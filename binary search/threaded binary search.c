@@ -23,7 +23,7 @@ int main(void) {
 BSO *getBSO(int left, int right, int Array[], int toFind) {
 	BSO * bso = (BSO*)malloc(sizeof(BSO));
 	if (bso == NULL){
-		return NULL;
+		abort();
 	}
 	bso->left = left;
 	bso->right = right;
@@ -47,18 +47,14 @@ void getBinarySearchRange(BSO *bso) {
 
 	if (foundIndex >= 0){
 		if (foundIndex - 1 >= 0 && Array[foundIndex - 1] == toFind){
-			if ((leftBSO = getBSO(left, foundIndex - 1, Array, toFind)) == NULL){
-				return;
-			}
+			leftBSO = getBSO(left, foundIndex - 1, Array, toFind);
 			mostLeft = binarySearch(leftBSO);
 		}
 		if (mostLeft == -1){
 			mostLeft = foundIndex;
 		}
 		if (foundIndex + 1 <= right && Array[foundIndex + 1] == toFind){
-			if ((rightBSO = getBSO(foundIndex + 1, right, Array, toFind)) == NULL){
-				return;
-			}
+			rightBSO = getBSO(foundIndex + 1, right, Array, toFind);
 			mostRight = binarySearch(rightBSO);
 		}
 		if (mostRight == -1){

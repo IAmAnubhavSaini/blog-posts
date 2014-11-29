@@ -11,6 +11,7 @@ void getBinarySearchRangeBSO(BSO *bso);
 BSO *getBSO(int left, int right, int Array[], int toFind);
 void getBinarySearchRange(int left, int right, int Array[], int toFind, int * mostLeft, int * mostRight);
 int binarySearch(int left, int right, int Array[], int toFind);
+int binarySearchBSO(BSO *bso);
 
 int main(void) {
 	int leftIndex, rightIndex;
@@ -65,6 +66,9 @@ void getBinarySearchRange(int left, int right, int Array[], int toFind, int * mo
 	}
 }
 
+int binarySearchBSO(BSO *bso) {
+	return binarySearch(bso->left, bso->right, bso->numbers, bso->toFind);
+}
 int binarySearch(int left, int right, int Array[], int toFind) {
 	int mid = -1;
 	while (left <= right){

@@ -9,7 +9,6 @@ typedef struct BinarySearchObject BSO;
 
 void getBinarySearchRangeBSO(BSO *bso);
 BSO *getBSO(int left, int right, int Array[], int toFind);
-int binarySearch(int left, int right, int Array[], int toFind);
 int binarySearchBSO(BSO *bso);
 
 int main(void) {
@@ -82,23 +81,6 @@ int binarySearchBSO(BSO *bso) {
 		}
 		else {
 			bso->left = mid + 1;
-		}
-	}
-	return -1;
-}
-
-int binarySearch(int left, int right, int Array[], int toFind) {
-	int mid = -1;
-	while (left <= right){
-		mid = left + (right - left) / 2;
-		if (Array[mid] == toFind){
-			return mid;
-		}
-		else if (Array[mid] > toFind) {
-			right = mid - 1;
-		}
-		else {
-			left = mid + 1;
 		}
 	}
 	return -1;

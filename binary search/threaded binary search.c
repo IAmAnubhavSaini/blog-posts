@@ -41,7 +41,24 @@ void getBinarySearchRangeBSO(BSO *bso) {
 	int *Array = bso->numbers;
 	int mostLeft;
 	int mostRight;
-	getBinarySearchRange(left, right, Array, toFind, &mostLeft, &mostRight);
+	int foundIndex = binarySearch(left, right, Array, toFind);
+	mostLeft = -1;
+	mostRight = -1;
+
+	if (foundIndex >= 0){
+		if (foundIndex - 1 >= 0 && Array[foundIndex - 1] == toFind){
+			mostLeft = binarySearch(left, foundIndex - 1, Array, toFind);
+		}
+		if (mostLeft == -1){
+			mostLeft = foundIndex;
+		}
+		if (foundIndex + 1 <= right && Array[foundIndex + 1] == toFind){
+			mostRight = binarySearch(foundIndex + 1, right, Array, toFind);
+		}
+		if (mostRight == -1){
+			mostRight = foundIndex;
+		}
+	}
 	bso->rangeStart = mostLeft;
 	bso->rangeEnd = mostRight;
 }

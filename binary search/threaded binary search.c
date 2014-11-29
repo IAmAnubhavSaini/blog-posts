@@ -7,15 +7,15 @@ struct BinarySearchObject{
 };
 typedef struct BinarySearchObject BSO;
 
-void getBinarySearchRangeBSO(BSO *bso);
+void getBinarySearchRange(BSO *bso);
 BSO *getBSO(int left, int right, int Array[], int toFind);
-int binarySearchBSO(BSO *bso);
+int binarySearch(BSO *bso);
 
 int main(void) {
 	int leftIndex, rightIndex;
 	int numbers[] = { 1, 1, 3, 4, 4, 4, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 19, 20 };
 	BSO *bso = getBSO(0, 19, numbers, 4);
-	getBinarySearchRangeBSO(bso);
+	getBinarySearchRange(bso);
 	printf("\nRange : %d - %d\n", bso->rangeStart, bso->rangeEnd);
 	return 0;
 }
@@ -32,7 +32,7 @@ BSO *getBSO(int left, int right, int Array[], int toFind) {
 	return bso;
 }
 
-void getBinarySearchRangeBSO(BSO *bso) {
+void getBinarySearchRange(BSO *bso) {
 	BSO *leftBSO = NULL;
 	BSO *rightBSO = NULL;
 	int left = bso->left;
@@ -41,7 +41,7 @@ void getBinarySearchRangeBSO(BSO *bso) {
 	int *Array = bso->numbers;
 	int mostLeft;
 	int mostRight;
-	int foundIndex = binarySearchBSO(bso);
+	int foundIndex = binarySearch(bso);
 	mostLeft = -1;
 	mostRight = -1;
 
@@ -50,7 +50,7 @@ void getBinarySearchRangeBSO(BSO *bso) {
 			if ((leftBSO = getBSO(left, foundIndex - 1, Array, toFind)) == NULL){
 				return;
 			}
-			mostLeft = binarySearchBSO(leftBSO);
+			mostLeft = binarySearch(leftBSO);
 		}
 		if (mostLeft == -1){
 			mostLeft = foundIndex;
@@ -59,7 +59,7 @@ void getBinarySearchRangeBSO(BSO *bso) {
 			if ((rightBSO = getBSO(foundIndex + 1, right, Array, toFind)) == NULL){
 				return;
 			}
-			mostRight = binarySearchBSO(rightBSO);
+			mostRight = binarySearch(rightBSO);
 		}
 		if (mostRight == -1){
 			mostRight = foundIndex;
@@ -69,7 +69,7 @@ void getBinarySearchRangeBSO(BSO *bso) {
 	bso->rangeEnd = mostRight;
 }
 
-int binarySearchBSO(BSO *bso) {
+int binarySearch(BSO *bso) {
 	int mid =-1;
 	while (bso->left <= bso->right){
 		mid = bso->left + (bso->right - bso->left) / 2;

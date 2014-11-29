@@ -9,7 +9,6 @@ typedef struct BinarySearchObject BSO;
 
 void getBinarySearchRangeBSO(BSO *bso);
 BSO *getBSO(int left, int right, int Array[], int toFind);
-void getBinarySearchRange(int left, int right, int Array[], int toFind, int * mostLeft, int * mostRight);
 int binarySearch(int left, int right, int Array[], int toFind);
 int binarySearchBSO(BSO *bso);
 
@@ -61,26 +60,6 @@ void getBinarySearchRangeBSO(BSO *bso) {
 	}
 	bso->rangeStart = mostLeft;
 	bso->rangeEnd = mostRight;
-}
-void getBinarySearchRange(int left, int right, int Array[], int toFind, int * mostLeft, int * mostRight) {
-	int foundIndex = binarySearch(left, right, Array, toFind);
-	*mostLeft = -1;
-	*mostRight = -1;
-
-	if (foundIndex >= 0){
-		if (foundIndex - 1 >= 0 && Array[foundIndex - 1] == toFind){
-			*mostLeft = binarySearch(left, foundIndex - 1, Array, toFind);
-		}
-		if (*mostLeft == -1){
-			*mostLeft = foundIndex;
-		}
-		if (foundIndex + 1 <= right && Array[foundIndex + 1] == toFind){
-			*mostRight = binarySearch(foundIndex + 1, right, Array, toFind);
-		}
-		if (*mostRight == -1){
-			*mostRight = foundIndex;
-		}
-	}
 }
 
 int binarySearchBSO(BSO *bso) {

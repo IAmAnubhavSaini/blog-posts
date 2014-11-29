@@ -1,3 +1,4 @@
+#include <windows.h>
 #include <stdio.h>
 
 struct BinarySearchObject{
@@ -10,6 +11,7 @@ typedef struct BinarySearchObject BSO;
 void getBinarySearchRange(BSO *bso);
 BSO *getBSO(int left, int right, int Array[], int toFind);
 int binarySearch(BSO *bso);
+int getCPUCoreCount();
 
 int main(void) {
 	int leftIndex, rightIndex;
@@ -17,7 +19,14 @@ int main(void) {
 	BSO *bso = getBSO(0, 19, numbers, 4);
 	getBinarySearchRange(bso);
 	printf("\nRange : %d - %d\n", bso->rangeStart, bso->rangeEnd);
+	printf("\n%02d processors", getCPUCoreCount());
 	return 0;
+}
+
+int getCPUCoreCount(){
+	SYSTEM_INFO sysinfo;
+	GetSystemInfo(&sysinfo);
+	return sysinfo.dwNumberOfProcessors;
 }
 
 BSO *getBSO(int left, int right, int Array[], int toFind) {

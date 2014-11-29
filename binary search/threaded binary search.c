@@ -66,17 +66,21 @@ void getBinarySearchRange(BSO *bso) {
 }
 
 int binarySearch(BSO *bso) {
-	int mid =-1;
+	int mid = -1;
+	BSO * rightBSO = NULL;
+	BSO * leftBSO = NULL;
 	while (bso->left <= bso->right){
 		mid = bso->left + (bso->right - bso->left) / 2;
 		if (bso->numbers[mid] == bso->toFind){
 			return mid;
 		}
 		else if (bso->numbers[mid] > bso->toFind) {
-			bso->right = mid - 1;
+			leftBSO = getBSO(bso->left, mid - 1, bso->numbers, bso->toFind);
+			return binarySearch(leftBSO);
 		}
-		else {
-			bso->left = mid + 1;
+		else { // going right
+			rightBSO = getBSO(mid + 1, bso->right, bso->numbers, bso->toFind);
+			return binarySearch(rightBSO);
 		}
 	}
 	return -1;

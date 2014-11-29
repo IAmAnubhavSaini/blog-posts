@@ -34,25 +34,33 @@ BSO *getBSO(int left, int right, int Array[], int toFind) {
 }
 
 void getBinarySearchRangeBSO(BSO *bso) {
+	BSO *leftBSO = NULL;
+	BSO *rightBSO = NULL;
 	int left = bso->left;
 	int right = bso->right;
 	int toFind = bso->toFind;
 	int *Array = bso->numbers;
 	int mostLeft;
 	int mostRight;
-	int foundIndex = binarySearch(left, right, Array, toFind);
+	int foundIndex = binarySearchBSO(bso);
 	mostLeft = -1;
 	mostRight = -1;
 
 	if (foundIndex >= 0){
 		if (foundIndex - 1 >= 0 && Array[foundIndex - 1] == toFind){
-			mostLeft = binarySearch(left, foundIndex - 1, Array, toFind);
+			if ((leftBSO = getBSO(left, foundIndex - 1, Array, toFind)) == NULL){
+				return;
+			}
+			mostLeft = binarySearchBSO(leftBSO);
 		}
 		if (mostLeft == -1){
 			mostLeft = foundIndex;
 		}
 		if (foundIndex + 1 <= right && Array[foundIndex + 1] == toFind){
-			mostRight = binarySearch(foundIndex + 1, right, Array, toFind);
+			if ((rightBSO = getBSO(foundIndex + 1, right, Array, toFind)) == NULL){
+				return;
+			}
+			mostRight = binarySearchBSO(rightBSO);
 		}
 		if (mostRight == -1){
 			mostRight = foundIndex;

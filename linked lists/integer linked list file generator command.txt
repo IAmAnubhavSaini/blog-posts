@@ -1,0 +1,16 @@
+C:\SRC\blog posts\linked lists>cl *c /Fa /Fd /Fm /Fo /Fe
+Microsoft (R) C/C++ Optimizing Compiler Version 18.00.30723 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+integer linked list runner.c
+integer linked list test.c
+integer linked list.c
+Generating Code...
+Microsoft (R) Incremental Linker Version 12.00.30723.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+"/map:integer linked list runner.map"
+"/out:integer linked list runner.exe"
+"integer linked list runner.obj"
+"integer linked list test.obj"
+"integer linked list.obj"

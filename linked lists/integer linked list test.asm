@@ -6,27 +6,27 @@ INCLUDELIB LIBCMT
 INCLUDELIB OLDNAMES
 
 _DATA	SEGMENT
-$SG4454	DB	0aH, 'Found 2 in list.', 00H
+$SG4455	DB	0aH, 'Found 2 in list.', 00H
 	ORG $+6
-$SG4456	DB	0aH, 'Not found 2 in list.', 00H
+$SG4457	DB	0aH, 'Not found 2 in list.', 00H
 	ORG $+2
-$SG4458	DB	0aH, 'Found 4 in list.', 00H
+$SG4459	DB	0aH, 'Found 4 in list.', 00H
 	ORG $+6
-$SG4460	DB	0aH, 'Not found 4 in list.', 00H
+$SG4461	DB	0aH, 'Not found 4 in list.', 00H
 	ORG $+2
-$SG4463	DB	0aH, 'Deleted first 2.', 00H
+$SG4464	DB	0aH, 'Deleted first 2.', 00H
 	ORG $+6
-$SG4465	DB	0aH, 'Deleted first 4.', 00H
+$SG4466	DB	0aH, 'Deleted first 4.', 00H
 	ORG $+6
-$SG4467	DB	0aH, '4 Not found.', 00H
+$SG4468	DB	0aH, '4 Not found.', 00H
 	ORG $+2
-$SG4469	DB	0aH, 'Deleted first 1.', 00H
+$SG4470	DB	0aH, 'Deleted first 1.', 00H
 	ORG $+6
-$SG4471	DB	0aH, '1 Not found.', 00H
+$SG4472	DB	0aH, '1 Not found.', 00H
 	ORG $+2
-$SG4475	DB	0aH, 'All 2s deleted from list.', 00H
+$SG4476	DB	0aH, 'All 2s deleted from list.', 00H
 	ORG $+5
-$SG4477	DB	0aH, '2 not found.', 00H
+$SG4478	DB	0aH, '2 not found.', 00H
 _DATA	ENDS
 PUBLIC	TEST_setup1
 PUBLIC	TEST_search1
@@ -76,13 +76,13 @@ $LN5:
 	test	eax, eax
 	je	SHORT $LN2@TEST_delet
 ; Line 51
-	lea	rcx, OFFSET FLAT:$SG4475
+	lea	rcx, OFFSET FLAT:$SG4476
 	call	printf
 ; Line 53
 	jmp	SHORT $LN1@TEST_delet
 $LN2@TEST_delet:
 ; Line 54
-	lea	rcx, OFFSET FLAT:$SG4477
+	lea	rcx, OFFSET FLAT:$SG4478
 	call	printf
 $LN1@TEST_delet:
 ; Line 56
@@ -106,7 +106,7 @@ $LN8:
 	test	eax, eax
 	je	SHORT $LN5@TEST_delet
 ; Line 20
-	lea	rcx, OFFSET FLAT:$SG4463
+	lea	rcx, OFFSET FLAT:$SG4464
 	call	printf
 ; Line 21
 	call	print_list
@@ -118,7 +118,7 @@ $LN5@TEST_delet:
 	test	eax, eax
 	je	SHORT $LN4@TEST_delet
 ; Line 24
-	lea	rcx, OFFSET FLAT:$SG4465
+	lea	rcx, OFFSET FLAT:$SG4466
 	call	printf
 ; Line 25
 	call	print_list
@@ -126,7 +126,7 @@ $LN5@TEST_delet:
 	jmp	SHORT $LN3@TEST_delet
 $LN4@TEST_delet:
 ; Line 28
-	lea	rcx, OFFSET FLAT:$SG4467
+	lea	rcx, OFFSET FLAT:$SG4468
 	call	printf
 ; Line 29
 	call	print_list
@@ -138,7 +138,7 @@ $LN3@TEST_delet:
 	test	eax, eax
 	je	SHORT $LN2@TEST_delet
 ; Line 32
-	lea	rcx, OFFSET FLAT:$SG4469
+	lea	rcx, OFFSET FLAT:$SG4470
 	call	printf
 ; Line 33
 	call	print_list
@@ -146,7 +146,7 @@ $LN3@TEST_delet:
 	jmp	SHORT $LN1@TEST_delet
 $LN2@TEST_delet:
 ; Line 36
-	lea	rcx, OFFSET FLAT:$SG4471
+	lea	rcx, OFFSET FLAT:$SG4472
 	call	printf
 ; Line 37
 	call	print_list
@@ -170,13 +170,13 @@ $LN7:
 	test	eax, eax
 	je	SHORT $LN4@TEST_searc
 ; Line 5
-	lea	rcx, OFFSET FLAT:$SG4454
+	lea	rcx, OFFSET FLAT:$SG4455
 	call	printf
 ; Line 7
 	jmp	SHORT $LN3@TEST_searc
 $LN4@TEST_searc:
 ; Line 8
-	lea	rcx, OFFSET FLAT:$SG4456
+	lea	rcx, OFFSET FLAT:$SG4457
 	call	printf
 $LN3@TEST_searc:
 ; Line 10
@@ -186,13 +186,13 @@ $LN3@TEST_searc:
 	test	eax, eax
 	je	SHORT $LN2@TEST_searc
 ; Line 11
-	lea	rcx, OFFSET FLAT:$SG4458
+	lea	rcx, OFFSET FLAT:$SG4459
 	call	printf
 ; Line 13
 	jmp	SHORT $LN1@TEST_searc
 $LN2@TEST_searc:
 ; Line 14
-	lea	rcx, OFFSET FLAT:$SG4460
+	lea	rcx, OFFSET FLAT:$SG4461
 	call	printf
 $LN1@TEST_searc:
 ; Line 16

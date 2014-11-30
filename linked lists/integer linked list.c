@@ -1,7 +1,5 @@
 #include "integer linked list.h"
 
-Node *head = NULL;
-Node *curr = NULL;
 
 Node* create_list(int val){
 #ifdef DEBUG
@@ -14,19 +12,18 @@ Node* create_list(int val){
 	ptr->val = val;
 	ptr->next = NULL;
 
-	head = curr = ptr;
 	return ptr;
 #ifdef DEBUG
 	printf("\ndebug: exiting create_list.");
 #endif
 }
 
-Node* add_to_list(int val, bool before_head){
+Node* add_to_list(Node *head, Node *curr, int val, bool before_head){
 #ifdef DEBUG
 	printf("\ndebug: entering add_to_list.");
 #endif
 	Node *newTS = (Node*)malloc(sizeof(Node));
-	if (is_list_empty()){
+	if (is_list_empty(head)){
 		return(create_list(val));
 	}
 
@@ -48,7 +45,7 @@ Node* add_to_list(int val, bool before_head){
 #endif
 }
 
-void make_list_circular(){
+void make_list_circular(Node *head){
 #ifdef DEBUG
 	printf("\ndebug: entering make_list_circular.");
 #endif
@@ -62,12 +59,12 @@ void make_list_circular(){
 #endif
 }
 
-void print_list(){
+void print_list(Node *head){
 #ifdef DEBUG
 	printf("\ndebug: entering print_list.");
 #endif
 	Node *ptr = head;
-	if (is_list_circular()){
+	if (is_list_circular(head)){
 		printf("\nCircular list.");
 	}
 	else {
@@ -88,7 +85,7 @@ void print_list(){
 #endif
 }
 
-bool search_list(int val){
+bool search_list(Node *head, int val){
 	Node * start = head;
 	bool isFound = false;
 	while (start != NULL){
@@ -101,7 +98,7 @@ bool search_list(int val){
 	return isFound;
 }
 
-bool delete_first_value_matching_node(int val){
+bool delete_first_value_matching_node(Node *head, int val){
 	Node * prev = head;
 	Node * curr = NULL;
 	bool isDeleted = false;
@@ -133,7 +130,7 @@ bool delete_first_value_matching_node(int val){
 	return isDeleted;
 }
 
-bool delete_all_value_matching_nodes(int val){
+bool delete_all_value_matching_nodes(Node *head, int val){
 	Node * prev = head;
 	Node * curr = NULL;
 	bool isDeleted = false;
@@ -158,7 +155,7 @@ bool delete_all_value_matching_nodes(int val){
 	return isDeleted;
 }
 
-bool is_list_circular(){
+bool is_list_circular(Node *head){
 	Node *slow = head;
 	Node *fast = head;
 	while (slow && fast && fast->next && fast->next){
@@ -171,7 +168,7 @@ bool is_list_circular(){
 	return false;
 }
 
-bool is_list_empty(){
+bool is_list_empty(Node *head){
 	if (!head)
 		return true;
 	else

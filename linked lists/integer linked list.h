@@ -13,15 +13,15 @@ struct link_node
 typedef struct link_node Node; //gives a bit of OOP feel
 
 Node  *   create_list(int val);
-Node  *   add_to_list(int val, bool before_head);
+Node  *   add_to_list(Node *head, Node *curr, int val, bool before_head);
 
-void      make_list_circular();
-void      print_list();
+void      make_list_circular(Node *head);
+void      print_list(Node *head);
 
-bool      search_list(int val);
-bool      delete_first_value_matching_node(int val);
-bool      delete_all_value_matching_nodes(int val);
-bool      is_list_empty();
-bool      is_list_circular();
+bool      search_list(Node *head, int val);
+bool      delete_first_value_matching_node(Node *head, int val);
+bool      delete_all_value_matching_nodes(Node *head, int val);
+bool      is_list_empty(Node *head);
+bool      is_list_circular(Node *head);
 
 #endif INTEGER_LINKED_LIST_H

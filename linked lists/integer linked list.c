@@ -50,7 +50,7 @@ void print_list(){
 	if (ptr != NULL){
 		printf("\nThe values of the list are\n");
 		while (ptr){
-			printf("[%d @ %p]->", ptr->val, ptr);
+			printf("[%d]->", ptr->val, ptr);
 			ptr = ptr->next;
 		}
 		printf("[NULL]\n");
@@ -79,7 +79,7 @@ bool delete_first_value_matching_node(int val){
 	bool isDeleted = false;
 	if (head->next != NULL){
 		curr = head->next;
-		printf("\ndebug: at least two nodes exists.");
+		// add a debugging compiler switch printf("\ndebug: at least two nodes exists.");
 		while (curr != NULL && !isDeleted){
 			if (curr->val == val){
 				prev->next = curr->next;
@@ -91,7 +91,7 @@ bool delete_first_value_matching_node(int val){
 		}
 	}
 	else{
-		printf("\ndebug: only one node exists.");
+		// use compiler switch printf("\ndebug: only one node exists.");
 		if (prev->val == val){
 			isDeleted = true;
 			//free prev

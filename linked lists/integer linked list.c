@@ -3,11 +3,17 @@
 Node *head = NULL;
 Node *curr = NULL;
 
+bool      is_list_empty(){
+	if (!head)
+		return true;
+	else
+		return false;
+}
+
 Node* create_list(int val){
 	Node *ptr = (Node*)malloc(sizeof(Node));
 	if (ptr == NULL){
-		printf("\n*Cannot create a node.*\n");
-		return NULL;
+		abort();
 	}
 
 	ptr->val = val;
@@ -19,7 +25,7 @@ Node* create_list(int val){
 
 Node* add_to_list(int val, bool before_head){
 	Node *newTS = (Node*)malloc(sizeof(Node));
-	if (head == NULL){
+	if (is_list_empty()){
 		return(create_list(val));
 	}
 

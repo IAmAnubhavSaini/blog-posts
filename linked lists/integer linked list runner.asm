@@ -6,17 +6,17 @@ INCLUDELIB LIBCMT
 INCLUDELIB OLDNAMES
 
 _DATA	SEGMENT
-$SG4459	DB	0aH, 0aH, 'Firing test 1', 0aH, 00H
+$SG4477	DB	0aH, 0aH, 'Firing test 1', 0aH, 00H
 	ORG $+7
-$SG4460	DB	0aH, 0aH, 'Firing test 2', 0aH, 00H
+$SG4478	DB	0aH, 0aH, 'Firing test 2', 0aH, 00H
 	ORG $+7
-$SG4461	DB	0aH, 0aH, 'Firing test 3', 0aH, 00H
+$SG4479	DB	0aH, 0aH, 'Firing test 3', 0aH, 00H
 	ORG $+7
-$SG4462	DB	0aH, 0aH, 'Firing test 4', 0aH, 00H
+$SG4480	DB	0aH, 0aH, 'Firing test 4', 0aH, 00H
 	ORG $+7
-$SG4463	DB	0aH, 0aH, 'Firing test 5', 0aH, 00H
+$SG4481	DB	0aH, 0aH, 'Firing test 5', 0aH, 00H
 	ORG $+7
-$SG4464	DB	0aH, 0aH, 'Firing test 6', 0aH, 00H
+$SG4482	DB	0aH, 0aH, 'Firing test 6', 0aH, 00H
 _DATA	ENDS
 PUBLIC	fire
 PUBLIC	main
@@ -64,32 +64,32 @@ fire	PROC
 $LN3:
 	sub	rsp, 40					; 00000028H
 ; Line 4
-	lea	rcx, OFFSET FLAT:$SG4459
+	lea	rcx, OFFSET FLAT:$SG4477
 	call	printf
 ; Line 5
 	call	TEST_setup1
 ; Line 6
-	lea	rcx, OFFSET FLAT:$SG4460
+	lea	rcx, OFFSET FLAT:$SG4478
 	call	printf
 ; Line 7
 	call	TEST_search1
 ; Line 8
-	lea	rcx, OFFSET FLAT:$SG4461
+	lea	rcx, OFFSET FLAT:$SG4479
 	call	printf
 ; Line 9
 	call	TEST_delete1
 ; Line 10
-	lea	rcx, OFFSET FLAT:$SG4462
+	lea	rcx, OFFSET FLAT:$SG4480
 	call	printf
 ; Line 11
 	call	TEST_setup1
 ; Line 12
-	lea	rcx, OFFSET FLAT:$SG4463
+	lea	rcx, OFFSET FLAT:$SG4481
 	call	printf
 ; Line 13
 	call	TEST_delete2
 ; Line 14
-	lea	rcx, OFFSET FLAT:$SG4464
+	lea	rcx, OFFSET FLAT:$SG4482
 	call	printf
 ; Line 15
 	call	TEST_circular_list

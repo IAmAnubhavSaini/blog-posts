@@ -1,6 +1,6 @@
 #include "integer linked list test.h"
 
-void fire(){
+void fireTests(){
 	printf("\n\nFiring test 1\n");
 	TEST_setup1();
 	printf("\n\nFiring test 2\n");
@@ -17,7 +17,7 @@ void fire(){
 }
 
 int main(){
-	fire();
+	fireTests();
 	return 0;
 }
 

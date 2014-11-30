@@ -18,7 +18,7 @@ int main(){
 }
 
 void ActionCarrier(int(*action)(int, int), int a, int b){
-	printf("\n%d %x %d = %d", a, action, b, action(a, b));
+	printf("\n%d %p %d = %d", a, action, b, action(a, b));
 }
 
 int sum(int a, int b){

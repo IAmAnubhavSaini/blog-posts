@@ -1,0 +1,50 @@
+C:\SRC\blog posts\function pointers and delegates>"function pointer.exe"
+
+20 1061556304 7 = 27
+20 1061556336 7 = 13
+20 1061556368 7 = 140
+20 1061556400 7 = 2
+20 1061556432 7 = 6
+C:\SRC\blog posts\function pointers and delegates>"function pointer.exe"
+
+20 1058803792 7 = 27
+20 1058803824 7 = 13
+20 1058803856 7 = 140
+20 1058803888 7 = 2
+20 1058803920 7 = 6
+C:\SRC\blog posts\function pointers and delegates>"function pointer.exe"
+
+20 1072566352 7 = 27
+20 1072566384 7 = 13
+20 1072566416 7 = 140
+20 1072566448 7 = 2
+20 1072566480 7 = 6
+C:\SRC\blog posts\function pointers and delegates>"function pointer.exe"
+
+20 1058934864 7 = 27
+20 1058934896 7 = 13
+20 1058934928 7 = 140
+20 1058934960 7 = 2
+20 1058934992 7 = 6
+C:\SRC\blog posts\function pointers and delegates>"function pointer.exe"
+
+20 1063718992 7 = 27
+20 1063719024 7 = 13
+20 1063719056 7 = 140
+20 1063719088 7 = 2
+20 1063719120 7 = 6
+C:\SRC\blog posts\function pointers and delegates>"function pointer.exe"
+
+20 1058738256 7 = 27
+20 1058738288 7 = 13
+20 1058738320 7 = 140
+20 1058738352 7 = 2
+20 1058738384 7 = 6
+C:\SRC\blog posts\function pointers and delegates>"function pointer.exe"
+
+20 1072762960 7 = 27
+20 1072762992 7 = 13
+20 1072763024 7 = 140
+20 1072763056 7 = 2
+20 1072763088 7 = 6
+C:\SRC\blog posts\function pointers and delegates>

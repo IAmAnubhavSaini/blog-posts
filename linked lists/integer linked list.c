@@ -70,16 +70,21 @@ void      make_list_circular(){
 void print_list(){
 
 	Node *ptr = head;
-	if (ptr != NULL){
-		printf("\nThe values of the list are\n");
-		while (ptr){
-			printf("[%d]->", ptr->val, ptr);
-			ptr = ptr->next;
-		}
-		printf("[NULL]\n");
+	if (is_list_circular()){
+		printf("\nCircular list.");
 	}
-	else{
-		printf("\nEmpty list.");
+	else {
+		if (ptr != NULL){
+			printf("\nThe values of the list are\n");
+			while (ptr){
+				printf("[%d]->", ptr->val, ptr);
+				ptr = ptr->next;
+			}
+			printf("[NULL]\n");
+		}
+		else{
+			printf("\nEmpty list.");
+		}
 	}
 }
 

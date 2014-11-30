@@ -46,6 +46,7 @@ void TEST_setup1(){
 	add_to_list(2, false);
 	print_list();
 }
+
 void TEST_delete2(){
 	if (delete_all_value_matching_nodes(2)){
 		printf("\nAll 2s deleted from list.");
@@ -54,4 +55,26 @@ void TEST_delete2(){
 		printf("\n2 not found.");
 	}
 	print_list();
+}
+
+void      TEST_circular_list(){
+	TEST_setup1();
+	print_list();
+	printf("Circular list test: list should not be circular.");
+	if (is_list_circular()){
+		printf("\nlist is circular.");
+	}
+	else{
+		printf("\nlist is not circular.");
+	}
+	make_list_circular();
+	printf("\nCircular list test: list should be circular.");
+	print_list();
+	if (is_list_circular()){
+		printf("\nlist is circular.\n");
+	}
+	else {
+		printf("\nlist is not circular.\n");
+	}
+
 }

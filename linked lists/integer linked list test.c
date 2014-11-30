@@ -2,40 +2,45 @@
 
 void TEST_search1(){
 	Node *head = TEST_setup1();
-	if (search_list(head,2)){
-		printf("\nFound 2 in list.");
+	int num = 2;
+	if (search_list(head, num)){
+		printf("\nFound %d in list.", num);
 	}
 	else{
-		printf("\nNot found 2 in list.");
+		printf("\nDid not find %d in list.", num);
 	}
-	if (search_list(head, 4)){
-		printf("\nFound 4 in list.");
+	num = 4;
+	if (search_list(head, num)){
+		printf("\nFound %d in list.", num);
 	}
 	else{
-		printf("\nNot found 4 in list.");
+		printf("\nDid not find %d in list.", num);
 	}
 }
 
 void TEST_delete1(){
 	Node *head = TEST_setup1();
-	if (delete_first_value_matching_node(head, 2)){
-		printf("\nDeleted first 2.");
+	int num = 2;
+	if (delete_first_value_matching_node(head, num)){
+		printf("\nDeleted first %d.", num);
 		print_list(head);
 	}
-	if (delete_first_value_matching_node(head, 4)){
-		printf("\nDeleted first 4.");
+	num = 4;
+	if (delete_first_value_matching_node(head, num)){
+		printf("\nDeleted first %d.", num);
 		print_list(head);
 	}
 	else{
-		printf("\n4 Not found.");
+		printf("\nDid not find %d in list.", num);
 		print_list(head);
 	}
+	num = 1;
 	if (delete_first_value_matching_node(head, 1)){
-		printf("\nDeleted first 1.");
+		printf("\nDeleted first %d.", num);
 		print_list(head);
 	}
 	else{
-		printf("\n1 Not found.");
+		printf("\nDid not find %d in list.", num);
 		print_list(head);
 	}
 }
@@ -54,11 +59,12 @@ Node * TEST_setup1(){
 
 void TEST_delete2(){
 	Node *head = TEST_setup1();
-	if (delete_all_value_matching_nodes(head, 2)){
-		printf("\nAll 2s deleted from list.");
+	int num = 2;
+	if (delete_all_value_matching_nodes(head, num)){
+		printf("\nAll %d deleted from list.", num);
 	}
 	else{
-		printf("\n2 not found.");
+		printf("\nDid not find %d in list.", num);
 	}
 	print_list(head);
 }

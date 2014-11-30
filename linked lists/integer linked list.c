@@ -4,17 +4,18 @@ Node *head = NULL;
 Node *curr = NULL;
 
 bool      is_list_circular(){
-	Node *khargosh, *kachua;
-	khargosh = kachua = head;
-	while (head && khargosh && kachua){
-		if (khargosh = khargosh->next){
-			khargosh = khargosh->next;
-			kachua = kachua->next;
-		}
-		if (kachua == khargosh)
+	Node *slow = head;
+	Node *fast = head;
+	while (slow && fast && fast->next && fast->next){
+		fast = fast->next->next;
+		slow = slow->next;
+		if (slow == fast){
 			return true;
+		}
 	}
-	return false;
+	if (!fast || !fast->next || !fast->next->next){
+		return false;
+	}
 }
 
 bool      is_list_empty(){

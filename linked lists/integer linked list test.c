@@ -1,13 +1,14 @@
 #include "integer linked list test.h"
 
 void TEST_search1(){
-	if (search_list(2)){
+	Node *head = TEST_setup1();
+	if (search_list(head,2)){
 		printf("\nFound 2 in list.");
 	}
 	else{
 		printf("\nNot found 2 in list.");
 	}
-	if (search_list(4)){
+	if (search_list(head, 4)){
 		printf("\nFound 4 in list.");
 	}
 	else{
@@ -16,65 +17,70 @@ void TEST_search1(){
 }
 
 void TEST_delete1(){
-	if (delete_first_value_matching_node(2)){
+	Node *head = TEST_setup1();
+	if (delete_first_value_matching_node(head, 2)){
 		printf("\nDeleted first 2.");
-		print_list();
+		print_list(head);
 	}
-	if (delete_first_value_matching_node(4)){
+	if (delete_first_value_matching_node(head, 4)){
 		printf("\nDeleted first 4.");
-		print_list();
+		print_list(head);
 	}
 	else{
 		printf("\n4 Not found.");
-		print_list();
+		print_list(head);
 	}
-	if (delete_first_value_matching_node(1)){
+	if (delete_first_value_matching_node(head, 1)){
 		printf("\nDeleted first 1.");
-		print_list();
+		print_list(head);
 	}
 	else{
 		printf("\n1 Not found.");
-		print_list();
+		print_list(head);
 	}
 }
 
-void TEST_setup1(){
-	add_to_list(1, false);
-	add_to_list(2, false);
-	add_to_list(3, false);
-	add_to_list(8, true);
-	add_to_list(2, false);
-	print_list();
+Node * TEST_setup1(){
+	Node *head = NULL;
+	Node *curr = NULL;
+	head = curr = add_to_list(head, curr, 1, false);
+	add_to_list(head, curr, 2, false);
+	add_to_list(head, curr, 3, false);
+	add_to_list(head, curr, 8, true);
+	add_to_list(head, curr, 2, false);
+	print_list(head);
+	return head;
 }
 
 void TEST_delete2(){
-	if (delete_all_value_matching_nodes(2)){
+	Node *head = TEST_setup1();
+	if (delete_all_value_matching_nodes(head, 2)){
 		printf("\nAll 2s deleted from list.");
 	}
 	else{
 		printf("\n2 not found.");
 	}
-	print_list();
+	print_list(head);
 }
 
-void      TEST_circular_list(){
-	TEST_setup1();
-	print_list();
+void TEST_circular_list(){
+	Node *head = TEST_setup1();
+	print_list(head);
 	printf("Circular list test: list should not be circular.");
-	if (is_list_circular()){
+	if (is_list_circular(head)){
 		printf("\nlist is circular.");
 	}
 	else{
 		printf("\nlist is not circular.");
 	}
-	make_list_circular();
+	make_list_circular(head);
 	printf("\nCircular list test: list should be circular.");
-	print_list();
-	if (is_list_circular()){
+	print_list(head);
+	if (is_list_circular(head)){
 		printf("\nlist is circular.\n");
 	}
 	else {
 		printf("\nlist is not circular.\n");
 	}
-
 }
+

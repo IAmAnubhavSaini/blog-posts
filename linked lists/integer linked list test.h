@@ -3,7 +3,7 @@
 
 #include "integer linked list.h"
 
-void      TEST_setup1(void);
+Node *    TEST_setup1(void);
 void      TEST_search1(void);
 void      TEST_delete1(void);
 void      TEST_delete2(void);

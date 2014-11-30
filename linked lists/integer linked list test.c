@@ -1,7 +1,7 @@
 #include "integer linked list test.h"
 
-void TEST_search1(){
-	Node *head = TEST_setup1();
+void TEST_should_find_number_in_list(){
+	Node *head = TEST_should_setup_and_confim_via_printing();
 	int num = 2;
 	if (search_list(head, num)){
 		printf(FNIL, num);
@@ -9,7 +9,12 @@ void TEST_search1(){
 	else{
 		printf(DNFNIL, num);
 	}
-	num = 4;
+
+}
+
+void TEST_should_not_find_number_in_list(){
+	Node *head = TEST_should_setup_and_confim_via_printing();
+	int num = 4;
 	if (search_list(head, num)){
 		printf(FNIL, num);
 	}
@@ -18,8 +23,8 @@ void TEST_search1(){
 	}
 }
 
-void TEST_delete1(){
-	Node *head = TEST_setup1();
+void TEST_should_delete_numbers_first_occurence(){
+	Node *head = TEST_should_setup_and_confim_via_printing();
 	int num = 2;
 	if (delete_first_value_matching_node(head, num)){
 		printf(DFN, num);
@@ -45,7 +50,7 @@ void TEST_delete1(){
 	}
 }
 
-Node * TEST_setup1(){
+Node * TEST_should_setup_and_confim_via_printing(){
 	Node *head = NULL;
 	Node *curr = NULL;
 	head = curr = add_to_list(head, curr, 1, false);
@@ -57,8 +62,8 @@ Node * TEST_setup1(){
 	return head;
 }
 
-void TEST_delete2(){
-	Node *head = TEST_setup1();
+void TEST_should_delete_all_occurences_on_a_number(){
+	Node *head = TEST_should_setup_and_confim_via_printing();
 	int num = 2;
 	if (delete_all_value_matching_nodes(head, num)){
 		printf(ANDFL, num);
@@ -69,8 +74,8 @@ void TEST_delete2(){
 	print_list(head);
 }
 
-void TEST_circular_list(){
-	Node *head = TEST_setup1();
+void TEST_shoud_not_be_a_circular_list(){
+	Node *head = TEST_should_setup_and_confim_via_printing();
 	print_list(head);
 	printf(CLTLSNBC);
 	if (is_list_circular(head)){
@@ -79,7 +84,14 @@ void TEST_circular_list(){
 	else{
 		printf(LINC);
 	}
+}
+
+
+void TEST_shoud_be_a_circular_list(){
+	Node *head = TEST_should_setup_and_confim_via_printing();
+	print_list(head);
 	make_list_circular(head);
+
 	printf(CLTLSBC);
 	print_list(head);
 	if (is_list_circular(head)){

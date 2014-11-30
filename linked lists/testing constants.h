@@ -7,6 +7,7 @@
 #define FT_4 "\n\nFiring test 4\n"
 #define FT_5 "\n\nFiring test 5\n"
 #define FT_6 "\n\nFiring test 6\n"
+#define FT_7 "\n\nFiring test 7\n"
 
 #define FNIL "\nFound %d in list."
 #define DNFNIL "\nDid not find %d in list."

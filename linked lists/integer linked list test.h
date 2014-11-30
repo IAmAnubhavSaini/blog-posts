@@ -5,11 +5,13 @@
 #include "integer linked list.h"
 
 
-Node *    TEST_setup1(void);
-void      TEST_search1(void);
-void      TEST_delete1(void);
-void      TEST_delete2(void);
-void      TEST_circular_list(void);
+Node *    TEST_should_setup_and_confim_via_printing(void);
+void      TEST_should_find_number_in_list(void);
+void      TEST_should_not_find_number_in_list(void);
+void      TEST_should_delete_numbers_first_occurence(void);
+void      TEST_should_delete_all_occurences_on_a_number(void);
+void      TEST_shoud_not_be_a_circular_list(void);
+void      TEST_shoud_be_a_circular_list(void);
 
 
 #endif //INTEGER_LINKED_LIST_TEST_H

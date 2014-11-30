@@ -1,9 +1,9 @@
 #include "integer linked list.h"
 
 
-Node* create_list(int val){
+Node* create_node(int val){
 #ifdef DEBUG
-	printf("\ndebug: entering create_list.");
+	printf("\ndebug: entering create_node with value : %d.", val);
 #endif
 	Node *ptr = (Node*)malloc(sizeof(Node));
 	if (ptr == NULL){
@@ -14,17 +14,17 @@ Node* create_list(int val){
 
 	return ptr;
 #ifdef DEBUG
-	printf("\ndebug: exiting create_list.");
+	printf("\ndebug: exiting create_node.");
 #endif
 }
 
 Node* add_to_list(Node *head, Node *curr, int val, bool before_head){
 #ifdef DEBUG
-	printf("\ndebug: entering add_to_list.");
+	printf("\ndebug: entering add_to_list with value : %d.", val);
 #endif
 	Node *newTS = (Node*)malloc(sizeof(Node));
 	if (is_list_empty(head)){
-		return(create_list(val));
+		return(create_node(val));
 	}
 
 	if (before_head) {
@@ -173,4 +173,21 @@ bool is_list_empty(Node *head){
 		return true;
 	else
 		return false;
+}
+
+Node * create_stack_from_existing_list(Node *otherListHead, Node *otherListUpto){
+	Node *head = NULL;
+	Node *tmp = NULL;
+
+	if (!otherListHead){ // we don't really care about NULL Upto, since, that case we will be copying whole  ll.
+		abort(); // reach violently to bad cases.
+	}
+
+	tmp = otherListHead;
+	while (tmp != NULL && tmp != otherListUpto){
+		head = add_to_list(head, NULL /* I know what I am doing */, tmp->val, true);
+		tmp = tmp->next;
+	}
+
+	return head;
 }

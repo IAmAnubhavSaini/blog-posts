@@ -4,17 +4,17 @@ void TEST_search1(){
 	Node *head = TEST_setup1();
 	int num = 2;
 	if (search_list(head, num)){
-		printf("\nFound %d in list.", num);
+		printf(FNIL, num);
 	}
 	else{
-		printf("\nDid not find %d in list.", num);
+		printf(DNFNIL, num);
 	}
 	num = 4;
 	if (search_list(head, num)){
-		printf("\nFound %d in list.", num);
+		printf(FNIL, num);
 	}
 	else{
-		printf("\nDid not find %d in list.", num);
+		printf(DNFNIL, num);
 	}
 }
 
@@ -22,25 +22,25 @@ void TEST_delete1(){
 	Node *head = TEST_setup1();
 	int num = 2;
 	if (delete_first_value_matching_node(head, num)){
-		printf("\nDeleted first %d.", num);
+		printf(DFN, num);
 		print_list(head);
 	}
 	num = 4;
 	if (delete_first_value_matching_node(head, num)){
-		printf("\nDeleted first %d.", num);
+		printf(DFN, num);
 		print_list(head);
 	}
 	else{
-		printf("\nDid not find %d in list.", num);
+		printf(DNFNIL, num);
 		print_list(head);
 	}
 	num = 1;
 	if (delete_first_value_matching_node(head, 1)){
-		printf("\nDeleted first %d.", num);
+		printf(DFN, num);
 		print_list(head);
 	}
 	else{
-		printf("\nDid not find %d in list.", num);
+		printf(DNFNIL, num);
 		print_list(head);
 	}
 }
@@ -61,10 +61,10 @@ void TEST_delete2(){
 	Node *head = TEST_setup1();
 	int num = 2;
 	if (delete_all_value_matching_nodes(head, num)){
-		printf("\nAll %d deleted from list.", num);
+		printf(ANDFL, num);
 	}
 	else{
-		printf("\nDid not find %d in list.", num);
+		printf(DNFNIL, num);
 	}
 	print_list(head);
 }
@@ -72,21 +72,21 @@ void TEST_delete2(){
 void TEST_circular_list(){
 	Node *head = TEST_setup1();
 	print_list(head);
-	printf("Circular list test: list should not be circular.");
+	printf(CLTLSNBC);
 	if (is_list_circular(head)){
-		printf("\nlist is circular.");
+		printf(LIC);
 	}
 	else{
-		printf("\nlist is not circular.");
+		printf(LINC);
 	}
 	make_list_circular(head);
-	printf("\nCircular list test: list should be circular.");
+	printf(CLTLSBC);
 	print_list(head);
 	if (is_list_circular(head)){
-		printf("\nlist is circular.\n");
+		printf(LIC);
 	}
 	else {
-		printf("\nlist is not circular.\n");
+		printf(LINC);
 	}
 }
 

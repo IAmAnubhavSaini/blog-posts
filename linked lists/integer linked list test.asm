@@ -6,39 +6,39 @@ INCLUDELIB LIBCMT
 INCLUDELIB OLDNAMES
 
 _DATA	SEGMENT
-$SG4478	DB	0aH, 'Found 2 in list.', 00H
-	ORG $+6
-$SG4480	DB	0aH, 'Not found 2 in list.', 00H
-	ORG $+2
-$SG4482	DB	0aH, 'Found 4 in list.', 00H
-	ORG $+6
-$SG4484	DB	0aH, 'Not found 4 in list.', 00H
-	ORG $+2
-$SG4488	DB	0aH, 'Deleted first 2.', 00H
-	ORG $+6
-$SG4490	DB	0aH, 'Deleted first 4.', 00H
-	ORG $+6
-$SG4492	DB	0aH, '4 Not found.', 00H
-	ORG $+2
-$SG4494	DB	0aH, 'Deleted first 1.', 00H
-	ORG $+6
-$SG4496	DB	0aH, '1 Not found.', 00H
-	ORG $+2
-$SG4505	DB	0aH, 'All 2s deleted from list.', 00H
+$SG4480	DB	0aH, 'Found %d in list.', 00H
 	ORG $+5
-$SG4507	DB	0aH, '2 not found.', 00H
-	ORG $+2
-$SG4510	DB	'Circular list test: list should not be circular.', 00H
-	ORG $+7
-$SG4512	DB	0aH, 'list is circular.', 00H
+$SG4482	DB	0aH, 'Did not find %d in list.', 00H
+	ORG $+6
+$SG4484	DB	0aH, 'Found %d in list.', 00H
 	ORG $+5
-$SG4514	DB	0aH, 'list is not circular.', 00H
+$SG4486	DB	0aH, 'Did not find %d in list.', 00H
+	ORG $+6
+$SG4491	DB	0aH, 'Deleted first %d.', 00H
+	ORG $+5
+$SG4493	DB	0aH, 'Deleted first %d.', 00H
+	ORG $+5
+$SG4495	DB	0aH, 'Did not find %d in list.', 00H
+	ORG $+6
+$SG4497	DB	0aH, 'Deleted first %d.', 00H
+	ORG $+5
+$SG4499	DB	0aH, 'Did not find %d in list.', 00H
+	ORG $+6
+$SG4509	DB	0aH, 'All %d deleted from list.', 00H
+	ORG $+5
+$SG4511	DB	0aH, 'Did not find %d in list.', 00H
+	ORG $+6
+$SG4514	DB	0aH, 'Circular list test: list should not be circular.', 00H
+	ORG $+6
+$SG4516	DB	0aH, 'list is circular.', 00H
+	ORG $+5
+$SG4518	DB	0aH, 'list is not circular.', 00H
 	ORG $+1
-$SG4515	DB	0aH, 'Circular list test: list should be circular.', 00H
+$SG4519	DB	0aH, 'Circular list test: list should be circular.', 00H
 	ORG $+2
-$SG4517	DB	0aH, 'list is circular.', 0aH, 00H
-	ORG $+4
-$SG4519	DB	0aH, 'list is not circular.', 0aH, 00H
+$SG4521	DB	0aH, 'list is circular.', 00H
+	ORG $+5
+$SG4523	DB	0aH, 'list is not circular.', 00H
 _DATA	ENDS
 PUBLIC	TEST_setup1
 PUBLIC	TEST_search1
@@ -58,13 +58,13 @@ $pdata$TEST_setup1 DD imagerel $LN3
 	DD	imagerel $LN3+177
 	DD	imagerel $unwind$TEST_setup1
 $pdata$TEST_search1 DD imagerel $LN7
-	DD	imagerel $LN7+115
+	DD	imagerel $LN7+145
 	DD	imagerel $unwind$TEST_search1
 $pdata$TEST_delete1 DD imagerel $LN8
-	DD	imagerel $LN8+199
+	DD	imagerel $LN8+241
 	DD	imagerel $unwind$TEST_delete1
 $pdata$TEST_delete2 DD imagerel $LN5
-	DD	imagerel $LN5+77
+	DD	imagerel $LN5+92
 	DD	imagerel $unwind$TEST_delete2
 $pdata$TEST_circular_list DD imagerel $LN7
 	DD	imagerel $LN7+159
@@ -87,179 +87,197 @@ _TEXT	SEGMENT
 head$ = 32
 TEST_circular_list PROC
 ; File c:\src\blog posts\linked lists\integer linked list test.c
-; Line 66
+; Line 72
 $LN7:
 	sub	rsp, 56					; 00000038H
-; Line 67
+; Line 73
 	call	TEST_setup1
 	mov	QWORD PTR head$[rsp], rax
-; Line 68
+; Line 74
 	mov	rcx, QWORD PTR head$[rsp]
 	call	print_list
-; Line 69
-	lea	rcx, OFFSET FLAT:$SG4510
+; Line 75
+	lea	rcx, OFFSET FLAT:$SG4514
 	call	printf
-; Line 70
+; Line 76
 	mov	rcx, QWORD PTR head$[rsp]
 	call	is_list_circular
 	movzx	eax, al
 	test	eax, eax
 	je	SHORT $LN4@TEST_circu
-; Line 71
-	lea	rcx, OFFSET FLAT:$SG4512
+; Line 77
+	lea	rcx, OFFSET FLAT:$SG4516
 	call	printf
-; Line 73
+; Line 79
 	jmp	SHORT $LN3@TEST_circu
 $LN4@TEST_circu:
-; Line 74
-	lea	rcx, OFFSET FLAT:$SG4514
+; Line 80
+	lea	rcx, OFFSET FLAT:$SG4518
 	call	printf
 $LN3@TEST_circu:
-; Line 76
+; Line 82
 	mov	rcx, QWORD PTR head$[rsp]
 	call	make_list_circular
-; Line 77
-	lea	rcx, OFFSET FLAT:$SG4515
+; Line 83
+	lea	rcx, OFFSET FLAT:$SG4519
 	call	printf
-; Line 78
+; Line 84
 	mov	rcx, QWORD PTR head$[rsp]
 	call	print_list
-; Line 79
+; Line 85
 	mov	rcx, QWORD PTR head$[rsp]
 	call	is_list_circular
 	movzx	eax, al
 	test	eax, eax
 	je	SHORT $LN2@TEST_circu
-; Line 80
-	lea	rcx, OFFSET FLAT:$SG4517
+; Line 86
+	lea	rcx, OFFSET FLAT:$SG4521
 	call	printf
-; Line 82
+; Line 88
 	jmp	SHORT $LN1@TEST_circu
 $LN2@TEST_circu:
-; Line 83
-	lea	rcx, OFFSET FLAT:$SG4519
+; Line 89
+	lea	rcx, OFFSET FLAT:$SG4523
 	call	printf
 $LN1@TEST_circu:
-; Line 85
+; Line 91
 	add	rsp, 56					; 00000038H
 	ret	0
 TEST_circular_list ENDP
 _TEXT	ENDS
 ; Function compile flags: /Odtp
 _TEXT	SEGMENT
-head$ = 32
+num$ = 32
+head$ = 40
 TEST_delete2 PROC
 ; File c:\src\blog posts\linked lists\integer linked list test.c
-; Line 55
+; Line 60
 $LN5:
 	sub	rsp, 56					; 00000038H
-; Line 56
+; Line 61
 	call	TEST_setup1
 	mov	QWORD PTR head$[rsp], rax
-; Line 57
-	mov	edx, 2
+; Line 62
+	mov	DWORD PTR num$[rsp], 2
+; Line 63
+	mov	edx, DWORD PTR num$[rsp]
 	mov	rcx, QWORD PTR head$[rsp]
 	call	delete_all_value_matching_nodes
 	movzx	eax, al
 	test	eax, eax
 	je	SHORT $LN2@TEST_delet
-; Line 58
-	lea	rcx, OFFSET FLAT:$SG4505
+; Line 64
+	mov	edx, DWORD PTR num$[rsp]
+	lea	rcx, OFFSET FLAT:$SG4509
 	call	printf
-; Line 60
+; Line 66
 	jmp	SHORT $LN1@TEST_delet
 $LN2@TEST_delet:
-; Line 61
-	lea	rcx, OFFSET FLAT:$SG4507
+; Line 67
+	mov	edx, DWORD PTR num$[rsp]
+	lea	rcx, OFFSET FLAT:$SG4511
 	call	printf
 $LN1@TEST_delet:
-; Line 63
+; Line 69
 	mov	rcx, QWORD PTR head$[rsp]
 	call	print_list
-; Line 64
+; Line 70
 	add	rsp, 56					; 00000038H
 	ret	0
 TEST_delete2 ENDP
 _TEXT	ENDS
 ; Function compile flags: /Odtp
 _TEXT	SEGMENT
-head$ = 32
+num$ = 32
+head$ = 40
 TEST_delete1 PROC
 ; File c:\src\blog posts\linked lists\integer linked list test.c
-; Line 19
+; Line 21
 $LN8:
 	sub	rsp, 56					; 00000038H
-; Line 20
+; Line 22
 	call	TEST_setup1
 	mov	QWORD PTR head$[rsp], rax
-; Line 21
-	mov	edx, 2
+; Line 23
+	mov	DWORD PTR num$[rsp], 2
+; Line 24
+	mov	edx, DWORD PTR num$[rsp]
 	mov	rcx, QWORD PTR head$[rsp]
 	call	delete_first_value_matching_node
 	movzx	eax, al
 	test	eax, eax
 	je	SHORT $LN5@TEST_delet
-; Line 22
-	lea	rcx, OFFSET FLAT:$SG4488
+; Line 25
+	mov	edx, DWORD PTR num$[rsp]
+	lea	rcx, OFFSET FLAT:$SG4491
 	call	printf
-; Line 23
+; Line 26
 	mov	rcx, QWORD PTR head$[rsp]
 	call	print_list
 $LN5@TEST_delet:
-; Line 25
-	mov	edx, 4
+; Line 28
+	mov	DWORD PTR num$[rsp], 4
+; Line 29
+	mov	edx, DWORD PTR num$[rsp]
 	mov	rcx, QWORD PTR head$[rsp]
 	call	delete_first_value_matching_node
 	movzx	eax, al
 	test	eax, eax
 	je	SHORT $LN4@TEST_delet
-; Line 26
-	lea	rcx, OFFSET FLAT:$SG4490
-	call	printf
-; Line 27
-	mov	rcx, QWORD PTR head$[rsp]
-	call	print_list
-; Line 29
-	jmp	SHORT $LN3@TEST_delet
-$LN4@TEST_delet:
 ; Line 30
-	lea	rcx, OFFSET FLAT:$SG4492
+	mov	edx, DWORD PTR num$[rsp]
+	lea	rcx, OFFSET FLAT:$SG4493
 	call	printf
 ; Line 31
 	mov	rcx, QWORD PTR head$[rsp]
 	call	print_list
-$LN3@TEST_delet:
 ; Line 33
+	jmp	SHORT $LN3@TEST_delet
+$LN4@TEST_delet:
+; Line 34
+	mov	edx, DWORD PTR num$[rsp]
+	lea	rcx, OFFSET FLAT:$SG4495
+	call	printf
+; Line 35
+	mov	rcx, QWORD PTR head$[rsp]
+	call	print_list
+$LN3@TEST_delet:
+; Line 37
+	mov	DWORD PTR num$[rsp], 1
+; Line 38
 	mov	edx, 1
 	mov	rcx, QWORD PTR head$[rsp]
 	call	delete_first_value_matching_node
 	movzx	eax, al
 	test	eax, eax
 	je	SHORT $LN2@TEST_delet
-; Line 34
-	lea	rcx, OFFSET FLAT:$SG4494
+; Line 39
+	mov	edx, DWORD PTR num$[rsp]
+	lea	rcx, OFFSET FLAT:$SG4497
 	call	printf
-; Line 35
+; Line 40
 	mov	rcx, QWORD PTR head$[rsp]
 	call	print_list
-; Line 37
+; Line 42
 	jmp	SHORT $LN1@TEST_delet
 $LN2@TEST_delet:
-; Line 38
-	lea	rcx, OFFSET FLAT:$SG4496
+; Line 43
+	mov	edx, DWORD PTR num$[rsp]
+	lea	rcx, OFFSET FLAT:$SG4499
 	call	printf
-; Line 39
+; Line 44
 	mov	rcx, QWORD PTR head$[rsp]
 	call	print_list
 $LN1@TEST_delet:
-; Line 41
+; Line 46
 	add	rsp, 56					; 00000038H
 	ret	0
 TEST_delete1 ENDP
 _TEXT	ENDS
 ; Function compile flags: /Odtp
 _TEXT	SEGMENT
-head$ = 32
+num$ = 32
+head$ = 40
 TEST_search1 PROC
 ; File c:\src\blog posts\linked lists\integer linked list test.c
 ; Line 3
@@ -269,40 +287,48 @@ $LN7:
 	call	TEST_setup1
 	mov	QWORD PTR head$[rsp], rax
 ; Line 5
-	mov	edx, 2
+	mov	DWORD PTR num$[rsp], 2
+; Line 6
+	mov	edx, DWORD PTR num$[rsp]
 	mov	rcx, QWORD PTR head$[rsp]
 	call	search_list
 	movzx	eax, al
 	test	eax, eax
 	je	SHORT $LN4@TEST_searc
-; Line 6
-	lea	rcx, OFFSET FLAT:$SG4478
-	call	printf
-; Line 8
-	jmp	SHORT $LN3@TEST_searc
-$LN4@TEST_searc:
-; Line 9
+; Line 7
+	mov	edx, DWORD PTR num$[rsp]
 	lea	rcx, OFFSET FLAT:$SG4480
 	call	printf
+; Line 9
+	jmp	SHORT $LN3@TEST_searc
+$LN4@TEST_searc:
+; Line 10
+	mov	edx, DWORD PTR num$[rsp]
+	lea	rcx, OFFSET FLAT:$SG4482
+	call	printf
 $LN3@TEST_searc:
-; Line 11
-	mov	edx, 4
+; Line 12
+	mov	DWORD PTR num$[rsp], 4
+; Line 13
+	mov	edx, DWORD PTR num$[rsp]
 	mov	rcx, QWORD PTR head$[rsp]
 	call	search_list
 	movzx	eax, al
 	test	eax, eax
 	je	SHORT $LN2@TEST_searc
-; Line 12
-	lea	rcx, OFFSET FLAT:$SG4482
-	call	printf
 ; Line 14
-	jmp	SHORT $LN1@TEST_searc
-$LN2@TEST_searc:
-; Line 15
+	mov	edx, DWORD PTR num$[rsp]
 	lea	rcx, OFFSET FLAT:$SG4484
 	call	printf
-$LN1@TEST_searc:
+; Line 16
+	jmp	SHORT $LN1@TEST_searc
+$LN2@TEST_searc:
 ; Line 17
+	mov	edx, DWORD PTR num$[rsp]
+	lea	rcx, OFFSET FLAT:$SG4486
+	call	printf
+$LN1@TEST_searc:
+; Line 19
 	add	rsp, 56					; 00000038H
 	ret	0
 TEST_search1 ENDP
@@ -313,14 +339,14 @@ head$ = 32
 curr$ = 40
 TEST_setup1 PROC
 ; File c:\src\blog posts\linked lists\integer linked list test.c
-; Line 43
+; Line 48
 $LN3:
 	sub	rsp, 56					; 00000038H
-; Line 44
+; Line 49
 	mov	QWORD PTR head$[rsp], 0
-; Line 45
+; Line 50
 	mov	QWORD PTR curr$[rsp], 0
-; Line 46
+; Line 51
 	xor	r9d, r9d
 	mov	r8d, 1
 	mov	rdx, QWORD PTR curr$[rsp]
@@ -329,36 +355,36 @@ $LN3:
 	mov	QWORD PTR curr$[rsp], rax
 	mov	rax, QWORD PTR curr$[rsp]
 	mov	QWORD PTR head$[rsp], rax
-; Line 47
+; Line 52
 	xor	r9d, r9d
 	mov	r8d, 2
 	mov	rdx, QWORD PTR curr$[rsp]
 	mov	rcx, QWORD PTR head$[rsp]
 	call	add_to_list
-; Line 48
+; Line 53
 	xor	r9d, r9d
 	mov	r8d, 3
 	mov	rdx, QWORD PTR curr$[rsp]
 	mov	rcx, QWORD PTR head$[rsp]
 	call	add_to_list
-; Line 49
+; Line 54
 	mov	r9b, 1
 	mov	r8d, 8
 	mov	rdx, QWORD PTR curr$[rsp]
 	mov	rcx, QWORD PTR head$[rsp]
 	call	add_to_list
-; Line 50
+; Line 55
 	xor	r9d, r9d
 	mov	r8d, 2
 	mov	rdx, QWORD PTR curr$[rsp]
 	mov	rcx, QWORD PTR head$[rsp]
 	call	add_to_list
-; Line 51
+; Line 56
 	mov	rcx, QWORD PTR head$[rsp]
 	call	print_list
-; Line 52
+; Line 57
 	mov	rax, QWORD PTR head$[rsp]
-; Line 53
+; Line 58
 	add	rsp, 56					; 00000038H
 	ret	0
 TEST_setup1 ENDP

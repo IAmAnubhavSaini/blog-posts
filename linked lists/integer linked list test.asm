@@ -6,38 +6,53 @@ INCLUDELIB LIBCMT
 INCLUDELIB OLDNAMES
 
 _DATA	SEGMENT
-$SG4455	DB	0aH, 'Found 2 in list.', 00H
+$SG4459	DB	0aH, 'Found 2 in list.', 00H
 	ORG $+6
-$SG4457	DB	0aH, 'Not found 2 in list.', 00H
+$SG4461	DB	0aH, 'Not found 2 in list.', 00H
 	ORG $+2
-$SG4459	DB	0aH, 'Found 4 in list.', 00H
+$SG4463	DB	0aH, 'Found 4 in list.', 00H
 	ORG $+6
-$SG4461	DB	0aH, 'Not found 4 in list.', 00H
+$SG4465	DB	0aH, 'Not found 4 in list.', 00H
 	ORG $+2
-$SG4464	DB	0aH, 'Deleted first 2.', 00H
+$SG4468	DB	0aH, 'Deleted first 2.', 00H
 	ORG $+6
-$SG4466	DB	0aH, 'Deleted first 4.', 00H
+$SG4470	DB	0aH, 'Deleted first 4.', 00H
 	ORG $+6
-$SG4468	DB	0aH, '4 Not found.', 00H
+$SG4472	DB	0aH, '4 Not found.', 00H
 	ORG $+2
-$SG4470	DB	0aH, 'Deleted first 1.', 00H
+$SG4474	DB	0aH, 'Deleted first 1.', 00H
 	ORG $+6
-$SG4472	DB	0aH, '1 Not found.', 00H
+$SG4476	DB	0aH, '1 Not found.', 00H
 	ORG $+2
-$SG4476	DB	0aH, 'All 2s deleted from list.', 00H
+$SG4480	DB	0aH, 'All 2s deleted from list.', 00H
 	ORG $+5
-$SG4478	DB	0aH, '2 not found.', 00H
+$SG4482	DB	0aH, '2 not found.', 00H
+	ORG $+2
+$SG4484	DB	'Circular list test: list should not be circular.', 00H
+	ORG $+7
+$SG4486	DB	0aH, 'list is circular.', 00H
+	ORG $+5
+$SG4488	DB	0aH, 'list is not circular.', 00H
+	ORG $+1
+$SG4489	DB	0aH, 'Circular list test: list should be circular.', 00H
+	ORG $+2
+$SG4491	DB	0aH, 'list is circular.', 0aH, 00H
+	ORG $+4
+$SG4493	DB	0aH, 'list is not circular.', 0aH, 00H
 _DATA	ENDS
 PUBLIC	TEST_setup1
 PUBLIC	TEST_search1
 PUBLIC	TEST_delete1
 PUBLIC	TEST_delete2
+PUBLIC	TEST_circular_list
 EXTRN	printf:PROC
 EXTRN	add_to_list:PROC
+EXTRN	make_list_circular:PROC
 EXTRN	print_list:PROC
 EXTRN	search_list:PROC
 EXTRN	delete_first_value_matching_node:PROC
 EXTRN	delete_all_value_matching_nodes:PROC
+EXTRN	is_list_circular:PROC
 pdata	SEGMENT
 $pdata$TEST_setup1 DD imagerel $LN3
 	DD	imagerel $LN3+74
@@ -51,6 +66,9 @@ $pdata$TEST_delete1 DD imagerel $LN8
 $pdata$TEST_delete2 DD imagerel $LN5
 	DD	imagerel $LN5+57
 	DD	imagerel $unwind$TEST_delete2
+$pdata$TEST_circular_list DD imagerel $LN7
+	DD	imagerel $LN7+129
+	DD	imagerel $unwind$TEST_circular_list
 pdata	ENDS
 xdata	SEGMENT
 $unwind$TEST_setup1 DD 010401H
@@ -61,33 +79,91 @@ $unwind$TEST_delete1 DD 010401H
 	DD	04204H
 $unwind$TEST_delete2 DD 010401H
 	DD	04204H
+$unwind$TEST_circular_list DD 010401H
+	DD	04204H
 xdata	ENDS
+; Function compile flags: /Odtp
+_TEXT	SEGMENT
+TEST_circular_list PROC
+; File c:\src\blog posts\linked lists\integer linked list test.c
+; Line 60
+$LN7:
+	sub	rsp, 40					; 00000028H
+; Line 61
+	call	TEST_setup1
+; Line 62
+	call	print_list
+; Line 63
+	lea	rcx, OFFSET FLAT:$SG4484
+	call	printf
+; Line 64
+	call	is_list_circular
+	movzx	eax, al
+	test	eax, eax
+	je	SHORT $LN4@TEST_circu
+; Line 65
+	lea	rcx, OFFSET FLAT:$SG4486
+	call	printf
+; Line 67
+	jmp	SHORT $LN3@TEST_circu
+$LN4@TEST_circu:
+; Line 68
+	lea	rcx, OFFSET FLAT:$SG4488
+	call	printf
+$LN3@TEST_circu:
+; Line 70
+	call	make_list_circular
+; Line 71
+	lea	rcx, OFFSET FLAT:$SG4489
+	call	printf
+; Line 72
+	call	print_list
+; Line 73
+	call	is_list_circular
+	movzx	eax, al
+	test	eax, eax
+	je	SHORT $LN2@TEST_circu
+; Line 74
+	lea	rcx, OFFSET FLAT:$SG4491
+	call	printf
+; Line 76
+	jmp	SHORT $LN1@TEST_circu
+$LN2@TEST_circu:
+; Line 77
+	lea	rcx, OFFSET FLAT:$SG4493
+	call	printf
+$LN1@TEST_circu:
+; Line 80
+	add	rsp, 40					; 00000028H
+	ret	0
+TEST_circular_list ENDP
+_TEXT	ENDS
 ; Function compile flags: /Odtp
 _TEXT	SEGMENT
 TEST_delete2 PROC
 ; File c:\src\blog posts\linked lists\integer linked list test.c
-; Line 49
+; Line 50
 $LN5:
 	sub	rsp, 40					; 00000028H
-; Line 50
+; Line 51
 	mov	ecx, 2
 	call	delete_all_value_matching_nodes
 	movzx	eax, al
 	test	eax, eax
 	je	SHORT $LN2@TEST_delet
-; Line 51
-	lea	rcx, OFFSET FLAT:$SG4476
+; Line 52
+	lea	rcx, OFFSET FLAT:$SG4480
 	call	printf
-; Line 53
+; Line 54
 	jmp	SHORT $LN1@TEST_delet
 $LN2@TEST_delet:
-; Line 54
-	lea	rcx, OFFSET FLAT:$SG4478
+; Line 55
+	lea	rcx, OFFSET FLAT:$SG4482
 	call	printf
 $LN1@TEST_delet:
-; Line 56
-	call	print_list
 ; Line 57
+	call	print_list
+; Line 58
 	add	rsp, 40					; 00000028H
 	ret	0
 TEST_delete2 ENDP
@@ -106,7 +182,7 @@ $LN8:
 	test	eax, eax
 	je	SHORT $LN5@TEST_delet
 ; Line 20
-	lea	rcx, OFFSET FLAT:$SG4464
+	lea	rcx, OFFSET FLAT:$SG4468
 	call	printf
 ; Line 21
 	call	print_list
@@ -118,7 +194,7 @@ $LN5@TEST_delet:
 	test	eax, eax
 	je	SHORT $LN4@TEST_delet
 ; Line 24
-	lea	rcx, OFFSET FLAT:$SG4466
+	lea	rcx, OFFSET FLAT:$SG4470
 	call	printf
 ; Line 25
 	call	print_list
@@ -126,7 +202,7 @@ $LN5@TEST_delet:
 	jmp	SHORT $LN3@TEST_delet
 $LN4@TEST_delet:
 ; Line 28
-	lea	rcx, OFFSET FLAT:$SG4468
+	lea	rcx, OFFSET FLAT:$SG4472
 	call	printf
 ; Line 29
 	call	print_list
@@ -138,7 +214,7 @@ $LN3@TEST_delet:
 	test	eax, eax
 	je	SHORT $LN2@TEST_delet
 ; Line 32
-	lea	rcx, OFFSET FLAT:$SG4470
+	lea	rcx, OFFSET FLAT:$SG4474
 	call	printf
 ; Line 33
 	call	print_list
@@ -146,7 +222,7 @@ $LN3@TEST_delet:
 	jmp	SHORT $LN1@TEST_delet
 $LN2@TEST_delet:
 ; Line 36
-	lea	rcx, OFFSET FLAT:$SG4472
+	lea	rcx, OFFSET FLAT:$SG4476
 	call	printf
 ; Line 37
 	call	print_list
@@ -170,13 +246,13 @@ $LN7:
 	test	eax, eax
 	je	SHORT $LN4@TEST_searc
 ; Line 5
-	lea	rcx, OFFSET FLAT:$SG4455
+	lea	rcx, OFFSET FLAT:$SG4459
 	call	printf
 ; Line 7
 	jmp	SHORT $LN3@TEST_searc
 $LN4@TEST_searc:
 ; Line 8
-	lea	rcx, OFFSET FLAT:$SG4457
+	lea	rcx, OFFSET FLAT:$SG4461
 	call	printf
 $LN3@TEST_searc:
 ; Line 10
@@ -186,13 +262,13 @@ $LN3@TEST_searc:
 	test	eax, eax
 	je	SHORT $LN2@TEST_searc
 ; Line 11
-	lea	rcx, OFFSET FLAT:$SG4459
+	lea	rcx, OFFSET FLAT:$SG4463
 	call	printf
 ; Line 13
 	jmp	SHORT $LN1@TEST_searc
 $LN2@TEST_searc:
 ; Line 14
-	lea	rcx, OFFSET FLAT:$SG4461
+	lea	rcx, OFFSET FLAT:$SG4465
 	call	printf
 $LN1@TEST_searc:
 ; Line 16

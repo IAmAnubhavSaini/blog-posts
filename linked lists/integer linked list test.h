@@ -2,6 +2,7 @@
 #define INTEGER_LINKED_LIST_TEST_H
 
 #include "integer linked list.h"
+#include "testing constants.h"
 
 Node *    TEST_setup1(void);
 void      TEST_search1(void);

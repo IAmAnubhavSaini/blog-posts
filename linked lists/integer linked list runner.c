@@ -1,19 +1,18 @@
 #include "integer linked list test.h"
 
 void fireTests(){
-	printf("\n\nFiring test 1\n");
+	printf(FT_1);
 	TEST_setup1();
-	printf("\n\nFiring test 2\n");
+	printf(FT_2);
 	TEST_search1();
-	printf("\n\nFiring test 3\n");
+	printf(FT_3);
 	TEST_delete1();
-	printf("\n\nFiring test 4\n");
+	printf(FT_4);
 	TEST_setup1();
-	printf("\n\nFiring test 5\n");
+	printf(FT_5);
 	TEST_delete2();
-	printf("\n\nFiring test 6\n");
+	printf(FT_6);
 	TEST_circular_list();
-
 }
 
 int main(){

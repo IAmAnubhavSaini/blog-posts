@@ -19,5 +19,6 @@ bool      search_list(int val);
 bool      delete_first_value_matching_node(int val);
 bool      delete_all_value_matching_nodes(int val);
 bool      is_list_empty();
+bool      is_list_circular();
 
 #endif INTEGER_LINKED_LIST_H

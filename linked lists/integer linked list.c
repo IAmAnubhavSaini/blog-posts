@@ -3,6 +3,20 @@
 Node *head = NULL;
 Node *curr = NULL;
 
+bool      is_list_circular(){
+	Node *khargosh, *kachua;
+	khargosh = kachua = head;
+	while (head && khargosh && kachua){
+		if (khargosh = khargosh->next){
+			khargosh = khargosh->next;
+			kachua = kachua->next;
+		}
+		if (kachua == khargosh)
+			return true;
+	}
+	return false;
+}
+
 bool      is_list_empty(){
 	if (!head)
 		return true;

@@ -58,6 +58,14 @@ Node* add_to_list(int val, bool before_head){
 	}
 }
 
+void      make_list_circular(){
+	Node * tmp = head;
+	while(tmp && tmp->next){
+		tmp = tmp->next;
+	}
+	tmp->next = head;
+}
+
 void print_list(){
 
 	Node *ptr = head;

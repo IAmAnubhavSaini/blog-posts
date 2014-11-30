@@ -14,7 +14,10 @@ typedef struct link_node Node; //gives a bit of OOP feel
 
 Node  *   create_list(int val);
 Node  *   add_to_list(int val, bool before_head);
+
+void      make_list_circular();
 void      print_list();
+
 bool      search_list(int val);
 bool      delete_first_value_matching_node(int val);
 bool      delete_all_value_matching_nodes(int val);

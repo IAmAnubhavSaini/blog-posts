@@ -3,28 +3,6 @@
 Node *head = NULL;
 Node *curr = NULL;
 
-bool      is_list_circular(){
-	Node *slow = head;
-	Node *fast = head;
-	while (slow && fast && fast->next && fast->next){
-		fast = fast->next->next;
-		slow = slow->next;
-		if (slow == fast){
-			return true;
-		}
-	}
-	if (!fast || !fast->next || !fast->next->next){
-		return false;
-	}
-}
-
-bool      is_list_empty(){
-	if (!head)
-		return true;
-	else
-		return false;
-}
-
 Node* create_list(int val){
 	Node *ptr = (Node*)malloc(sizeof(Node));
 	if (ptr == NULL){
@@ -59,7 +37,7 @@ Node* add_to_list(int val, bool before_head){
 	}
 }
 
-void      make_list_circular(){
+void make_list_circular(){
 	Node * tmp = head;
 	while(tmp && tmp->next){
 		tmp = tmp->next;
@@ -152,4 +130,26 @@ bool delete_all_value_matching_nodes(int val){
 		}
 	}
 	return isDeleted;
+}
+
+bool is_list_circular(){
+	Node *slow = head;
+	Node *fast = head;
+	while (slow && fast && fast->next && fast->next){
+		fast = fast->next->next;
+		slow = slow->next;
+		if (slow == fast){
+			return true;
+		}
+	}
+	if (!fast || !fast->next || !fast->next->next){
+		return false;
+	}
+}
+
+bool is_list_empty(){
+	if (!head)
+		return true;
+	else
+		return false;
 }

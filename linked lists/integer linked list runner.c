@@ -15,8 +15,8 @@ void fireTests(){
 	TEST_shoud_be_a_circular_list();
 	printf(FTN, 7);
 	TEST_should_not_find_number_in_list();
-	printf(FTN, 8);
-	TEST_stack_should_be_reverse_of_the_list();
+	/*printf(FTN, 8);
+	TEST_stack_should_be_reverse_of_the_list();*/
 }
 
 int main(){

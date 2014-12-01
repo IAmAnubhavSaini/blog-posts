@@ -14,7 +14,7 @@ void TEST_should_find_number_in_list(){
 
 void TEST_should_not_find_number_in_list(){
 	Node *head = TEST_should_setup_and_confim_via_printing();
-	int num = 4;
+	int num = -1; // we are adding only positive numbers.
 	if (search_list(head, num)){
 		printf(FNIL, num);
 	}
@@ -51,13 +51,11 @@ void TEST_should_delete_numbers_first_occurence(){
 }
 
 Node * TEST_should_setup_and_confim_via_printing(){
-	Node *head = NULL;
-	Node *curr = NULL;
-	head = curr = add_to_list(head, curr, 1, false);
-	add_to_list(head, curr, 2, false);
-	add_to_list(head, curr, 3, false);
-	add_to_list(head, curr, 8, true);
-	add_to_list(head, curr, 2, false);
+	Node *head = create_node(1);
+	add_to_list(head, 2);
+	add_to_list(head, 3);
+	add_to_list(head, 4);
+	add_to_list(head, 5);
 	print_list(head);
 	return head;
 }
@@ -102,3 +100,8 @@ void TEST_shoud_be_a_circular_list(){
 	}
 }
 
+void TEST_stack_should_be_reverse_of_the_list(void){
+	Node *head = TEST_should_setup_and_confim_via_printing();
+	Node *stackTop = create_stack_from_existing_list(head, NULL);
+	print_list(stackTop);
+}

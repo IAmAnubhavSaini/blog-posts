@@ -18,30 +18,18 @@ Node* create_node(int val){
 #endif
 }
 
-Node* add_to_list(Node *head, Node *curr, int val, bool before_head){
+void add_to_list(Node *head, int val){
 #ifdef DEBUG
 	printf("\ndebug: entering add_to_list with value : %d.", val);
 #endif
-	Node *newTS = (Node*)malloc(sizeof(Node));
-	if (is_list_empty(head)){
-		return(create_node(val));
+	Node *newTS = create_node(val);
+	Node *tmp = head;
+	while (tmp->next != NULL){
+		tmp = tmp->next;
 	}
-
-	if (before_head) {
-		newTS->val = val;
-		newTS->next = head;
-		head = newTS;
-		return head;//try returning head so that further manipulation can start from right there.
-	}
-	else{
-		newTS->val = val;
-		newTS->next = NULL;
-		curr->next = newTS;
-		curr = newTS;
-		return curr;//try returning current so that further manipulation can start from right there.
-	}
+	tmp->next = newTS;
 #ifdef DEBUG
-	printf("\ndebug: entering add_to_list.");
+	printf("\ndebug: exiting add_to_list.");
 #endif
 }
 
@@ -185,7 +173,7 @@ Node * create_stack_from_existing_list(Node *otherListHead, Node *otherListUpto)
 
 	tmp = otherListHead;
 	while (tmp != NULL && tmp != otherListUpto){
-		head = add_to_list(head, NULL /* I know what I am doing */, tmp->val, true);
+		add_to_list(head, tmp->val);
 		tmp = tmp->next;
 	}
 

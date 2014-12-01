@@ -6,15 +6,35 @@ INCLUDELIB LIBCMT
 INCLUDELIB OLDNAMES
 
 _DATA	SEGMENT
-$SG4501	DB	0aH, 'Circular list.', 00H
-$SG4505	DB	0aH, 'The values of the list are : ', 00H
+$SG4471	DB	0aH, 'debug: entering create_node with value : %d.', 00H
+	ORG $+2
+$SG4478	DB	0aH, 'debug: exiting create_node.', 00H
+	ORG $+3
+$SG4484	DB	0aH, 'debug: entering add_to_list with value : %d.', 00H
+	ORG $+2
+$SG4491	DB	0aH, 'debug: exiting add_to_list.', 00H
+	ORG $+3
+$SG4495	DB	0aH, 'debug: entering make_list_circular.', 00H
+	ORG $+3
+$SG4500	DB	0aH, 'debug: exiting make_list_circular.', 00H
+	ORG $+4
+$SG4504	DB	0aH, 'debug: entering print_list.', 00H
+	ORG $+3
+$SG4507	DB	0aH, 'Circular list.', 00H
+$SG4511	DB	0aH, 'The values of the list are : ', 00H
 	ORG $+1
-$SG4509	DB	' [%d]-> ', 00H
+$SG4515	DB	' [%d]-> ', 00H
 	ORG $+7
-$SG4510	DB	'[NULL]', 0aH, 00H
-$SG4512	DB	0aH, 'Empty list.', 00H
+$SG4516	DB	'[NULL]', 0aH, 00H
+$SG4518	DB	0aH, 'Empty list.', 00H
+	ORG $+3
+$SG4519	DB	0aH, 'debug: exiting print_list.', 00H
+	ORG $+4
+$SG4543	DB	0aH, 'debug: at least two nodes exists.', 00H
+	ORG $+5
+$SG4550	DB	0aH, 'debug: only one node exists.', 00H
 _DATA	ENDS
-PUBLIC	create_list
+PUBLIC	create_node
 PUBLIC	add_to_list
 PUBLIC	make_list_circular
 PUBLIC	print_list
@@ -23,27 +43,28 @@ PUBLIC	delete_first_value_matching_node
 PUBLIC	delete_all_value_matching_nodes
 PUBLIC	is_list_empty
 PUBLIC	is_list_circular
+PUBLIC	create_stack_from_existing_list
 EXTRN	printf:PROC
 EXTRN	abort:PROC
 EXTRN	malloc:PROC
 pdata	SEGMENT
-$pdata$create_list DD imagerel $LN4
-	DD	imagerel $LN4+70
-	DD	imagerel $unwind$create_list
-$pdata$add_to_list DD imagerel $LN6
-	DD	imagerel $LN6+178
+$pdata$create_node DD imagerel $LN4
+	DD	imagerel $LN4+100
+	DD	imagerel $unwind$create_node
+$pdata$add_to_list DD imagerel $LN5
+	DD	imagerel $LN5+112
 	DD	imagerel $unwind$add_to_list
 $pdata$make_list_circular DD imagerel $LN5
-	DD	imagerel $LN5+68
+	DD	imagerel $LN5+98
 	DD	imagerel $unwind$make_list_circular
 $pdata$print_list DD imagerel $LN9
-	DD	imagerel $LN9+149
+	DD	imagerel $LN9+173
 	DD	imagerel $unwind$print_list
 $pdata$search_list DD imagerel $LN6
 	DD	imagerel $LN6+79
 	DD	imagerel $unwind$search_list
 $pdata$delete_first_value_matching_node DD imagerel $LN9
-	DD	imagerel $LN9+176
+	DD	imagerel $LN9+205
 	DD	imagerel $unwind$delete_first_value_matching_node
 $pdata$delete_all_value_matching_nodes DD imagerel $LN9
 	DD	imagerel $LN9+168
@@ -51,25 +72,83 @@ $pdata$delete_all_value_matching_nodes DD imagerel $LN9
 $pdata$is_list_circular DD imagerel $LN6
 	DD	imagerel $LN6+119
 	DD	imagerel $unwind$is_list_circular
+$pdata$create_stack_from_existing_list DD imagerel $LN6
+	DD	imagerel $LN6+118
+	DD	imagerel $unwind$create_stack_from_existing_list
 pdata	ENDS
 xdata	SEGMENT
-$unwind$create_list DD 010801H
+$unwind$create_node DD 010801H
 	DD	06208H
-$unwind$add_to_list DD 011801H
-	DD	06218H
+$unwind$add_to_list DD 010d01H
+	DD	0620dH
 $unwind$make_list_circular DD 010901H
-	DD	02209H
+	DD	06209H
 $unwind$print_list DD 010901H
 	DD	06209H
 $unwind$search_list DD 010d01H
 	DD	0220dH
 $unwind$delete_first_value_matching_node DD 010d01H
-	DD	0420dH
+	DD	0820dH
 $unwind$delete_all_value_matching_nodes DD 010d01H
 	DD	0420dH
 $unwind$is_list_circular DD 010901H
 	DD	02209H
+$unwind$create_stack_from_existing_list DD 010e01H
+	DD	0620eH
 xdata	ENDS
+; Function compile flags: /Odtp
+_TEXT	SEGMENT
+tmp$ = 32
+head$ = 40
+otherListHead$ = 64
+otherListUpto$ = 72
+create_stack_from_existing_list PROC
+; File c:\src\blog posts\linked lists\integer linked list.c
+; Line 166
+$LN6:
+	mov	QWORD PTR [rsp+16], rdx
+	mov	QWORD PTR [rsp+8], rcx
+	sub	rsp, 56					; 00000038H
+; Line 167
+	mov	QWORD PTR head$[rsp], 0
+; Line 168
+	mov	QWORD PTR tmp$[rsp], 0
+; Line 170
+	cmp	QWORD PTR otherListHead$[rsp], 0
+	jne	SHORT $LN3@create_sta
+; Line 171
+	call	abort
+$LN3@create_sta:
+; Line 174
+	mov	rax, QWORD PTR otherListHead$[rsp]
+	mov	QWORD PTR tmp$[rsp], rax
+$LN2@create_sta:
+; Line 175
+	cmp	QWORD PTR tmp$[rsp], 0
+	je	SHORT $LN1@create_sta
+	mov	rax, QWORD PTR otherListUpto$[rsp]
+	cmp	QWORD PTR tmp$[rsp], rax
+	je	SHORT $LN1@create_sta
+; Line 176
+	mov	rax, QWORD PTR tmp$[rsp]
+	mov	edx, DWORD PTR [rax]
+	mov	rcx, QWORD PTR head$[rsp]
+	call	add_to_list
+; Line 177
+	mov	rax, QWORD PTR tmp$[rsp]
+	mov	rax, QWORD PTR [rax+8]
+	mov	QWORD PTR tmp$[rsp], rax
+; Line 178
+	jmp	SHORT $LN2@create_sta
+$LN1@create_sta:
+; Line 180
+	mov	rax, QWORD PTR head$[rsp]
+$LN5@create_sta:
+; Line 181
+	add	rsp, 56					; 00000038H
+	ret	0
+create_stack_from_existing_list ENDP
+_TEXT	ENDS
 ; Function compile flags: /Odtp
 _TEXT	SEGMENT
 fast$ = 0
@@ -77,18 +156,18 @@ slow$ = 8
 head$ = 32
 is_list_circular PROC
 ; File c:\src\blog posts\linked lists\integer linked list.c
-; Line 158
+; Line 146
 $LN6:
 	mov	QWORD PTR [rsp+8], rcx
 	sub	rsp, 24
-; Line 159
+; Line 147
 	mov	rax, QWORD PTR head$[rsp]
 	mov	QWORD PTR slow$[rsp], rax
-; Line 160
+; Line 148
 	mov	rax, QWORD PTR head$[rsp]
 	mov	QWORD PTR fast$[rsp], rax
 $LN3@is_list_ci:
-; Line 161
+; Line 149
 	cmp	QWORD PTR slow$[rsp], 0
 	je	SHORT $LN2@is_list_ci
 	cmp	QWORD PTR fast$[rsp], 0
@@ -99,30 +178,30 @@ $LN3@is_list_ci:
 	mov	rax, QWORD PTR fast$[rsp]
 	cmp	QWORD PTR [rax+8], 0
 	je	SHORT $LN2@is_list_ci
-; Line 162
+; Line 150
 	mov	rax, QWORD PTR fast$[rsp]
 	mov	rax, QWORD PTR [rax+8]
 	mov	rax, QWORD PTR [rax+8]
 	mov	QWORD PTR fast$[rsp], rax
-; Line 163
+; Line 151
 	mov	rax, QWORD PTR slow$[rsp]
 	mov	rax, QWORD PTR [rax+8]
 	mov	QWORD PTR slow$[rsp], rax
-; Line 164
+; Line 152
 	mov	rax, QWORD PTR fast$[rsp]
 	cmp	QWORD PTR slow$[rsp], rax
 	jne	SHORT $LN1@is_list_ci
-; Line 165
+; Line 153
 	mov	al, 1
 	jmp	SHORT $LN4@is_list_ci
 $LN1@is_list_ci:
-; Line 167
+; Line 155
 	jmp	SHORT $LN3@is_list_ci
 $LN2@is_list_ci:
-; Line 168
+; Line 156
 	xor	al, al
 $LN4@is_list_ci:
-; Line 169
+; Line 157
 	add	rsp, 24
 	ret	0
 is_list_circular ENDP
@@ -132,22 +211,22 @@ _TEXT	SEGMENT
 head$ = 8
 is_list_empty PROC
 ; File c:\src\blog posts\linked lists\integer linked list.c
-; Line 171
+; Line 159
 	mov	QWORD PTR [rsp+8], rcx
-; Line 172
+; Line 160
 	cmp	QWORD PTR head$[rsp], 0
 	jne	SHORT $LN2@is_list_em
-; Line 173
+; Line 161
 	mov	al, 1
 	jmp	SHORT $LN3@is_list_em
-; Line 174
+; Line 162
 	jmp	SHORT $LN1@is_list_em
 $LN2@is_list_em:
-; Line 175
+; Line 163
 	xor	al, al
 $LN1@is_list_em:
 $LN3@is_list_em:
-; Line 176
+; Line 164
 	ret	0
 is_list_empty ENDP
 _TEXT	ENDS
@@ -160,151 +239,157 @@ head$ = 48
 val$ = 56
 delete_all_value_matching_nodes PROC
 ; File c:\src\blog posts\linked lists\integer linked list.c
-; Line 133
+; Line 121
 $LN9:
 	mov	DWORD PTR [rsp+16], edx
 	mov	QWORD PTR [rsp+8], rcx
 	sub	rsp, 40					; 00000028H
-; Line 134
+; Line 122
 	mov	rax, QWORD PTR head$[rsp]
 	mov	QWORD PTR prev$[rsp], rax
-; Line 135
+; Line 123
 	mov	QWORD PTR curr$[rsp], 0
-; Line 136
+; Line 124
 	mov	BYTE PTR isDeleted$[rsp], 0
-; Line 137
+; Line 125
 	mov	rax, QWORD PTR head$[rsp]
 	cmp	QWORD PTR [rax+8], 0
 	je	SHORT $LN6@delete_all
-; Line 138
+; Line 126
 	mov	rax, QWORD PTR head$[rsp]
 	mov	rax, QWORD PTR [rax+8]
 	mov	QWORD PTR curr$[rsp], rax
 $LN5@delete_all:
-; Line 139
+; Line 127
 	cmp	QWORD PTR curr$[rsp], 0
 	je	SHORT $LN4@delete_all
-; Line 140
+; Line 128
 	mov	rax, QWORD PTR curr$[rsp]
 	mov	ecx, DWORD PTR val$[rsp]
 	cmp	DWORD PTR [rax], ecx
 	jne	SHORT $LN3@delete_all
-; Line 141
+; Line 129
 	mov	BYTE PTR isDeleted$[rsp], 1
-; Line 142
+; Line 130
 	mov	rax, QWORD PTR prev$[rsp]
 	mov	rcx, QWORD PTR curr$[rsp]
 	mov	rcx, QWORD PTR [rcx+8]
 	mov	QWORD PTR [rax+8], rcx
 $LN3@delete_all:
-; Line 145
+; Line 133
 	mov	rax, QWORD PTR curr$[rsp]
 	mov	QWORD PTR prev$[rsp], rax
-; Line 146
+; Line 134
 	mov	rax, QWORD PTR curr$[rsp]
 	mov	rax, QWORD PTR [rax+8]
 	mov	QWORD PTR curr$[rsp], rax
-; Line 147
+; Line 135
 	jmp	SHORT $LN5@delete_all
 $LN4@delete_all:
-; Line 149
+; Line 137
 	jmp	SHORT $LN2@delete_all
 $LN6@delete_all:
-; Line 150
+; Line 138
 	mov	rax, QWORD PTR prev$[rsp]
 	mov	ecx, DWORD PTR val$[rsp]
 	cmp	DWORD PTR [rax], ecx
 	jne	SHORT $LN1@delete_all
-; Line 151
+; Line 139
 	mov	BYTE PTR isDeleted$[rsp], 1
-; Line 152
+; Line 140
 	mov	QWORD PTR prev$[rsp], 0
 $LN1@delete_all:
 $LN2@delete_all:
-; Line 155
+; Line 143
 	movzx	eax, BYTE PTR isDeleted$[rsp]
-; Line 156
+; Line 144
 	add	rsp, 40					; 00000028H
 	ret	0
 delete_all_value_matching_nodes ENDP
 _TEXT	ENDS
 ; Function compile flags: /Odtp
 _TEXT	SEGMENT
-isDeleted$ = 0
-curr$ = 8
-prev$ = 16
-head$ = 48
-val$ = 56
+isDeleted$ = 32
+curr$ = 40
+prev$ = 48
+head$ = 80
+val$ = 88
 delete_first_value_matching_node PROC
 ; File c:\src\blog posts\linked lists\integer linked list.c
-; Line 101
+; Line 89
 $LN9:
 	mov	DWORD PTR [rsp+16], edx
 	mov	QWORD PTR [rsp+8], rcx
-	sub	rsp, 40					; 00000028H
-; Line 102
+	sub	rsp, 72					; 00000048H
+; Line 90
 	mov	rax, QWORD PTR head$[rsp]
 	mov	QWORD PTR prev$[rsp], rax
-; Line 103
+; Line 91
 	mov	QWORD PTR curr$[rsp], 0
-; Line 104
+; Line 92
 	mov	BYTE PTR isDeleted$[rsp], 0
-; Line 105
+; Line 93
 	mov	rax, QWORD PTR head$[rsp]
 	cmp	QWORD PTR [rax+8], 0
 	je	SHORT $LN6@delete_fir
-; Line 106
+; Line 94
 	mov	rax, QWORD PTR head$[rsp]
 	mov	rax, QWORD PTR [rax+8]
 	mov	QWORD PTR curr$[rsp], rax
+; Line 96
+	lea	rcx, OFFSET FLAT:$SG4543
+	call	printf
 $LN5@delete_fir:
-; Line 110
+; Line 98
 	cmp	QWORD PTR curr$[rsp], 0
 	je	SHORT $LN4@delete_fir
 	movzx	eax, BYTE PTR isDeleted$[rsp]
 	test	eax, eax
 	jne	SHORT $LN4@delete_fir
-; Line 111
+; Line 99
 	mov	rax, QWORD PTR curr$[rsp]
 	mov	ecx, DWORD PTR val$[rsp]
 	cmp	DWORD PTR [rax], ecx
 	jne	SHORT $LN3@delete_fir
-; Line 112
+; Line 100
 	mov	rax, QWORD PTR prev$[rsp]
 	mov	rcx, QWORD PTR curr$[rsp]
 	mov	rcx, QWORD PTR [rcx+8]
 	mov	QWORD PTR [rax+8], rcx
-; Line 113
+; Line 101
 	mov	BYTE PTR isDeleted$[rsp], 1
 $LN3@delete_fir:
-; Line 116
+; Line 104
 	mov	rax, QWORD PTR curr$[rsp]
 	mov	QWORD PTR prev$[rsp], rax
-; Line 117
+; Line 105
 	mov	rax, QWORD PTR curr$[rsp]
 	mov	rax, QWORD PTR [rax+8]
 	mov	QWORD PTR curr$[rsp], rax
-; Line 118
+; Line 106
 	jmp	SHORT $LN5@delete_fir
 $LN4@delete_fir:
-; Line 120
+; Line 108
 	jmp	SHORT $LN2@delete_fir
 $LN6@delete_fir:
-; Line 124
+; Line 110
+	lea	rcx, OFFSET FLAT:$SG4550
+	call	printf
+; Line 112
 	mov	rax, QWORD PTR prev$[rsp]
 	mov	ecx, DWORD PTR val$[rsp]
 	cmp	DWORD PTR [rax], ecx
 	jne	SHORT $LN1@delete_fir
-; Line 125
+; Line 113
 	mov	BYTE PTR isDeleted$[rsp], 1
-; Line 127
+; Line 115
 	mov	QWORD PTR prev$[rsp], 0
 $LN1@delete_fir:
 $LN2@delete_fir:
-; Line 130
+; Line 118
 	movzx	eax, BYTE PTR isDeleted$[rsp]
-; Line 131
-	add	rsp, 40					; 00000028H
+; Line 119
+	add	rsp, 72					; 00000048H
 	ret	0
 delete_first_value_matching_node ENDP
 _TEXT	ENDS
@@ -316,40 +401,40 @@ head$ = 32
 val$ = 40
 search_list PROC
 ; File c:\src\blog posts\linked lists\integer linked list.c
-; Line 88
+; Line 76
 $LN6:
 	mov	DWORD PTR [rsp+16], edx
 	mov	QWORD PTR [rsp+8], rcx
 	sub	rsp, 24
-; Line 89
+; Line 77
 	mov	rax, QWORD PTR head$[rsp]
 	mov	QWORD PTR start$[rsp], rax
-; Line 90
+; Line 78
 	mov	BYTE PTR isFound$[rsp], 0
 $LN3@search_lis:
-; Line 91
+; Line 79
 	cmp	QWORD PTR start$[rsp], 0
 	je	SHORT $LN2@search_lis
-; Line 92
+; Line 80
 	mov	rax, QWORD PTR start$[rsp]
 	mov	ecx, DWORD PTR val$[rsp]
 	cmp	DWORD PTR [rax], ecx
 	jne	SHORT $LN1@search_lis
-; Line 93
+; Line 81
 	mov	BYTE PTR isFound$[rsp], 1
-; Line 94
+; Line 82
 	jmp	SHORT $LN2@search_lis
 $LN1@search_lis:
-; Line 96
+; Line 84
 	mov	rax, QWORD PTR start$[rsp]
 	mov	rax, QWORD PTR [rax+8]
 	mov	QWORD PTR start$[rsp], rax
-; Line 97
+; Line 85
 	jmp	SHORT $LN3@search_lis
 $LN2@search_lis:
-; Line 98
+; Line 86
 	movzx	eax, BYTE PTR isFound$[rsp]
-; Line 99
+; Line 87
 	add	rsp, 24
 	ret	0
 search_list ENDP
@@ -360,171 +445,156 @@ ptr$ = 32
 head$ = 64
 print_list PROC
 ; File c:\src\blog posts\linked lists\integer linked list.c
-; Line 62
+; Line 50
 $LN9:
 	mov	QWORD PTR [rsp+8], rcx
 	sub	rsp, 56					; 00000038H
-; Line 66
+; Line 52
+	lea	rcx, OFFSET FLAT:$SG4504
+	call	printf
+; Line 54
 	mov	rax, QWORD PTR head$[rsp]
 	mov	QWORD PTR ptr$[rsp], rax
-; Line 67
+; Line 55
 	mov	rcx, QWORD PTR head$[rsp]
 	call	is_list_circular
 	movzx	eax, al
 	test	eax, eax
 	je	SHORT $LN6@print_list
-; Line 68
-	lea	rcx, OFFSET FLAT:$SG4501
+; Line 56
+	lea	rcx, OFFSET FLAT:$SG4507
 	call	printf
-; Line 70
+; Line 58
 	jmp	SHORT $LN5@print_list
 $LN6@print_list:
-; Line 71
+; Line 59
 	cmp	QWORD PTR ptr$[rsp], 0
 	je	SHORT $LN4@print_list
-; Line 72
-	lea	rcx, OFFSET FLAT:$SG4505
+; Line 60
+	lea	rcx, OFFSET FLAT:$SG4511
 	call	printf
 $LN3@print_list:
-; Line 73
+; Line 61
 	cmp	QWORD PTR ptr$[rsp], 0
 	je	SHORT $LN2@print_list
-; Line 74
+; Line 62
 	mov	r8, QWORD PTR ptr$[rsp]
 	mov	rax, QWORD PTR ptr$[rsp]
 	mov	edx, DWORD PTR [rax]
-	lea	rcx, OFFSET FLAT:$SG4509
+	lea	rcx, OFFSET FLAT:$SG4515
 	call	printf
-; Line 75
+; Line 63
 	mov	rax, QWORD PTR ptr$[rsp]
 	mov	rax, QWORD PTR [rax+8]
 	mov	QWORD PTR ptr$[rsp], rax
-; Line 76
+; Line 64
 	jmp	SHORT $LN3@print_list
 $LN2@print_list:
-; Line 77
-	lea	rcx, OFFSET FLAT:$SG4510
+; Line 65
+	lea	rcx, OFFSET FLAT:$SG4516
 	call	printf
-; Line 79
+; Line 67
 	jmp	SHORT $LN1@print_list
 $LN4@print_list:
-; Line 80
-	lea	rcx, OFFSET FLAT:$SG4512
+; Line 68
+	lea	rcx, OFFSET FLAT:$SG4518
 	call	printf
 $LN1@print_list:
 $LN5@print_list:
-; Line 86
+; Line 72
+	lea	rcx, OFFSET FLAT:$SG4519
+	call	printf
+; Line 74
 	add	rsp, 56					; 00000038H
 	ret	0
 print_list ENDP
 _TEXT	ENDS
 ; Function compile flags: /Odtp
 _TEXT	SEGMENT
-tmp$ = 0
-head$ = 32
+tmp$ = 32
+head$ = 64
 make_list_circular PROC
 ; File c:\src\blog posts\linked lists\integer linked list.c
-; Line 48
+; Line 36
 $LN5:
 	mov	QWORD PTR [rsp+8], rcx
-	sub	rsp, 24
-; Line 52
+	sub	rsp, 56					; 00000038H
+; Line 38
+	lea	rcx, OFFSET FLAT:$SG4495
+	call	printf
+; Line 40
 	mov	rax, QWORD PTR head$[rsp]
 	mov	QWORD PTR tmp$[rsp], rax
 $LN2@make_list_:
-; Line 53
+; Line 41
 	cmp	QWORD PTR tmp$[rsp], 0
 	je	SHORT $LN1@make_list_
 	mov	rax, QWORD PTR tmp$[rsp]
 	cmp	QWORD PTR [rax+8], 0
 	je	SHORT $LN1@make_list_
-; Line 54
+; Line 42
 	mov	rax, QWORD PTR tmp$[rsp]
 	mov	rax, QWORD PTR [rax+8]
 	mov	QWORD PTR tmp$[rsp], rax
-; Line 55
+; Line 43
 	jmp	SHORT $LN2@make_list_
 $LN1@make_list_:
-; Line 56
+; Line 44
 	mov	rax, QWORD PTR tmp$[rsp]
 	mov	rcx, QWORD PTR head$[rsp]
 	mov	QWORD PTR [rax+8], rcx
-; Line 60
-	add	rsp, 24
+; Line 46
+	lea	rcx, OFFSET FLAT:$SG4500
+	call	printf
+; Line 48
+	add	rsp, 56					; 00000038H
 	ret	0
 make_list_circular ENDP
 _TEXT	ENDS
 ; Function compile flags: /Odtp
 _TEXT	SEGMENT
-newTS$ = 32
+tmp$ = 32
+newTS$ = 40
 head$ = 64
-curr$ = 72
-val$ = 80
-before_head$ = 88
+val$ = 72
 add_to_list PROC
 ; File c:\src\blog posts\linked lists\integer linked list.c
 ; Line 21
-$LN6:
-	mov	BYTE PTR [rsp+32], r9b
-	mov	DWORD PTR [rsp+24], r8d
-	mov	QWORD PTR [rsp+16], rdx
+$LN5:
+	mov	DWORD PTR [rsp+16], edx
 	mov	QWORD PTR [rsp+8], rcx
 	sub	rsp, 56					; 00000038H
+; Line 23
+	mov	edx, DWORD PTR val$[rsp]
+	lea	rcx, OFFSET FLAT:$SG4484
+	call	printf
 ; Line 25
-	mov	ecx, 16
-	call	malloc
+	mov	ecx, DWORD PTR val$[rsp]
+	call	create_node
 	mov	QWORD PTR newTS$[rsp], rax
 ; Line 26
-	mov	rcx, QWORD PTR head$[rsp]
-	call	is_list_empty
-	movzx	eax, al
-	test	eax, eax
-	je	SHORT $LN3@add_to_lis
-; Line 27
-	mov	ecx, DWORD PTR val$[rsp]
-	call	create_list
-	jmp	SHORT $LN4@add_to_lis
-$LN3@add_to_lis:
-; Line 30
-	movzx	eax, BYTE PTR before_head$[rsp]
-	test	eax, eax
-	je	SHORT $LN2@add_to_lis
-; Line 31
-	mov	rax, QWORD PTR newTS$[rsp]
-	mov	ecx, DWORD PTR val$[rsp]
-	mov	DWORD PTR [rax], ecx
-; Line 32
-	mov	rax, QWORD PTR newTS$[rsp]
-	mov	rcx, QWORD PTR head$[rsp]
-	mov	QWORD PTR [rax+8], rcx
-; Line 33
-	mov	rax, QWORD PTR newTS$[rsp]
-	mov	QWORD PTR head$[rsp], rax
-; Line 34
 	mov	rax, QWORD PTR head$[rsp]
-	jmp	SHORT $LN4@add_to_lis
-; Line 36
-	jmp	SHORT $LN1@add_to_lis
+	mov	QWORD PTR tmp$[rsp], rax
 $LN2@add_to_lis:
-; Line 37
-	mov	rax, QWORD PTR newTS$[rsp]
-	mov	ecx, DWORD PTR val$[rsp]
-	mov	DWORD PTR [rax], ecx
-; Line 38
-	mov	rax, QWORD PTR newTS$[rsp]
-	mov	QWORD PTR [rax+8], 0
-; Line 39
-	mov	rax, QWORD PTR curr$[rsp]
+; Line 27
+	mov	rax, QWORD PTR tmp$[rsp]
+	cmp	QWORD PTR [rax+8], 0
+	je	SHORT $LN1@add_to_lis
+; Line 28
+	mov	rax, QWORD PTR tmp$[rsp]
+	mov	rax, QWORD PTR [rax+8]
+	mov	QWORD PTR tmp$[rsp], rax
+; Line 29
+	jmp	SHORT $LN2@add_to_lis
+$LN1@add_to_lis:
+; Line 30
+	mov	rax, QWORD PTR tmp$[rsp]
 	mov	rcx, QWORD PTR newTS$[rsp]
 	mov	QWORD PTR [rax+8], rcx
-; Line 40
-	mov	rax, QWORD PTR newTS$[rsp]
-	mov	QWORD PTR curr$[rsp], rax
-; Line 41
-	mov	rax, QWORD PTR curr$[rsp]
-$LN1@add_to_lis:
-$LN4@add_to_lis:
-; Line 46
+; Line 32
+	lea	rcx, OFFSET FLAT:$SG4491
+	call	printf
+; Line 34
 	add	rsp, 56					; 00000038H
 	ret	0
 add_to_list ENDP
@@ -533,22 +603,26 @@ _TEXT	ENDS
 _TEXT	SEGMENT
 ptr$ = 32
 val$ = 64
-create_list PROC
+create_node PROC
 ; File c:\src\blog posts\linked lists\integer linked list.c
 ; Line 4
 $LN4:
 	mov	DWORD PTR [rsp+8], ecx
 	sub	rsp, 56					; 00000038H
+; Line 6
+	mov	edx, DWORD PTR val$[rsp]
+	lea	rcx, OFFSET FLAT:$SG4471
+	call	printf
 ; Line 8
 	mov	ecx, 16
 	call	malloc
 	mov	QWORD PTR ptr$[rsp], rax
 ; Line 9
 	cmp	QWORD PTR ptr$[rsp], 0
-	jne	SHORT $LN1@create_lis
+	jne	SHORT $LN1@create_nod
 ; Line 10
 	call	abort
-$LN1@create_lis:
+$LN1@create_nod:
 ; Line 12
 	mov	rax, QWORD PTR ptr$[rsp]
 	mov	ecx, DWORD PTR val$[rsp]
@@ -558,10 +632,15 @@ $LN1@create_lis:
 	mov	QWORD PTR [rax+8], 0
 ; Line 15
 	mov	rax, QWORD PTR ptr$[rsp]
-$LN3@create_lis:
+	jmp	SHORT $LN2@create_nod
+; Line 17
+	lea	rcx, OFFSET FLAT:$SG4478
+	call	printf
+$LN2@create_nod:
+$LN3@create_nod:
 ; Line 19
 	add	rsp, 56					; 00000038H
 	ret	0
-create_list ENDP
+create_node ENDP
 _TEXT	ENDS
 END

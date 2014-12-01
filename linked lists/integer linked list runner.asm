@@ -6,19 +6,19 @@ INCLUDELIB LIBCMT
 INCLUDELIB OLDNAMES
 
 _DATA	SEGMENT
-$SG4482	DB	0aH, 0aH, 'Firing test 1', 0aH, 00H
-	ORG $+7
-$SG4483	DB	0aH, 0aH, 'Firing test 2', 0aH, 00H
-	ORG $+7
-$SG4484	DB	0aH, 0aH, 'Firing test 3', 0aH, 00H
-	ORG $+7
-$SG4485	DB	0aH, 0aH, 'Firing test 4', 0aH, 00H
-	ORG $+7
-$SG4486	DB	0aH, 0aH, 'Firing test 5', 0aH, 00H
-	ORG $+7
-$SG4487	DB	0aH, 0aH, 'Firing test 6', 0aH, 00H
-	ORG $+7
-$SG4488	DB	0aH, 0aH, 'Firing test 7', 0aH, 00H
+$SG4488	DB	0aH, 0aH, 'Firing test %d', 0aH, 00H
+	ORG $+6
+$SG4489	DB	0aH, 0aH, 'Firing test %d', 0aH, 00H
+	ORG $+6
+$SG4490	DB	0aH, 0aH, 'Firing test %d', 0aH, 00H
+	ORG $+6
+$SG4491	DB	0aH, 0aH, 'Firing test %d', 0aH, 00H
+	ORG $+6
+$SG4492	DB	0aH, 0aH, 'Firing test %d', 0aH, 00H
+	ORG $+6
+$SG4493	DB	0aH, 0aH, 'Firing test %d', 0aH, 00H
+	ORG $+6
+$SG4494	DB	0aH, 0aH, 'Firing test %d', 0aH, 00H
 _DATA	ENDS
 PUBLIC	fireTests
 PUBLIC	main
@@ -32,7 +32,7 @@ EXTRN	TEST_shoud_not_be_a_circular_list:PROC
 EXTRN	TEST_shoud_be_a_circular_list:PROC
 pdata	SEGMENT
 $pdata$fireTests DD imagerel $LN3
-	DD	imagerel $LN3+128
+	DD	imagerel $LN3+163
 	DD	imagerel $unwind$fireTests
 $pdata$main DD	imagerel $LN3
 	DD	imagerel $LN3+16
@@ -48,14 +48,14 @@ xdata	ENDS
 _TEXT	SEGMENT
 main	PROC
 ; File c:\src\blog posts\linked lists\integer linked list runner.c
-; Line 20
+; Line 22
 $LN3:
 	sub	rsp, 40					; 00000028H
-; Line 21
-	call	fireTests
-; Line 22
-	xor	eax, eax
 ; Line 23
+	call	fireTests
+; Line 24
+	xor	eax, eax
+; Line 25
 	add	rsp, 40					; 00000028H
 	ret	0
 main	ENDP
@@ -68,41 +68,48 @@ fireTests PROC
 $LN3:
 	sub	rsp, 40					; 00000028H
 ; Line 4
-	lea	rcx, OFFSET FLAT:$SG4482
+	mov	edx, 1
+	lea	rcx, OFFSET FLAT:$SG4488
 	call	printf
 ; Line 5
 	call	TEST_should_setup_and_confim_via_printing
 ; Line 6
-	lea	rcx, OFFSET FLAT:$SG4483
+	mov	edx, 2
+	lea	rcx, OFFSET FLAT:$SG4489
 	call	printf
 ; Line 7
 	call	TEST_should_find_number_in_list
 ; Line 8
-	lea	rcx, OFFSET FLAT:$SG4484
+	mov	edx, 3
+	lea	rcx, OFFSET FLAT:$SG4490
 	call	printf
 ; Line 9
 	call	TEST_should_delete_numbers_first_occurence
 ; Line 10
-	lea	rcx, OFFSET FLAT:$SG4485
+	mov	edx, 4
+	lea	rcx, OFFSET FLAT:$SG4491
 	call	printf
 ; Line 11
 	call	TEST_should_delete_all_occurences_on_a_number
 ; Line 12
-	lea	rcx, OFFSET FLAT:$SG4486
+	mov	edx, 5
+	lea	rcx, OFFSET FLAT:$SG4492
 	call	printf
 ; Line 13
 	call	TEST_shoud_not_be_a_circular_list
 ; Line 14
-	lea	rcx, OFFSET FLAT:$SG4487
+	mov	edx, 6
+	lea	rcx, OFFSET FLAT:$SG4493
 	call	printf
 ; Line 15
 	call	TEST_shoud_be_a_circular_list
 ; Line 16
-	lea	rcx, OFFSET FLAT:$SG4488
+	mov	edx, 7
+	lea	rcx, OFFSET FLAT:$SG4494
 	call	printf
 ; Line 17
 	call	TEST_should_not_find_number_in_list
-; Line 18
+; Line 20
 	add	rsp, 40					; 00000028H
 	ret	0
 fireTests ENDP

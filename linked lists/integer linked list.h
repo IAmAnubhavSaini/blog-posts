@@ -10,10 +10,16 @@ struct link_node
 	int val;
 	struct link_node *next;
 };
+
+enum node_insertion_position{
+	INSERT_AT_END,
+	INSERT_AT_START
+};
+
 typedef struct link_node Node; //gives a bit of OOP feel
 
 Node  *   create_node(int val);
-Node  *   add_to_list(Node *head, Node *curr, int val, bool before_head);
+void      add_to_list(Node *head, int val);
 
 void      make_list_circular(Node *head);
 void      print_list(Node *head);

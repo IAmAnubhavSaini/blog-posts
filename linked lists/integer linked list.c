@@ -47,6 +47,35 @@ void make_list_circular(Node *head){
 #endif
 }
 
+void make_list_acircular(Node *head)
+{
+	Node *slow;
+	Node *fast;
+	slow = fast = head;
+	if (head == NULL){
+		return;
+	}
+	if (is_list_circular(head)){
+		while (true){
+			fast = fast->next->next;
+			slow = slow->next;
+			if (slow == fast){
+				break;
+			}
+		}
+		fast = head;
+		while (fast != slow){
+			fast = fast->next;
+			slow = slow->next;
+		}
+		fast = fast->next;
+		while (fast->next != slow){
+			fast = fast->next;
+		}
+		fast->next = NULL;
+	}
+}
+
 void print_list(Node *head){
 #ifdef DEBUG
 	printf("\ndebug: entering print_list.");
@@ -146,7 +175,7 @@ bool delete_all_value_matching_nodes(Node *head, int val){
 bool is_list_circular(Node *head){
 	Node *slow = head;
 	Node *fast = head;
-	while (slow && fast && fast->next && fast->next){
+	while (slow && fast && fast->next){
 		fast = fast->next->next;
 		slow = slow->next;
 		if (slow == fast){

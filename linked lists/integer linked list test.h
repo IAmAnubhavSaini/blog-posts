@@ -13,5 +13,6 @@ void      TEST_should_delete_all_occurences_on_a_number(void);
 void      TEST_shoud_not_be_a_circular_list(void);
 void      TEST_shoud_be_a_circular_list(void);
 void      TEST_stack_should_be_reverse_of_the_list(void);
+void      TEST_should_make_a_circular_list_acircular(void);
 
 #endif //INTEGER_LINKED_LIST_TEST_H

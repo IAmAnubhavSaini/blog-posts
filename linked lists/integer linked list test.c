@@ -105,3 +105,27 @@ void TEST_stack_should_be_reverse_of_the_list(void){
 	Node *stackTop = create_stack_from_existing_list(head, NULL);
 	print_list(stackTop);
 }
+
+void TEST_should_make_a_circular_list_acircular(void)
+{
+	Node *head = TEST_should_setup_and_confim_via_printing();
+	print_list(head);
+	make_list_circular(head);
+
+	printf(CLTLSBC);
+	print_list(head);
+	if (is_list_circular(head)){
+		printf(LIC);
+	}
+	else {
+		printf(LINC);
+	}
+	make_list_acircular(head);
+	printf(CLTLSNBC);
+	if (is_list_circular(head)){
+		printf(LIC);
+	}
+	else {
+		printf(LINC);
+	}
+}

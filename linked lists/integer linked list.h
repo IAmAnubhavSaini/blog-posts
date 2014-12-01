@@ -22,6 +22,7 @@ Node  *   create_node(int val);
 void      add_to_list(Node *head, int val);
 
 void      make_list_circular(Node *head);
+void      make_list_acircular(Node *head);
 void      print_list(Node *head);
 
 bool      search_list(Node *head, int val);

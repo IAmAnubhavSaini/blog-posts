@@ -164,28 +164,5 @@ bool is_list_empty(Node *head){
 }
 
 Node * create_stack_from_existing_list(Node *otherListHead, Node *otherListUpto){
-	/* theory
-		1 -> 2 -> 3 -> 4 -> 5 -> NULL
-		When next node is NULL, return current node.
-		When next node is not null, call this function again.
-
-
-		This will return node 5, we need to change it's next to the earlier invocation of the 
-		function.
-		1 ->
-			2 ->
-				3 ->
-					4 ->
-						5 ->
-							NULL
-						<-
-		if something is returned, change it's next and point it to the current node.
-
-		if(tmp -> next == NULL){
-			return tmp;
-		} else {
-			top = create_stack_from_existing_list(tmp -> next, otherListUpto);
-			top -> next = tmp;
-		}
-		*/
+	/* theory : read from list, write to stack; first: implement stack. */
 }

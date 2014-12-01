@@ -19,6 +19,8 @@ $SG4492	DB	0aH, 0aH, 'Firing test %d', 0aH, 00H
 $SG4493	DB	0aH, 0aH, 'Firing test %d', 0aH, 00H
 	ORG $+6
 $SG4494	DB	0aH, 0aH, 'Firing test %d', 0aH, 00H
+	ORG $+6
+$SG4495	DB	0aH, 0aH, 'Firing test %d', 0aH, 00H
 _DATA	ENDS
 PUBLIC	fireTests
 PUBLIC	main
@@ -30,9 +32,10 @@ EXTRN	TEST_should_delete_numbers_first_occurence:PROC
 EXTRN	TEST_should_delete_all_occurences_on_a_number:PROC
 EXTRN	TEST_shoud_not_be_a_circular_list:PROC
 EXTRN	TEST_shoud_be_a_circular_list:PROC
+EXTRN	TEST_stack_should_be_reverse_of_the_list:PROC
 pdata	SEGMENT
 $pdata$fireTests DD imagerel $LN3
-	DD	imagerel $LN3+163
+	DD	imagerel $LN3+185
 	DD	imagerel $unwind$fireTests
 $pdata$main DD	imagerel $LN3
 	DD	imagerel $LN3+16
@@ -109,6 +112,12 @@ $LN3:
 	call	printf
 ; Line 17
 	call	TEST_should_not_find_number_in_list
+; Line 18
+	mov	edx, 8
+	lea	rcx, OFFSET FLAT:$SG4495
+	call	printf
+; Line 19
+	call	TEST_stack_should_be_reverse_of_the_list
 ; Line 20
 	add	rsp, 40					; 00000028H
 	ret	0

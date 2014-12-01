@@ -72,9 +72,6 @@ $pdata$delete_all_value_matching_nodes DD imagerel $LN9
 $pdata$is_list_circular DD imagerel $LN6
 	DD	imagerel $LN6+119
 	DD	imagerel $unwind$is_list_circular
-$pdata$create_stack_from_existing_list DD imagerel $LN6
-	DD	imagerel $LN6+118
-	DD	imagerel $unwind$create_stack_from_existing_list
 pdata	ENDS
 xdata	SEGMENT
 $unwind$create_node DD 010801H
@@ -93,59 +90,17 @@ $unwind$delete_all_value_matching_nodes DD 010d01H
 	DD	0420dH
 $unwind$is_list_circular DD 010901H
 	DD	02209H
-$unwind$create_stack_from_existing_list DD 010e01H
-	DD	0620eH
 xdata	ENDS
 ; Function compile flags: /Odtp
 _TEXT	SEGMENT
-tmp$ = 32
-head$ = 40
-otherListHead$ = 64
-otherListUpto$ = 72
+otherListHead$ = 8
+otherListUpto$ = 16
 create_stack_from_existing_list PROC
 ; File c:\src\blog posts\linked lists\integer linked list.c
 ; Line 166
-$LN6:
 	mov	QWORD PTR [rsp+16], rdx
 	mov	QWORD PTR [rsp+8], rcx
-	sub	rsp, 56					; 00000038H
-; Line 167
-	mov	QWORD PTR head$[rsp], 0
-; Line 168
-	mov	QWORD PTR tmp$[rsp], 0
-; Line 170
-	cmp	QWORD PTR otherListHead$[rsp], 0
-	jne	SHORT $LN3@create_sta
-; Line 171
-	call	abort
-$LN3@create_sta:
-; Line 174
-	mov	rax, QWORD PTR otherListHead$[rsp]
-	mov	QWORD PTR tmp$[rsp], rax
-$LN2@create_sta:
-; Line 175
-	cmp	QWORD PTR tmp$[rsp], 0
-	je	SHORT $LN1@create_sta
-	mov	rax, QWORD PTR otherListUpto$[rsp]
-	cmp	QWORD PTR tmp$[rsp], rax
-	je	SHORT $LN1@create_sta
-; Line 176
-	mov	rax, QWORD PTR tmp$[rsp]
-	mov	edx, DWORD PTR [rax]
-	mov	rcx, QWORD PTR head$[rsp]
-	call	add_to_list
-; Line 177
-	mov	rax, QWORD PTR tmp$[rsp]
-	mov	rax, QWORD PTR [rax+8]
-	mov	QWORD PTR tmp$[rsp], rax
-; Line 178
-	jmp	SHORT $LN2@create_sta
-$LN1@create_sta:
-; Line 180
-	mov	rax, QWORD PTR head$[rsp]
-$LN5@create_sta:
-; Line 181
-	add	rsp, 56					; 00000038H
+; Line 191
 	ret	0
 create_stack_from_existing_list ENDP
 _TEXT	ENDS

@@ -164,18 +164,28 @@ bool is_list_empty(Node *head){
 }
 
 Node * create_stack_from_existing_list(Node *otherListHead, Node *otherListUpto){
-	Node *head = NULL;
-	Node *tmp = NULL;
+	/* theory
+		1 -> 2 -> 3 -> 4 -> 5 -> NULL
+		When next node is NULL, return current node.
+		When next node is not null, call this function again.
 
-	if (!otherListHead){ // we don't really care about NULL Upto, since, that case we will be copying whole  ll.
-		abort(); // reach violently to bad cases.
-	}
 
-	tmp = otherListHead;
-	while (tmp != NULL && tmp != otherListUpto){
-		add_to_list(head, tmp->val);
-		tmp = tmp->next;
-	}
+		This will return node 5, we need to change it's next to the earlier invocation of the 
+		function.
+		1 ->
+			2 ->
+				3 ->
+					4 ->
+						5 ->
+							NULL
+						<-
+		if something is returned, change it's next and point it to the current node.
 
-	return head;
+		if(tmp -> next == NULL){
+			return tmp;
+		} else {
+			top = create_stack_from_existing_list(tmp -> next, otherListUpto);
+			top -> next = tmp;
+		}
+		*/
 }

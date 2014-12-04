@@ -10,7 +10,12 @@ namespace StringCalculatorKata
             {
                 return 0;
             }
-            throw new NotImplementedException();
+            var sum = 0;
+            foreach (var s in numbers.Split(','))
+            {
+                sum += int.Parse(s);
+            }
+            return sum;
         }
     }
 }

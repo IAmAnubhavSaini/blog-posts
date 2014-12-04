@@ -6,7 +6,13 @@ namespace StringCalculatorKata
     {
         public static int Add(string numbers)
         {
-            return string.IsNullOrEmpty(numbers) ? 0 : numbers.Split(',').Sum(num => int.Parse(num));
+            if (string.IsNullOrEmpty(numbers))
+            {
+                return 0;
+            }
+            var numberArray = numbers.Split(new[] {',', '\n'});
+            return numberArray.Sum(num => int.Parse(num));
+            //.Where(s=>!string.IsNullOrEmpty(s))
         }
     }
 }

@@ -28,5 +28,23 @@ namespace StringCalculatorKata.Tests
 
             Assert.IsTrue(6 == Calculator.Add(numbers));
         }
+        
+        [TestMethod]
+        public void ShouldReturnSumOfThreeNumbersWithDifferentDelimeters()
+        {
+            const string numbers = "1\n2, 3";
+
+            Assert.IsTrue(6 == Calculator.Add(numbers));
+        }
+        
+        [TestMethod]
+        public void ShouldFailSumOfThreeNumbersWithWrongDelimeters()
+        {
+            const string numbers = "1,\n";
+
+            Assert.IsFalse(1 == Calculator.Add(numbers));
+        }
+
+
     }
 }

@@ -38,7 +38,7 @@ namespace StringCalculatorKata.Tests
         }
         
         [TestMethod]
-        public void ShouldFailSumOfThreeNumbersWithWrongDelimeters()
+        public void ShouldFailSumOfNumbersInStringWithWrongDelimeters()
         {
             const string numbers = "1,\n";
 

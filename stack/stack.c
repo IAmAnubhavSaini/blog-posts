@@ -22,7 +22,7 @@ struct stack_head * init_stack(int size){
 
 void push(struct stack_head * head, int value){
 	if (head->size == head->current_index){
-		abort(); // for now, resize later.
+		resize(head, head->size*2);
 	}
 	head->values[head->current_index] = value;
 	head->current_index = head->current_index + 1;
@@ -36,3 +36,13 @@ int pop(struct stack_head *head){
 	return head->values[head->current_index];
 }
 
+void resize(struct stack_head *head, int newSize)
+{
+	int * values = (int*)realloc(head->values, newSize);
+	if (values == NULL){
+		printf("Cannot resize stack.");
+		return;
+	}
+	head->values = values;
+	head->size = newSize;
+}

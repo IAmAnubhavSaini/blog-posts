@@ -14,5 +14,6 @@ struct stack_head{
 struct stack_head * init_stack(int size);
 void push(struct stack_head * top, int value);
 int pop(struct stack_head *head);
+void resize(struct stack_head *head, int newSize);
 
 #endif // STACK_TEST_H

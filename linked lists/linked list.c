@@ -90,10 +90,10 @@ void print_list(Node *head){
 			printf("\nThe values of the list are : ");
 			while (ptr){
 				if (ptr->type == INT_TYPE){
-					printf(" [%d]-> ", *((int*)ptr->val), ptr);
+					printf(" [%d]-> ", *((int*)ptr->val));
 				}
 				else if (ptr->type == STRING_TYPE){
-					printf(" [%s]-> ", ((char*)ptr->val), ptr);
+					printf(" [%s]-> ", ((char*)ptr->val));
 				}
 				else{
 					printf(" [cannot print @ %p]-> ", ptr);

@@ -2,7 +2,7 @@
 #define INTEGER_LINKED_LIST_TEST_H
 
 #include "testing constants.h"
-#include "integer linked list.h"
+#include "linked list.h"
 
 
 Node *    TEST_should_setup_and_confim_via_printing(void);

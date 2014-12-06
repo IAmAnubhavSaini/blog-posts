@@ -1,9 +1,9 @@
-#include "integer linked list test.h"
+#include "linked list test.h"
 
 void TEST_should_find_number_in_list(){
 	Node *head = TEST_should_setup_and_confim_via_printing();
 	int num = 2;
-	if (search_list(head, num)){
+	if (search_list_for_integer(head, num)){
 		printf(FNIL, num);
 	}
 	else{
@@ -15,7 +15,7 @@ void TEST_should_find_number_in_list(){
 void TEST_should_not_find_number_in_list(){
 	Node *head = TEST_should_setup_and_confim_via_printing();
 	int num = -1; // we are adding only positive numbers.
-	if (search_list(head, num)){
+	if (search_list_for_integer(head, num)){
 		printf(FNIL, num);
 	}
 	else{
@@ -26,12 +26,12 @@ void TEST_should_not_find_number_in_list(){
 void TEST_should_delete_numbers_first_occurence(){
 	Node *head = TEST_should_setup_and_confim_via_printing();
 	int num = 2;
-	if (delete_first_value_matching_node(head, num)){
+	if (delete_first_integer_value_matching_node(head, num)){
 		printf(DFN, num);
 		print_list(head);
 	}
 	num = 4;
-	if (delete_first_value_matching_node(head, num)){
+	if (delete_first_integer_value_matching_node(head, num)){
 		printf(DFN, num);
 		print_list(head);
 	}
@@ -40,7 +40,7 @@ void TEST_should_delete_numbers_first_occurence(){
 		print_list(head);
 	}
 	num = 1;
-	if (delete_first_value_matching_node(head, 1)){
+	if (delete_first_integer_value_matching_node(head, 1)){
 		printf(DFN, num);
 		print_list(head);
 	}
@@ -51,11 +51,12 @@ void TEST_should_delete_numbers_first_occurence(){
 }
 
 Node * TEST_should_setup_and_confim_via_printing(){
-	Node *head = create_node(1);
-	add_to_list(head, 2);
-	add_to_list(head, 3);
-	add_to_list(head, 4);
-	add_to_list(head, 5);
+	int num = 1;
+	Node *head = create_node((void*)&num, INT_TYPE);
+	num++; add_to_list(head, (void*)&num, INT_TYPE);
+	num++; add_to_list(head, (void*)&num, INT_TYPE);
+	num++; add_to_list(head, (void*)&num, INT_TYPE);
+	num++; add_to_list(head, (void*)&num, INT_TYPE);
 	print_list(head);
 	return head;
 }
@@ -63,7 +64,7 @@ Node * TEST_should_setup_and_confim_via_printing(){
 void TEST_should_delete_all_occurences_on_a_number(){
 	Node *head = TEST_should_setup_and_confim_via_printing();
 	int num = 2;
-	if (delete_all_value_matching_nodes(head, num)){
+	if (delete_all_integer_value_matching_nodes(head, num)){
 		printf(ANDFL, num);
 	}
 	else{

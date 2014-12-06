@@ -1,16 +1,17 @@
-#include "integer linked list.h"
+#include "linked list.h"
 
 
-Node* create_node(int val){
+Node* create_node(void* val, enum link_node_data_type type){
 #ifdef DEBUG
 	printf("\ndebug: entering create_node with value : %d.", val);
 #endif
 	Node *ptr = (Node*)malloc(sizeof(Node));
-	if (ptr == NULL){
+	if (ptr == NULL ){
 		abort();
 	}
 	ptr->val = val;
 	ptr->next = NULL;
+	ptr->type = type;
 
 	return ptr;
 #ifdef DEBUG
@@ -18,11 +19,11 @@ Node* create_node(int val){
 #endif
 }
 
-void add_to_list(Node *head, int val){
+void add_to_list(Node *head, void* val, enum link_node_data_type type){
 #ifdef DEBUG
-	printf("\ndebug: entering add_to_list with value : %d.", val);
+	printf("\ndebug: entering add_to_list with value.");
 #endif
-	Node *newTS = create_node(val);
+	Node *newTS = create_node(val, type);
 	Node *tmp = head;
 	while (tmp->next != NULL){
 		tmp = tmp->next;
@@ -88,7 +89,15 @@ void print_list(Node *head){
 		if (ptr != NULL){
 			printf("\nThe values of the list are : ");
 			while (ptr){
-				printf(" [%d]-> ", ptr->val, ptr);
+				if (ptr->type == INT_TYPE){
+					printf(" [%d]-> ", *((int*)ptr->val), ptr);
+				}
+				else if (ptr->type == STRING_TYPE){
+					printf(" [%s]-> ", ((char*)ptr->val), ptr);
+				}
+				else{
+					printf(" [cannot print @ %p]-> ", ptr);
+				}
 				ptr = ptr->next;
 			}
 			printf("[NULL]\n");
@@ -102,11 +111,11 @@ void print_list(Node *head){
 #endif
 }
 
-bool search_list(Node *head, int val){
+bool search_list_for_integer(Node *head, int val){
 	Node * start = head;
 	bool isFound = false;
 	while (start != NULL){
-		if (start->val == val){
+		if (*(int*)start->val == val){
 			isFound = true;
 			break;
 		}
@@ -115,7 +124,7 @@ bool search_list(Node *head, int val){
 	return isFound;
 }
 
-bool delete_first_value_matching_node(Node *head, int val){
+bool delete_first_integer_value_matching_node(Node *head, int val){
 	Node * prev = head;
 	Node * curr = NULL;
 	bool isDeleted = false;
@@ -125,7 +134,7 @@ bool delete_first_value_matching_node(Node *head, int val){
 		printf("\ndebug: at least two nodes exists.");
 #endif
 		while (curr != NULL && !isDeleted){
-			if (curr->val == val){
+			if (*(int*)curr->val == val){
 				prev->next = curr->next;
 				isDeleted = true;
 				//free curr here
@@ -138,7 +147,7 @@ bool delete_first_value_matching_node(Node *head, int val){
 #ifdef DEBUG
 		printf("\ndebug: only one node exists.");
 #endif
-		if (prev->val == val){
+		if (*(int*)prev->val == val){
 			isDeleted = true;
 			//free prev
 			prev = NULL;
@@ -147,14 +156,14 @@ bool delete_first_value_matching_node(Node *head, int val){
 	return isDeleted;
 }
 
-bool delete_all_value_matching_nodes(Node *head, int val){
+bool delete_all_integer_value_matching_nodes(Node *head, int val){
 	Node * prev = head;
 	Node * curr = NULL;
 	bool isDeleted = false;
 	if (head->next != NULL){
 		curr = head->next;
 		while (curr != NULL){
-			if (curr->val == val){
+			if (*(int*)curr->val == val){
 				isDeleted = true;//at least deleted once.
 				prev->next = curr->next;
 				//free curr
@@ -164,7 +173,7 @@ bool delete_all_value_matching_nodes(Node *head, int val){
 		}
 	}
 	else{//there is only one node
-		if (prev->val == val){
+		if (*(int*)prev->val == val){
 			isDeleted = true;
 			prev = NULL;
 		}
@@ -194,4 +203,5 @@ bool is_list_empty(Node *head){
 
 Node * create_stack_from_existing_list(Node *otherListHead, Node *otherListUpto){
 	/* theory : read from list, write to stack; first: implement stack. */
+	return NULL;
 }

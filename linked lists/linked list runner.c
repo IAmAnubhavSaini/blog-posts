@@ -1,4 +1,4 @@
-#include "integer linked list test.h"
+#include "linked list test.h"
 
 void fireTests(){
 	printf(FTN, 1);

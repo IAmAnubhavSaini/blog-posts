@@ -83,10 +83,10 @@ void print_list(Node *head){
 #endif
 	Node *ptr = head;
 	if (is_list_circular(head)){
-		printf("\nCircular list.");
+		printf("\nCircular list; not printing.");
 	}
 	else {
-		if (ptr != NULL){
+		if (ptr){
 			printf("\nThe values of the list are : ");
 			while (ptr){
 				if (ptr->type == INT_TYPE){
@@ -184,7 +184,7 @@ bool delete_all_integer_value_matching_nodes(Node *head, int val){
 bool is_list_circular(Node *head){
 	Node *slow = head;
 	Node *fast = head;
-	if (head && head->next){
+	if (head && !head->next){
 		return false;
 	}
 	while (slow && fast && fast->next){

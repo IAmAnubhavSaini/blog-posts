@@ -19,6 +19,13 @@ void fireTests(){
 	TEST_stack_should_be_reverse_of_the_list();
 	printf(FTN, 9);
 	TEST_should_make_a_circular_list_acircular();
+	printf(FTN, 10);
+	TEST_should_add_node_at_beginning_of_list();
+	printf(FTN, 11);
+	TEST_should_add_node_at_mid_of_list();
+	printf(FTN, 12);
+	TEST_should_add_node_at_end_of_list();
+
 }
 
 int main(){

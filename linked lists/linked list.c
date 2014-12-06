@@ -208,3 +208,59 @@ Node * create_stack_from_existing_list(Node *otherListHead, Node *otherListUpto)
 	/* theory : read from list, write to stack; first: implement stack. */
 	return NULL;
 }
+
+void tail_insert_in_list(Node *head, void * val, enum link_node_data_type type)
+{
+	add_to_list(head, val, type);
+}
+
+void mid_insert_in_list(Node *head, void * val, enum link_node_data_type type)
+{
+	Node *fast = head;
+	Node *slow = head;
+	Node *tmp = NULL;
+	if (!head)
+		return;
+	while (fast && slow && fast->next){
+		fast = fast->next->next;
+		slow = slow->next;
+	}
+	tmp = create_node(val, type);
+	tmp->next = slow->next;
+	slow->next = tmp;
+}
+
+void head_insert_in_list(Node *head, void * val, enum link_node_data_type type)
+{
+	Node *tmp = NULL;
+	if (!head)
+		return;
+	tmp = create_node(val, type);
+	tmp->next = head;
+	head = tmp;
+}
+
+void insert_in_list_after(Node *head, void * insertVal, enum link_node_data_type type, void *searchVal)
+{
+	Node *tmp = NULL;
+	Node *curr = head;
+	if (!head)
+		return;
+	// implementation pending.
+	//tmp = create_node(val, type);
+}
+
+void insert_in_list_before(Node *head, void * insertVal, enum link_node_data_type type, void *searchVal);
+
+void insert_in_list(Node *head, void * val, enum link_node_data_type type, enum node_insertion_position position)
+{
+	if (position == INSERT_AT_END){
+		tail_insert_in_list(head, val, type);
+	}
+	else if (position == INSERT_AT_START){
+		head_insert_in_list(head, val, type);
+	}
+	else if (position == INSERT_AT_MID){
+		mid_insert_in_list(head, val, type);
+	}
+}

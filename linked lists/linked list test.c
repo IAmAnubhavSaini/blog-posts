@@ -130,3 +130,30 @@ void TEST_should_make_a_circular_list_acircular(void)
 		printf(LINC);
 	}
 }
+
+void TEST_should_add_node_at_beginning_of_list(void)
+{
+	Node *head = TEST_should_setup_and_confim_via_printing();
+	int num = 10;
+	insert_in_list(head, (int*)&num, INT_TYPE, INSERT_AT_START);
+	printf(SHINATB, num);
+	print_list(head);
+}
+
+void TEST_should_add_node_at_end_of_list(void)
+{
+	Node *head = TEST_should_setup_and_confim_via_printing();
+	int num = 10;
+	insert_in_list(head, (int*)&num, INT_TYPE, INSERT_AT_END);
+	printf(SHINATE, num);
+	print_list(head);
+}
+
+void TEST_should_add_node_at_mid_of_list(void)
+{
+	Node *head = TEST_should_setup_and_confim_via_printing();
+	int num = 10;
+	insert_in_list(head, (int*)&num, INT_TYPE, INSERT_AT_MID);
+	printf(SHINATM, num);
+	print_list(head);
+}

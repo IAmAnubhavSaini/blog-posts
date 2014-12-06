@@ -14,4 +14,9 @@
 
 #define LIC "\nlist is circular."
 #define LINC "\nlist is not circular."
+
+#define SHINATB "\nShould have inserted %d at the beginning: "
+#define SHINATE "\nShould have inserted %d at the end: "
+#define SHINATM "\nShould have inserted %d at the mid: "
+
 #endif // TESTING_CONSTANTS_H

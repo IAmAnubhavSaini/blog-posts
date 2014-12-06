@@ -184,6 +184,9 @@ bool delete_all_integer_value_matching_nodes(Node *head, int val){
 bool is_list_circular(Node *head){
 	Node *slow = head;
 	Node *fast = head;
+	if (head && head->next){
+		return false;
+	}
 	while (slow && fast && fast->next){
 		fast = fast->next->next;
 		slow = slow->next;

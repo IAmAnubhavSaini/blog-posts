@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatAWebServerKnowsAboutYou", "WhatAWebServerKnowsAboutYou\WhatAWebServerKnowsAboutYou.csproj", "{35D33C0F-6AEC-4FC9-9230-9CB3A0E193A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatAWebServerKnowsAboutYou.Tests", "WhatAWebServerKnowsAboutYou.Tests\WhatAWebServerKnowsAboutYou.Tests.csproj", "{4C298116-59F7-48BC-B7FC-8521C75214BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35D33C0F-6AEC-4FC9-9230-9CB3A0E193A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35D33C0F-6AEC-4FC9-9230-9CB3A0E193A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35D33C0F-6AEC-4FC9-9230-9CB3A0E193A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35D33C0F-6AEC-4FC9-9230-9CB3A0E193A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C298116-59F7-48BC-B7FC-8521C75214BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C298116-59F7-48BC-B7FC-8521C75214BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C298116-59F7-48BC-B7FC-8521C75214BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C298116-59F7-48BC-B7FC-8521C75214BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -4,3 +4,6 @@ Debug/
 Obj/
 *.suo
 *.user
+bin/
+packages/
+App_Data/

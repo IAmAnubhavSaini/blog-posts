@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRentalCustomer", "MovieRentalCustomer\MovieRentalCustomer.csproj", "{0B6F8F6A-76CE-464C-B123-01D6557B4A78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRentalCustomer.Tests", "MovieRentalCustomer.Tests\MovieRentalCustomer.Tests.csproj", "{74B76915-DBE3-4BA9-BF93-9053336E0525}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0B6F8F6A-76CE-464C-B123-01D6557B4A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B6F8F6A-76CE-464C-B123-01D6557B4A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B6F8F6A-76CE-464C-B123-01D6557B4A78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74B76915-DBE3-4BA9-BF93-9053336E0525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74B76915-DBE3-4BA9-BF93-9053336E0525}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74B76915-DBE3-4BA9-BF93-9053336E0525}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74B76915-DBE3-4BA9-BF93-9053336E0525}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

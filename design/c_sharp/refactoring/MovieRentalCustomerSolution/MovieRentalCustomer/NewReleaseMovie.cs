@@ -3,10 +3,7 @@ namespace MovieRentalCustomer
 {
     public class NewReleaseMovie : Movie, ICanBeRented
     {
-        public NewReleaseMovie(string title)
-            : base(title, MovieType.NewRelease)
-        {
-        }
+        public NewReleaseMovie(string title) : base(title) { }
 
         public double RentFor(int daysRented)
         {

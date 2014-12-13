@@ -24,46 +24,36 @@ namespace MovieRentalCustomer
         {
             var totalAmount = 0d;
             var frequentRenterPoints = 0;
-            var result = "Rental reocord for " + Name + ".\n";
+            var result = CustomerInformation();
             foreach (var rental in Rentals)
             {
-                frequentRenterPoints += FrequentRenterPoints(rental);
-                result += "\t" + rental.Movie.Title + "\t" + RentalAmount(rental) + "\n";
-                totalAmount += RentalAmount(rental);
+                frequentRenterPoints += rental.FrequentRenterPoints();
+                result += MovieRentalInformation(rental);
+                totalAmount += rental.RentalAmount();
             }
-            result += "Amount owed is " + totalAmount + "\n";
-            result += "You earned " + frequentRenterPoints + " frequent renter points";
+            result += CustomerTotalAmountInformation(totalAmount);
+            result += CustomerFrequentRenterPointInformation(frequentRenterPoints);
             return result;
         }
 
-        private static int FrequentRenterPoints(Rental rental)
+        private string CustomerInformation()
         {
-            var frequentRenterPoints = 1;
-            if ((rental.Movie.Type == MovieType.NewRelease) && rental.DaysRented > 1)
-                frequentRenterPoints++;
-            return frequentRenterPoints;
+            return "Rental reocord for " + Name + ".\n";
         }
 
-        private static double RentalAmount(Rental rental)
+        private static string CustomerFrequentRenterPointInformation(int frequentRenterPoints)
         {
-            var thisAmount = 0d;
-            switch (rental.Movie.Type)
-            {
-                case MovieType.Children:
-                    thisAmount += 1.5;
-                    if (rental.DaysRented > 3)
-                        thisAmount += (rental.DaysRented - 3) * 1.5;
-                    break;
-                case MovieType.NewRelease:
-                    thisAmount += rental.DaysRented * 3;
-                    break;
-                case MovieType.Regular:
-                    thisAmount += 2;
-                    if (rental.DaysRented > 2)
-                        thisAmount += (rental.DaysRented - 2) * 1.5;
-                    break;
-            }
-            return thisAmount;
+            return "You earned " + frequentRenterPoints + " frequent renter points";
+        }
+
+        private static string CustomerTotalAmountInformation(double totalAmount)
+        {
+            return "Amount owed is " + totalAmount + "\n";
+        }
+
+        private static string MovieRentalInformation(Rental rental)
+        {
+            return "\t" + rental.Movie.Title + "\t" + rental.RentalAmount() + "\n";
         }
     }
 }

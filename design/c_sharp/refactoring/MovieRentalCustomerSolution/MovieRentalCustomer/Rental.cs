@@ -13,10 +13,7 @@
 
         public int FrequentRenterPoints()
         {
-            var frequentRenterPoints = 1;
-            if ((Movie.Type == MovieType.NewRelease) && DaysRented > 1)
-                frequentRenterPoints++;
-            return frequentRenterPoints;
+            return Movie.FrequentRenterPoints(DaysRented);
         }
 
         public double RentalAmount()

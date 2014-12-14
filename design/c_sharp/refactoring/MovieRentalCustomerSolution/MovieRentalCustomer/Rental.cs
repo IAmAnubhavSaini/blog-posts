@@ -21,24 +21,7 @@
 
         public double RentalAmount()
         {
-            var thisAmount = 0d;
-            switch (Movie.Type)
-            {
-                case MovieType.Children:
-                    thisAmount += 1.5;
-                    if (DaysRented > 3)
-                        thisAmount += (DaysRented - 3) * 1.5;
-                    break;
-                case MovieType.NewRelease:
-                    thisAmount += DaysRented * 3;
-                    break;
-                case MovieType.Regular:
-                    thisAmount += 2;
-                    if (DaysRented > 2)
-                        thisAmount += (DaysRented - 2) * 1.5;
-                    break;
-            }
-            return thisAmount;
+            return Movie.Rent.RentFor(DaysRented);
         }
     }
 }

@@ -13,5 +13,6 @@ namespace MovieRentalCustomer.Tests
 
             Assert.AreEqual(newCustomer.GenerateStatement(), "Rental reocord for Anubhav.\n\tTermitators\t6\nAmount owed is 6\nYou earned 2 frequent renter points");
         }
+
     }
 }

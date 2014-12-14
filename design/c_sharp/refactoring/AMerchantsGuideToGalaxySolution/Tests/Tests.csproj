@@ -50,11 +50,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="LanguageParsers\RomanLanguageParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\" />
-    <Folder Include="LanguageParsers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LanguageParsers\LanguageParsers.csproj">
+      <Project>{F58BD4C1-4A17-4699-90A7-BF66366F5906}</Project>
+      <Name>LanguageParsers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

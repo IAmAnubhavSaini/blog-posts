@@ -61,6 +61,10 @@
       <Project>{F58BD4C1-4A17-4699-90A7-BF66366F5906}</Project>
       <Name>LanguageParsers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Languages\Languages.csproj">
+      <Project>{4D4B0396-6E52-4015-9053-0C9B7832911B}</Project>
+      <Name>Languages</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -50,13 +50,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="App\GuideToGalaxyTests.cs" />
+    <Compile Include="App\QuestionTests.cs" />
     <Compile Include="LanguageParsers\RomanLanguageParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="App\" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\App\App.csproj">
+      <Project>{1F96CB29-BDCA-45F4-931B-B37E57C87B19}</Project>
+      <Name>App</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LanguageParsers\LanguageParsers.csproj">
       <Project>{F58BD4C1-4A17-4699-90A7-BF66366F5906}</Project>
       <Name>LanguageParsers</Name>

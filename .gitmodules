@@ -1,0 +1,3 @@
+[submodule "design/c_sharp/refactoring/GildedRose"]
+	path = design/c_sharp/refactoring/GildedRose
+	url = https://github.com/IAmAnubhavSaini/GildedRose.git

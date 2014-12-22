@@ -5,25 +5,28 @@ namespace GuideToGalaxy
 {
     public interface IProvideQuestion
     {
-
+        Information Information { get; set; }
+        string RawNumber { get; set; }
+        QAType QuestionType { get; set; }
     }
-    public class Question : IProvideQuestion
+    public abstract class Question : IProvideQuestion
     {
-        public Information Information = new Information();
+        public Information Information { get; set; }
+        public string RawNumber { get; set; }
+        public QAType QuestionType { get; set; }
 
-        public Question(string input, Dictionary<string, string> dictionary)
+        protected Question(string input, Dictionary<string, string> dictionary)
         {
             Input = input;
             CurrentConversionDictionary = dictionary;
+            Information = new Information();
             MakeInfo();
         }
         // Assumption : All input is case insensitive.
-        private readonly string Input;
+        protected readonly string Input;
         private string[] Splitted;
-        public QAType QuestionType;
-        public string RawNumber;
         private readonly Dictionary<string, string> CurrentConversionDictionary;
-        public void MakeInfo()
+        private void MakeInfo()
         {
             if (!string.IsNullOrEmpty(Input))
             {
@@ -31,64 +34,74 @@ namespace GuideToGalaxy
                 if (IsQuestion())
                 {
                     var count = Splitted.Count();
-                    int start;
-                    int end;
                     if (Input.ToLower().Contains("many"))
                     {
-                        start = 4; // because first 3 are "how many Unit is"
-                        // end will tackle situations : question ending or not ending in ? 
-                        end = Input.EndsWith("?") ? count - 2 : count - 1;
-                        var knownWord = true;
-                        for (var i = start; i < end && knownWord; ++i)
-                        {
-                            if (CurrentConversionDictionary.ContainsKey(Splitted[i]))
-                            {
-                                Information.Number += CurrentConversionDictionary[Splitted[i]];
-                                RawNumber += Splitted[i] + " ";
-                            }
-                            else
-                            {
-                                knownWord = false;
-                            }
-                        }
-                        if (knownWord)
-                        {
-                            QuestionType = QAType.Many;
-                            Information.Unit = Splitted[2];
-                            Information.Item = Splitted[end];
-                        }
-                        else
-                        {
-                            QuestionType = QAType.NonMatching;
-                        }
+                        GenerateManyQuestion(count);
                     }
                     else if (Input.ToLower().Contains("much"))
                     {
-                        var knownWord = true;
-                        start = 3; // start at fourth, because first three are : how much is
-                        end = Input.EndsWith("?") ? count - 1 : count;
-                        for (var i = start; i < end && knownWord; ++i)
-                        {
-                            if (CurrentConversionDictionary.ContainsKey(Splitted[i]))
-                            {
-                                Information.Number += CurrentConversionDictionary[Splitted[i]];
-                                RawNumber += Splitted[i] + " ";
-                            }
-                            else
-                            {
-                                knownWord = false;
-                            }
-                        }
-                        QuestionType = knownWord ? QAType.Much : QAType.NonMatching;
+                        GenerateMuchQuestion(count);
                     }
                     else
                     {
-                        // this is the case where we cannot make any sense/
                         QuestionType = QAType.NonMatching;
                     }
                 }
             }
         }
+
+        private void GenerateMuchQuestion(int count)
+        {
+            var knownWord = true;
+            var start = StartFrom();
+            var end = ItemIndex(count);
+            for (var i = start; i < end && knownWord; ++i)
+            {
+                if (CurrentConversionDictionary.ContainsKey(Splitted[i]))
+                {
+                    Information.Number += CurrentConversionDictionary[Splitted[i]];
+                    RawNumber += Splitted[i] + " ";
+                }
+                else
+                {
+                    knownWord = false;
+                }
+            }
+            QuestionType = knownWord ? QAType.Much : QAType.NonMatching;
+        }
+
+        private void GenerateManyQuestion(int count)
+        {
+            var start = StartFrom();
+            var itemIndex = ItemIndex(count);
+            var knownWord = true;
+            for (var i = start; i < itemIndex && knownWord; ++i)
+            {
+                if (CurrentConversionDictionary.ContainsKey(Splitted[i]))
+                {
+                    Information.Number += CurrentConversionDictionary[Splitted[i]];
+                    RawNumber += Splitted[i] + " ";
+                }
+                else
+                {
+                    knownWord = false;
+                }
+            }
+            if (knownWord)
+            {
+                QuestionType = QAType.Many;
+                Information.Unit = Splitted[2];
+                Information.Item = Splitted[itemIndex];
+            }
+            else
+            {
+                QuestionType = QAType.NonMatching;
+            }
+        }
+
+        protected abstract int ItemIndex(int count);
+
+        protected abstract int StartFrom();
 
         private bool IsQuestion()
         {
@@ -103,24 +116,9 @@ namespace GuideToGalaxy
                    input.ToLower().EndsWith("?") ||
                    input.ToLower().Contains("how");
         }
+
+
     }
 
-    public class QuestionFactory
-    {
-        public static Question GenerateQuestion(string input, Dictionary<string, string> dictionary)
-        {
-            if (input.Contains("much"))
-            {
-                return new MuchTypeQuestion(input, dictionary);
-            }
-            else if (input.Contains("many"))
-            {
-                return new ManyTypeQuestion(input, dictionary);
-            }
-            else
-            {
-                return new Question(input, dictionary);
-            }
-        }
-    }
+
 }

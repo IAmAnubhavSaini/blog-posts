@@ -43,8 +43,11 @@
   <ItemGroup>
     <Compile Include="Answer.cs" />
     <Compile Include="common.cs" />
+    <Compile Include="Factories.cs" />
     <Compile Include="information.cs" />
+    <Compile Include="ManyTypeAnswer.cs" />
     <Compile Include="ManyTypeQuestion.cs" />
+    <Compile Include="MuchTypeAnswer.cs" />
     <Compile Include="MuchTypeQuestion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

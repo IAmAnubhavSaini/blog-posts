@@ -50,7 +50,8 @@ namespace GuideToGalaxy
                 }
                 else
                 {
-                    PrintUsageInfo();
+                    //PrintUsageInfo();
+                    program.Run();
                 }
             }
 
@@ -107,14 +108,11 @@ namespace GuideToGalaxy
                     try
                     {
                         // assignment information (1)
-                        if (galacticLanguageNumeralsValue.ContainsKey(splitted[2].ToUpper()))
+                        if (galacticLanguageNumeralsDict.ContainsKey(splitted[2].ToUpper()))
                         {
                             splitted[2] = splitted[2].ToUpper();
                         }
-                        galacticLanguageNumeralsValue.Add(splitted[0], galacticLanguageNumeralsValue[splitted[2]]);
-                        // I think we are not going to ever use GalacticLanguageNumeralsValue, never.
                         galacticLanguageNumeralsDict.Add(splitted[0], splitted[2]);
-                        // We will always need to read string and convert it via GalactivLanguageNumeralsDict to Roman characters and then via RNP get teh value
                     }
                     catch (Exception ex)
                     {
@@ -128,7 +126,9 @@ namespace GuideToGalaxy
 
                     if (Question.IsQuestion(input))
                     {
-                        questions.Add(QuestionFactory.GenerateQuestion(input, galacticLanguageNumeralsDict));
+                        var generateQuestion = Factories.QuestionFactory.GenerateQuestion(input, galacticLanguageNumeralsDict);
+                        if (generateQuestion != null)
+                            questions.Add(generateQuestion);
                     }
                     else
                     {
@@ -151,7 +151,7 @@ namespace GuideToGalaxy
             // Now Answer all the questions.
             foreach (var question in questions)
             {
-                var answer = new Answer();
+                var answer = Factories.AnswerFactory.GenerateAnswer(question.QuestionType);
                 answer.MakeAnswer(question, informations, galacticLanguageNumeralsDict);
                 answers.Add(answer); // may be for future use or for self testing.
                 answer.PrintAnswer();

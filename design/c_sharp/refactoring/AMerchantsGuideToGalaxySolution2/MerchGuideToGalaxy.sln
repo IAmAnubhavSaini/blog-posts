@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guide", "gallactic_money\Guide.csproj", "{DCF8761A-14CE-49B2-AEF0-080B3C37BFA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumeralParser", "roman_numerals_parser\NumeralParser.csproj", "{8260CE64-90C1-46AE-8681-45E5A532C369}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralParserTests", "RomanNumeralParserTests\RomanNumeralParserTests.csproj", "{A3DF2DC1-F881-497C-9FED-B07FC26EC0AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Languages", "Languages\Languages.csproj", "{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCF8761A-14CE-49B2-AEF0-080B3C37BFA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF8761A-14CE-49B2-AEF0-080B3C37BFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF8761A-14CE-49B2-AEF0-080B3C37BFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF8761A-14CE-49B2-AEF0-080B3C37BFA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8260CE64-90C1-46AE-8681-45E5A532C369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8260CE64-90C1-46AE-8681-45E5A532C369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8260CE64-90C1-46AE-8681-45E5A532C369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8260CE64-90C1-46AE-8681-45E5A532C369}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3DF2DC1-F881-497C-9FED-B07FC26EC0AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3DF2DC1-F881-497C-9FED-B07FC26EC0AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3DF2DC1-F881-497C-9FED-B07FC26EC0AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3DF2DC1-F881-497C-9FED-B07FC26EC0AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,15 @@
+abc is L
+bbc is L
+cbc is L
+Cbc is U
+dbc is C
+Dbc is c
+Lbc is Dbc
+how much is abc
+how much is bbc
+how much is cbc
+how much is Cbc
+how much is dbc
+how much is Dbc
+how much is Dbc dbc
+how much is Lbc

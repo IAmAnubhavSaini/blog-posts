@@ -7,3 +7,4 @@ Obj/
 bin/
 packages/
 App_Data/
+*.pdb

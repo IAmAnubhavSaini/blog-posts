@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 
-namespace gallactic_money
+namespace GuideToGalaxy
 {
     class Program
     {
@@ -20,10 +21,10 @@ namespace gallactic_money
 
         static void Main(string[] args)
         {
-            Program program = new Program();
+            var program = new Program();
             try
             {
-                if (args.Count() >= 1)
+                if (args.Any())
                 {
                     if (args[0].ToLower().Equals("run"))
                     {
@@ -31,7 +32,7 @@ namespace gallactic_money
                     }
                     else if (args.Count() == 2 && args[0].ToLower().Equals("test") && args[1].ToLower().Equals("rnp"))
                     {
-                        program.TestRNP();
+                        program.TestRomanNumeralParser();
                     }
                     else if (args.Count() == 2 && args[0].ToLower().Equals("test") && args[1].ToLower().Equals("self"))
                     {
@@ -39,7 +40,7 @@ namespace gallactic_money
                     }
                     else if (args.Count() == 2 && args[0].ToLower().Equals("test") && args[1].ToLower().Equals("all"))
                     {
-                        program.TestRNP();
+                        program.TestRomanNumeralParser();
                         program.TestSelf();
                     }
                     else
@@ -52,7 +53,7 @@ namespace gallactic_money
                     PrintUsageInfo();
                 }
             }
-            
+
             catch (Exception ex)
             {
                 Console.WriteLine("Something went wrong.");
@@ -67,35 +68,52 @@ namespace gallactic_money
             Console.WriteLine("Self test not implemented yet.");
         }
 
+        string RemoveConsecutiveSpaces(string input)
+        {
+            var options = RegexOptions.Multiline;
+            var regex = new Regex(@"[ ]{2,}", options);
+            input = regex.Replace(input, @" ");
+            return input;
+        }
+
         void Run()
         {
-            string input, tmpInput;
-            string[] splitted;
-            List<Question> Questions = new List<Question>();
-            List<Information> Informations = new List<Information>();
-            List<Answer> Answers = new List<Answer>();
+            string input;
+            var questions = new List<IProvideQuestion>();
+            var informations = new List<Information>();
+            var answers = new List<Answer>();
+            var galacticLanguageNumeralsValue = new Dictionary<string, int>
+            {
+                {"I", 1},
+                {"V", 5},
+                {"X", 10},
+                {"L", 50},
+                {"C", 100},
+                {"D", 500},
+                {"M", 1000}
+            };
+            var galacticLanguageNumeralsDict = new Dictionary<string, string>();
 
             while (!string.IsNullOrEmpty(input = Console.ReadLine()))
             {
                 // input = input.ToLower(); // Assuming case insensitivity
                 // we need to sanitize input/
                 input = input.Trim();
-                input = CommonUtils.RemoveConsecutiveSpaces(input);
+                input = RemoveConsecutiveSpaces(input);
 
-                tmpInput = input;
-                splitted = input.Split(' ');
+                var splitted = input.Split(' ');
                 if (splitted.Count() == 3)
                 {
                     try
                     {
                         // assignment information (1)
-                        if (CommonUtils.GalacticLanguageNumeralsValue.ContainsKey(splitted[2].ToUpper()))
+                        if (galacticLanguageNumeralsValue.ContainsKey(splitted[2].ToUpper()))
                         {
                             splitted[2] = splitted[2].ToUpper();
                         }
-                        CommonUtils.GalacticLanguageNumeralsValue.Add(splitted[0], CommonUtils.GalacticLanguageNumeralsValue[splitted[2]]);
+                        galacticLanguageNumeralsValue.Add(splitted[0], galacticLanguageNumeralsValue[splitted[2]]);
                         // I think we are not going to ever use GalacticLanguageNumeralsValue, never.
-                        CommonUtils.GalacticLanguageNumeralsDict.Add(splitted[0], splitted[2]);
+                        galacticLanguageNumeralsDict.Add(splitted[0], splitted[2]);
                         // We will always need to read string and convert it via GalactivLanguageNumeralsDict to Roman characters and then via RNP get teh value
                     }
                     catch (Exception ex)
@@ -110,22 +128,18 @@ namespace gallactic_money
 
                     if (Question.IsQuestion(input))
                     {
-                        // A question : how fortunate! (3)
-
-                        Question q = new Question();
-                        q.MakeInfo(input, CommonUtils.GalacticLanguageNumeralsDict);
-                        Questions.Add(q);
+                        questions.Add(QuestionFactory.GenerateQuestion(input, galacticLanguageNumeralsDict));
                     }
                     else
                     {
                         // An informaion : how fortunate! (2)
                         try
                         {
-                            Information i = new Information();
-                            i.MakeInfo(input, CommonUtils.GalacticLanguageNumeralsDict);
-                            Informations.Add(i);
+                            var i = new Information();
+                            i.MakeInfo(input, galacticLanguageNumeralsDict);
+                            informations.Add(i);
                         }
-                        catch (System.FormatException fex)
+                        catch (FormatException fex)
                         {
                             Console.WriteLine("Hmm. It says string is in bad format. Please conform to specification.");
                             Console.WriteLine("Exception : " + fex.Message);
@@ -135,20 +149,19 @@ namespace gallactic_money
             } // reading of input is interrupted since no more string found
 
             // Now Answer all the questions.
-            foreach (Question Q in Questions)
+            foreach (var question in questions)
             {
-                Answer A = new Answer();
-                A.MakeAnswer(Q, Informations, CommonUtils.GalacticLanguageNumeralsDict);
-                Answers.Add(A); // may be for future use or for self testing.
-                A.PrintAnswer();
+                var answer = new Answer();
+                answer.MakeAnswer(question, informations, galacticLanguageNumeralsDict);
+                answers.Add(answer); // may be for future use or for self testing.
+                answer.PrintAnswer();
             }
-
         }
 
-       
-        void TestRNP()
+
+        void TestRomanNumeralParser()
         {
-            RomanNumeralParserTest tester = new RomanNumeralParserTest();
+            var tester = new RomanNumeralParserTest();
             tester.Test1();
             tester.Test2();
         }

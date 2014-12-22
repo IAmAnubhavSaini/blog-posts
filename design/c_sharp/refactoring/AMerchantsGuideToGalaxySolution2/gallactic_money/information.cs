@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gallactic_money
+namespace GuideToGalaxy
 {
     public class Information
     {
@@ -11,15 +11,14 @@ namespace gallactic_money
         public string Item; // Silver
         public int Value; // == 34
         public string Unit; // == Credits
-
-
+        
         public virtual void MakeInfo(string input, Dictionary<string, string> dict)
         {
-            string[] splitted = input.Split(' ');
+            var splitted = input.Split(' ');
             // Assumption : string input contains single spaces
-            int i = 0;
             try
             {
+                int i;
                 for (i = 0;
                     i < splitted.Count() &&
                     dict.ContainsKey(splitted[i]);
@@ -40,7 +39,7 @@ namespace gallactic_money
                 ++i;
                 Unit = splitted[i];
             }
-            catch (System.IndexOutOfRangeException ioore)
+            catch (IndexOutOfRangeException ioore)
             {
                 Console.WriteLine("Data is not provided as agreed upon specification.");
                 Console.WriteLine("Message : " + ioore.Message);

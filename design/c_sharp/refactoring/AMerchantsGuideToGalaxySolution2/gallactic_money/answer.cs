@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gallactic_money
+namespace GuideToGalaxy
 {
     public class Answer
     {
@@ -28,30 +28,22 @@ namespace gallactic_money
 
         string AnswerString;
 
-        internal void MakeAnswer(Question Q, List<Information> Informations, Dictionary<string, string> Dictionary)
+        internal void MakeAnswer(MuchTypeQuestion muchTypeQuestion, List<Information> informations, Dictionary<string, string> dictionary)
         {
-            var rnd = new Random();
-            var value = 0;
-            switch (Q.QuestionType)
-            {
-                case QAType.NonMatching:
-                    AnswerString = NonMatchResponses[rnd.Next(0, NonMatchResponses.Count())];
-                    break;
-                case QAType.Many:
-                    value = CalculateValueForItem(Q, Informations, Dictionary);
-                    AnswerString = string.Format(FormatStrings[QAType.Many], Q.RawNumber, Q.Item, value, Q.Unit);
-                    break;
-                case QAType.Much:
-                    value = CalculateValue(Q);
-                    AnswerString = string.Format(FormatStrings[QAType.Much], Q.RawNumber, value);
-                    break;
-            }
+            var value = CalculateValue(muchTypeQuestion);
+            AnswerString = string.Format(FormatStrings[QAType.Much], muchTypeQuestion.RawNumber, value);
         }
 
+        internal void MakeAnswer(ManyTypeQuestion manyTypeQuestion, List<Information> informations, Dictionary<string, string> dictionary)
+        {
+            var value = CalculateValueForItem(manyTypeQuestion, informations, dictionary);
+            AnswerString = string.Format(FormatStrings[QAType.Many], manyTypeQuestion.RawNumber, manyTypeQuestion.Information.Item, value, manyTypeQuestion.Information.Unit);
+        }
+      
         private int CalculateValue(Question Q)
         {
             var parser = new RomanToDecimanlLikeNumeralParser<RomanLanguage>();
-            var value = parser.ParseNumber(Q.Number);
+            var value = parser.ParseNumber(Q.Information.Number);
             return value;
         }
 
@@ -60,9 +52,9 @@ namespace gallactic_money
 
             var value = 0;
             var parser = new RomanToDecimanlLikeNumeralParser<RomanLanguage>();
-            var qNumberDecimal = parser.ParseNumber(Q.Number);
+            var qNumberDecimal = parser.ParseNumber(Q.Information.Number);
 
-            foreach (var i in Is.Where(info => info.Item.Equals(Q.Item)))
+            foreach (var i in Is.Where(info => info.Item.Equals(Q.Information.Item)))
             {
                 var iNumberDecimal = parser.ParseNumber(i.Number);
                 var perItem = i.Value / (double)iNumberDecimal;
@@ -77,5 +69,17 @@ namespace gallactic_money
         {
             Console.WriteLine(AnswerString);
         }
+
+        //internal void MakeAnswer(IProvideQuestion question, List<Information> informations, Dictionary<string, string> galacticLanguageNumeralsDict)
+        //{
+        //    if (question is ManyTypeQuestion)
+        //    {
+        //        MakeAnswer(question as ManyTypeQuestion, informations, galacticLanguageNumeralsDict);
+        //    }
+        //    else if(question is MuchTypeQuestion)
+        //    {
+        //        MakeAnswer(question as MuchTypeQuestion, informations, galacticLanguageNumeralsDict);
+        //    }
+        //}
     }
 }

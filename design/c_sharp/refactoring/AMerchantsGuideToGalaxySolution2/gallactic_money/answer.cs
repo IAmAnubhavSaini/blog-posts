@@ -7,6 +7,7 @@ namespace GuideToGalaxy
 {
     public abstract class Answer
     {
+        protected  abstract Question Question { get; set; }
         protected string AnswerString;
 
         internal abstract void MakeAnswer(IProvideQuestion question, List<Information> informations, Dictionary<string, string> dictionary);

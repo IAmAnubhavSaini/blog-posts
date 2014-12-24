@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralParserTests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Languages", "Languages\Languages.csproj", "{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuideTests", "GuideTests\GuideTests.csproj", "{561AC89C-1F7A-4554-9362-8FE81C5CDBED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptions", "Exceptions\Exceptions.csproj", "{E3A226A4-8815-4422-A557-0384871F46F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{561AC89C-1F7A-4554-9362-8FE81C5CDBED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{561AC89C-1F7A-4554-9362-8FE81C5CDBED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{561AC89C-1F7A-4554-9362-8FE81C5CDBED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{561AC89C-1F7A-4554-9362-8FE81C5CDBED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3A226A4-8815-4422-A557-0384871F46F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3A226A4-8815-4422-A557-0384871F46F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3A226A4-8815-4422-A557-0384871F46F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3A226A4-8815-4422-A557-0384871F46F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

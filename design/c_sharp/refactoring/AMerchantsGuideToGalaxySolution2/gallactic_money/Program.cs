@@ -69,14 +69,6 @@ namespace GuideToGalaxy
             Console.WriteLine("Self test not implemented yet.");
         }
 
-        string RemoveConsecutiveSpaces(string input)
-        {
-            var options = RegexOptions.Multiline;
-            var regex = new Regex(@"[ ]{2,}", options);
-            input = regex.Replace(input, @" ");
-            return input;
-        }
-
         void Run()
         {
             string input;

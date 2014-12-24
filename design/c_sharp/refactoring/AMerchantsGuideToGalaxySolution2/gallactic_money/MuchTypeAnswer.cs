@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
+using Languages;
 
 namespace GuideToGalaxy
 {
-    public class MuchTypeAnswer : Answer
+    public class MuchTypeAnswer<T> : Answer<T> where T : IProvideLanguage, new ()
     {
-        public MuchTypeAnswer(Question question)
+        public MuchTypeAnswer(Question<T> question)
         {
             Question = question;
         }
-        protected override sealed Question Question { get; set; }
+        protected override sealed Question<T> Question { get; set; }
 
         internal override void MakeAnswer(IProvideQuestion question, List<Information> informations, Dictionary<string, string> dictionary)
         {

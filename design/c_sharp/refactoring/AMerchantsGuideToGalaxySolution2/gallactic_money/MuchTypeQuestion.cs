@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using Languages;
 
 namespace GuideToGalaxy
 {
-    public class MuchTypeQuestion : Question
+    public class MuchTypeQuestion<T> : Question<T> where T : IProvideLanguage, new()
     {
-        public MuchTypeQuestion(string input, Dictionary<string, string> dictionary)
-            : base(input, dictionary)
+        public MuchTypeQuestion(string input, Knowledge<T> knowledge )
+            : base(input, knowledge)
         {
         }
 

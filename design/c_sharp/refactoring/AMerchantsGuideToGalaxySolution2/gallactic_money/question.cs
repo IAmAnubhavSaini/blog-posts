@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Exceptions;
+using Languages;
 
 namespace GuideToGalaxy
 {
@@ -11,20 +12,21 @@ namespace GuideToGalaxy
         string RawNumber { get; set; }
         QAType QuestionType { get; set; }
     }
-    public abstract class Question : IProvideQuestion
+    public abstract class Question<T> : IProvideQuestion where T : IProvideLanguage, new ()
     {
         public Information Information { get; set; }
         public string RawNumber { get; set; }
         public QAType QuestionType { get; set; }
 
-        protected Question(string input, Dictionary<string, string> dictionary)
+        protected Question(string input, Knowledge<T> knowledge)
         {
             Input = input;
-            CurrentConversionDictionary = dictionary;
+            Knowledge = knowledge;
             Information = new Information();
             MakeInfo();
         }
-        
+
+        public Knowledge<T> Knowledge { get; private set; }
         protected readonly string Input;
         private string[] Splitted;
         private readonly Dictionary<string, string> CurrentConversionDictionary;

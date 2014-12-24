@@ -1,36 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using Exceptions;
+﻿using Exceptions;
+using Languages;
+using System;
 
 namespace GuideToGalaxy
 {
     public class Factories
     {
-        public class AnswerFactory
+        public class AnswerFactory<T> where T: IProvideLanguage, new ()
         {
-            public static Answer GenerateAnswer(QAType type, Question question)
+            public static Answer<T> GenerateAnswer(QAType type, Question<T> question)
             {
                 switch (type)
                 {
-                    case QAType.Many: return new ManyTypeAnswer(question);
-                    case QAType.Much: return new MuchTypeAnswer(question);
+                    case QAType.Many: return new ManyTypeAnswer<T>(question);
+                    case QAType.Much: return new MuchTypeAnswer<T>(question);
                 }
                 throw new NotAnAnswerException("Non-conforming type of question asked. Cannot generate an answer.", new ArgumentException().ToString());
             }
         }
 
-        public class QuestionFactory
+        public class QuestionFactory<T> where T: IProvideLanguage, new()
         {
-            public static Question GenerateQuestion(string input, Dictionary<string, string> dictionary)
+            public static Question<T> GenerateQuestion(string input, Knowledge<T>  knowledge)
             {
                 var smallLetteredInput = input.ToLower();
                 if (smallLetteredInput.Contains(" much "))
                 {
-                    return new MuchTypeQuestion(input, dictionary);
+                    return new MuchTypeQuestion<T>(input, knowledge);
                 }
                 if (smallLetteredInput.Contains(" many "))
                 {
-                    return new ManyTypeQuestion(input, dictionary);
+                    return new ManyTypeQuestion<T>(input, knowledge);
                 }
                 throw new NotAQuestionException("Non-conforming type of question.", new ArgumentException().ToString());
             }

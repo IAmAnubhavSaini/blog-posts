@@ -28,7 +28,7 @@ namespace GuideToGalaxy
                 {
                     if (args[0].ToLower().Equals("run"))
                     {
-                        program.Run();
+                        program.Run<RomanLanguage>();
                     }
                     else if (args.Count() == 2 && args[0].ToLower().Equals("test") && args[1].ToLower().Equals("rnp"))
                     {
@@ -51,7 +51,7 @@ namespace GuideToGalaxy
                 else
                 {
                     //PrintUsageInfo();
-                    program.Run();
+                    program.Run<RomanLanguage>();
                 }
             }
 
@@ -69,13 +69,13 @@ namespace GuideToGalaxy
             Console.WriteLine("Self test not implemented yet.");
         }
 
-        void Run()
+        void Run<T>() where T: IProvideLanguage, new ()
         {
             string input;
             var questions = new List<IProvideQuestion>();
             var informations = new List<Information>();
-            var answers = new List<Answer>();
-            var knowledge = new Knowledge<RomanLanguage>();
+            var answers = new List<Answer<T>>();
+            var knowledge = new Knowledge<T>();
             while (!string.IsNullOrEmpty(input = Console.ReadLine()))
             {
                 input = SanitizeInput(input);
@@ -87,9 +87,9 @@ namespace GuideToGalaxy
                 }
                 else
                 {
-                    if (Question.IsQuestion(input))
+                    if (Question<T>.IsQuestion(input))
                     {
-                        var generateQuestion = Factories.QuestionFactory.GenerateQuestion(input, knowledge.ForeignLanguageToKnownLanguageDictionary);
+                        var generateQuestion = Factories.QuestionFactory<T>.GenerateQuestion(input, knowledge );
                         if (generateQuestion != null)
                             questions.Add(generateQuestion);
                     }
@@ -123,12 +123,12 @@ namespace GuideToGalaxy
             return  input.Trim().RemoveConsecutiveSpaces();
         }
 
-        private static void AnswerAllTheQuestion(IEnumerable<IProvideQuestion> questions, List<Information> informations, Dictionary<string, string> galacticLanguageNumeralsDict,
-            ICollection<Answer> answers)
+        private static void AnswerAllTheQuestion<T>(IEnumerable<IProvideQuestion> questions, List<Information> informations, Dictionary<string, string> galacticLanguageNumeralsDict,
+            ICollection<Answer<T>> answers) where T : IProvideLanguage, new()
         {
             foreach (var question in questions)
             {
-                var answer = Factories.AnswerFactory.GenerateAnswer(question.QuestionType, question as Question);
+                var answer = Factories.AnswerFactory<T>.GenerateAnswer(question.QuestionType, question as Question<T>);
                 answer.MakeAnswer(question, informations, galacticLanguageNumeralsDict);
                 answers.Add(answer);
                 answer.PrintAnswer();

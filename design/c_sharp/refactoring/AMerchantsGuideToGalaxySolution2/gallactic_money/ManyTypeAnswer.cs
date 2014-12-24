@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
+using Languages;
 
 namespace GuideToGalaxy
 {
-    public class ManyTypeAnswer : Answer
+    public class ManyTypeAnswer<T> : Answer<T> where T : IProvideLanguage, new ()
     {
-        public ManyTypeAnswer(Question question)
+        public ManyTypeAnswer(Question<T> question)
         {
             Question = question;
         } 
-        protected override sealed Question Question { get; set; }
+        protected override sealed Question<T> Question { get; set; }
 
         internal override void MakeAnswer(IProvideQuestion question, List<Information> informations, Dictionary<string, string> dictionary)
         {

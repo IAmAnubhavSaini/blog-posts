@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Languages;
+﻿using Languages;
 
 namespace GuideToGalaxy
 {

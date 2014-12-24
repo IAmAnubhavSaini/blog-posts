@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Exceptions;
+﻿using Exceptions;
 using Languages;
+using System;
+using System.Linq;
 
 namespace GuideToGalaxy
 {
@@ -29,7 +28,7 @@ namespace GuideToGalaxy
         public Knowledge<T> Knowledge { get; private set; }
         protected readonly string Input;
         private string[] Splitted;
-        private readonly Dictionary<string, string> CurrentConversionDictionary;
+
         private void MakeInfo()
         {
             if (!string.IsNullOrEmpty(Input))
@@ -61,9 +60,9 @@ namespace GuideToGalaxy
             var end = ItemIndex(count);
             for (var i = start; i < end && knownWord; ++i)
             {
-                if (CurrentConversionDictionary.ContainsKey(Splitted[i]))
+                if (Knowledge.ForeignLanguageToKnownLanguageDictionary.ContainsKey(Splitted[i]))
                 {
-                    Information.Number += CurrentConversionDictionary[Splitted[i]];
+                    Information.Number += Knowledge.ForeignLanguageToKnownLanguageDictionary[Splitted[i]];
                     RawNumber += Splitted[i] + " ";
                 }
                 else
@@ -81,9 +80,9 @@ namespace GuideToGalaxy
             var knownWord = true;
             for (var i = start; i < itemIndex && knownWord; ++i)
             {
-                if (CurrentConversionDictionary.ContainsKey(Splitted[i]))
+                if (Knowledge.ForeignLanguageToKnownLanguageDictionary.ContainsKey(Splitted[i]))
                 {
-                    Information.Number += CurrentConversionDictionary[Splitted[i]];
+                    Information.Number += Knowledge.ForeignLanguageToKnownLanguageDictionary[Splitted[i]];
                     RawNumber += Splitted[i] + " ";
                 }
                 else

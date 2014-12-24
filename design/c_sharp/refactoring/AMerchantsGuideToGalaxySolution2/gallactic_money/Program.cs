@@ -32,7 +32,7 @@ namespace GuideToGalaxy
                     }
                     else if (args.Count() == 2 && args[0].ToLower().Equals("test") && args[1].ToLower().Equals("rnp"))
                     {
-                        program.TestRomanNumeralParser();
+                        TestRomanNumeralParser();
                     }
                     else if (args.Count() == 2 && args[0].ToLower().Equals("test") && args[1].ToLower().Equals("self"))
                     {
@@ -40,7 +40,7 @@ namespace GuideToGalaxy
                     }
                     else if (args.Count() == 2 && args[0].ToLower().Equals("test") && args[1].ToLower().Equals("all"))
                     {
-                        program.TestRomanNumeralParser();
+                        TestRomanNumeralParser();
                         program.TestSelf();
                     }
                     else
@@ -78,19 +78,15 @@ namespace GuideToGalaxy
             var knowledge = new Knowledge<RomanLanguage>();
             while (!string.IsNullOrEmpty(input = Console.ReadLine()))
             {
-                // input = input.ToLower(); // Assuming case insensitivity
-                // we need to sanitize input/
                 input = SanitizeInput(input);
 
                 var splitted = input.Split(' ');
-                if (splitted.Count() == 3)
+                if (SimpleFact(splitted))
                 {
                     knowledge.ForeignLanguageToKnownLanguageDictionary.Add(splitted[0].ToUpper(), splitted[2].ToUpper());
                 }
                 else
                 {
-                    // here, either it's a question(3) or information(2).
-
                     if (Question.IsQuestion(input))
                     {
                         var generateQuestion = Factories.QuestionFactory.GenerateQuestion(input, knowledge.ForeignLanguageToKnownLanguageDictionary);
@@ -99,7 +95,6 @@ namespace GuideToGalaxy
                     }
                     else
                     {
-                        // An informaion : how fortunate! (2)
                         try
                         {
                             var i = new Information();
@@ -113,25 +108,35 @@ namespace GuideToGalaxy
                         }
                     }
                 }
-            } // reading of input is interrupted since no more string found
-            AnswerAllTheQuestion(questions, informations, knowledge.ForeignLanguageToKnownLanguageDictionary, answers);
+            }
 
-            // Now Answer all the questions.
+            AnswerAllTheQuestion(questions, informations, knowledge.ForeignLanguageToKnownLanguageDictionary, answers);
+        }
+
+        private static bool SimpleFact(IEnumerable<string> splitted)
+        {
+            return splitted.Count() == 3;
+        }
+
         private string SanitizeInput(string input)
         {
             return  input.Trim().RemoveConsecutiveSpaces();
         }
+
+        private static void AnswerAllTheQuestion(IEnumerable<IProvideQuestion> questions, List<Information> informations, Dictionary<string, string> galacticLanguageNumeralsDict,
+            ICollection<Answer> answers)
+        {
             foreach (var question in questions)
             {
-                var answer = Factories.AnswerFactory.GenerateAnswer(question.QuestionType);
+                var answer = Factories.AnswerFactory.GenerateAnswer(question.QuestionType, question as Question);
                 answer.MakeAnswer(question, informations, galacticLanguageNumeralsDict);
-                answers.Add(answer); // may be for future use or for self testing.
+                answers.Add(answer);
                 answer.PrintAnswer();
             }
         }
 
 
-        void TestRomanNumeralParser()
+        static void TestRomanNumeralParser()
         {
             var tester = new RomanNumeralParserTest();
             tester.Test1();

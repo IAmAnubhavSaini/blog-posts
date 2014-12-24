@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Exceptions;
 
 namespace GuideToGalaxy
 {
@@ -17,7 +15,7 @@ namespace GuideToGalaxy
                     case QAType.Many: return new ManyTypeAnswer();
                     case QAType.Much: return new MuchTypeAnswer();
                 }
-                return null;
+                throw new NotAnAnswerException("Non-conforming type of question asked. Cannot generate an answer.", new ArgumentException().ToString());
             }
         }
 
@@ -33,10 +31,7 @@ namespace GuideToGalaxy
                 {
                     return new ManyTypeQuestion(input, dictionary);
                 }
-                else
-                {
-                    return null;
-                }
+                throw new NotAQuestionException("Non-conforming type of question.", new ArgumentException().ToString());
             }
         }
     }

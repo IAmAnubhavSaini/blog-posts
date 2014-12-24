@@ -80,8 +80,7 @@ namespace GuideToGalaxy
             {
                 // input = input.ToLower(); // Assuming case insensitivity
                 // we need to sanitize input/
-                input = input.Trim();
-                input = RemoveConsecutiveSpaces(input);
+                input = SanitizeInput(input);
 
                 var splitted = input.Split(' ');
                 if (splitted.Count() == 3)
@@ -118,6 +117,10 @@ namespace GuideToGalaxy
             AnswerAllTheQuestion(questions, informations, knowledge.ForeignLanguageToKnownLanguageDictionary, answers);
 
             // Now Answer all the questions.
+        private string SanitizeInput(string input)
+        {
+            return  input.Trim().RemoveConsecutiveSpaces();
+        }
             foreach (var question in questions)
             {
                 var answer = Factories.AnswerFactory.GenerateAnswer(question.QuestionType);

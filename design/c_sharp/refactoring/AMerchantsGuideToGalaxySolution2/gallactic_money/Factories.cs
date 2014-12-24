@@ -8,12 +8,12 @@ namespace GuideToGalaxy
     {
         public class AnswerFactory
         {
-            public static Answer GenerateAnswer(QAType type)
+            public static Answer GenerateAnswer(QAType type, Question question)
             {
                 switch (type)
                 {
-                    case QAType.Many: return new ManyTypeAnswer();
-                    case QAType.Much: return new MuchTypeAnswer();
+                    case QAType.Many: return new ManyTypeAnswer(question);
+                    case QAType.Much: return new MuchTypeAnswer(question);
                 }
                 throw new NotAnAnswerException("Non-conforming type of question asked. Cannot generate an answer.", new ArgumentException().ToString());
             }

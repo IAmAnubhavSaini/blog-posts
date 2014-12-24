@@ -4,6 +4,12 @@ namespace GuideToGalaxy
 {
     public class ManyTypeAnswer : Answer
     {
+        public ManyTypeAnswer(Question question)
+        {
+            Question = question;
+        } 
+        protected override sealed Question Question { get; set; }
+
         internal override void MakeAnswer(IProvideQuestion question, List<Information> informations, Dictionary<string, string> dictionary)
         {
             var value = CalculateValue(question);

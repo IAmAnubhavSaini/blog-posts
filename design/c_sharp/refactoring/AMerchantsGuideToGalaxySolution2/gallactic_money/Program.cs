@@ -83,18 +83,7 @@ namespace GuideToGalaxy
             var questions = new List<IProvideQuestion>();
             var informations = new List<Information>();
             var answers = new List<Answer>();
-            var galacticLanguageNumeralsValue = new Dictionary<string, int>
-            {
-                {"I", 1},
-                {"V", 5},
-                {"X", 10},
-                {"L", 50},
-                {"C", 100},
-                {"D", 500},
-                {"M", 1000}
-            };
-            var galacticLanguageNumeralsDict = new Dictionary<string, string>();
-
+            var knowledge = new Knowledge<RomanLanguage>();
             while (!string.IsNullOrEmpty(input = Console.ReadLine()))
             {
                 // input = input.ToLower(); // Assuming case insensitivity
@@ -105,20 +94,7 @@ namespace GuideToGalaxy
                 var splitted = input.Split(' ');
                 if (splitted.Count() == 3)
                 {
-                    try
-                    {
-                        // assignment information (1)
-                        if (galacticLanguageNumeralsDict.ContainsKey(splitted[2].ToUpper()))
-                        {
-                            splitted[2] = splitted[2].ToUpper();
-                        }
-                        galacticLanguageNumeralsDict.Add(splitted[0], splitted[2]);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Could not found {0} in our records. Do you know what you are doing?", splitted[2]);
-                        Console.WriteLine("Exception: " + ex.Message);
-                    }
+                    knowledge.ForeignLanguageToKnownLanguageDictionary.Add(splitted[0].ToUpper(), splitted[2].ToUpper());
                 }
                 else
                 {
@@ -126,7 +102,7 @@ namespace GuideToGalaxy
 
                     if (Question.IsQuestion(input))
                     {
-                        var generateQuestion = Factories.QuestionFactory.GenerateQuestion(input, galacticLanguageNumeralsDict);
+                        var generateQuestion = Factories.QuestionFactory.GenerateQuestion(input, knowledge.ForeignLanguageToKnownLanguageDictionary);
                         if (generateQuestion != null)
                             questions.Add(generateQuestion);
                     }
@@ -136,7 +112,7 @@ namespace GuideToGalaxy
                         try
                         {
                             var i = new Information();
-                            i.MakeInfo(input, galacticLanguageNumeralsDict);
+                            i.MakeInfo(input, knowledge.ForeignLanguageToKnownLanguageDictionary);
                             informations.Add(i);
                         }
                         catch (FormatException fex)
@@ -147,6 +123,7 @@ namespace GuideToGalaxy
                     }
                 }
             } // reading of input is interrupted since no more string found
+            AnswerAllTheQuestion(questions, informations, knowledge.ForeignLanguageToKnownLanguageDictionary, answers);
 
             // Now Answer all the questions.
             foreach (var question in questions)

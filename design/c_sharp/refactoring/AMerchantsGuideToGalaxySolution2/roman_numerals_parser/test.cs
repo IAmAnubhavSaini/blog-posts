@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Languages;
 
-namespace roman_numerals_parser
+namespace NumeralParser
 {
     public class RomanNumeralParserTest
     {

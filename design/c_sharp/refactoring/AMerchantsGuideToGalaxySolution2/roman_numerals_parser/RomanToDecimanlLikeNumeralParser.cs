@@ -1,7 +1,7 @@
-﻿using Languages;
-using System;
+﻿using System;
+using Languages;
 
-namespace roman_numerals_parser
+namespace NumeralParser
 {
     public class RomanToDecimanlLikeNumeralParser<T> where T : IProvideLanguage, new()
     {

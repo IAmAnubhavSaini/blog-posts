@@ -7,8 +7,8 @@
     <ProjectGuid>{8260CE64-90C1-46AE-8681-45E5A532C369}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>roman_numerals_parser</RootNamespace>
-    <AssemblyName>roman_numerals_parser</AssemblyName>
+    <RootNamespace>NumeralParser</RootNamespace>
+    <AssemblyName>NumeralParser</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

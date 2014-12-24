@@ -2,7 +2,7 @@
 
 namespace GuideToGalaxy
 {
-    public class ManyTypeQuestion : Question, IProvideQuestion
+    public class ManyTypeQuestion : Question
     {
         public ManyTypeQuestion(string input, Dictionary<string, string> dictionary) :
             base(input, dictionary)

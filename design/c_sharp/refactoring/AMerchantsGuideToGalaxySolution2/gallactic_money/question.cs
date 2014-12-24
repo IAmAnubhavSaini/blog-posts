@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Exceptions;
 
 namespace GuideToGalaxy
 {
@@ -22,7 +24,7 @@ namespace GuideToGalaxy
             Information = new Information();
             MakeInfo();
         }
-        // Assumption : All input is case insensitive.
+        
         protected readonly string Input;
         private string[] Splitted;
         private readonly Dictionary<string, string> CurrentConversionDictionary;
@@ -31,20 +33,20 @@ namespace GuideToGalaxy
             if (!string.IsNullOrEmpty(Input))
             {
                 Splitted = Input.Split(' ');
-                if (IsQuestion())
+                if (IsQuestion(Input))
                 {
                     var count = Splitted.Count();
-                    if (Input.ToLower().Contains("many"))
+                    if (Input.ToLower().Contains(" many "))
                     {
                         GenerateManyQuestion(count);
                     }
-                    else if (Input.ToLower().Contains("much"))
+                    else if (Input.ToLower().Contains(" much "))
                     {
                         GenerateMuchQuestion(count);
                     }
                     else
                     {
-                        QuestionType = QAType.NonMatching;
+                        throw new NotAQuestionException("Non-conforming type of question.", new ArgumentException().ToString());
                     }
                 }
             }
@@ -103,21 +105,10 @@ namespace GuideToGalaxy
 
         protected abstract int StartFrom();
 
-        private bool IsQuestion()
-        {
-            return IsQuestion(Input);
-        }
-
         public static bool IsQuestion(string input)
         {
-            if (string.IsNullOrEmpty(input)) return false;
-            input = input.ToLower();
-            return input.ToLower().StartsWith("how") ||
-                   input.ToLower().EndsWith("?") ||
-                   input.ToLower().Contains("how");
+            return !string.IsNullOrEmpty(input) && input.ToLower().Contains("how ");
         }
-
-
     }
 
 

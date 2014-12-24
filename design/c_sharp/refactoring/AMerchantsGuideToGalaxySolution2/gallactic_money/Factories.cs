@@ -23,11 +23,12 @@ namespace GuideToGalaxy
         {
             public static Question GenerateQuestion(string input, Dictionary<string, string> dictionary)
             {
-                if (input.Contains("much"))
+                var smallLetteredInput = input.ToLower();
+                if (smallLetteredInput.Contains(" much "))
                 {
                     return new MuchTypeQuestion(input, dictionary);
                 }
-                else if (input.Contains("many"))
+                if (smallLetteredInput.Contains(" many "))
                 {
                     return new ManyTypeQuestion(input, dictionary);
                 }

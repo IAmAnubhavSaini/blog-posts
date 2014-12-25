@@ -127,7 +127,9 @@ namespace MarsRoverApp
                                 x--; break;
                         }
                         x = x < 0 ? 0 : x;
+                        x = x > CurrentPlane.TopRightX ? CurrentPlane.TopRightX : x;
                         y = y < 0 ? 0 : y;
+                        y = y > CurrentPlane.TopRightY ? CurrentPlane.TopRightY : y;
                         break;
                     case RoverCommand.L:
                         direction = roverDirection.TurnLeft();

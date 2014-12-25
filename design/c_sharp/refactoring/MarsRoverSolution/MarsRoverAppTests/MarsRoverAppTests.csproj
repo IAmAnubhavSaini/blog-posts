@@ -52,6 +52,14 @@
   <ItemGroup>
     <Compile Include="MovementTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DirectionTests.cs" />
+    <Compile Include="MixedTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MarsRoverApp\MarsRoverApp.csproj">
+      <Project>{11B28864-C00A-405F-8AC5-F966A4FD39CF}</Project>
+      <Name>MarsRoverApp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

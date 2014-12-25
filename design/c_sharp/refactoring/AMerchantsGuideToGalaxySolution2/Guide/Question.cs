@@ -108,7 +108,7 @@ namespace Guide
 
         public static bool IsQuestion(string input)
         {
-            return !string.IsNullOrEmpty(input) && input.ToLower().Contains("how ");
+            return !string.IsNullOrEmpty(input) && input.ToLower().StartsWith("how ");
         }
     }
 

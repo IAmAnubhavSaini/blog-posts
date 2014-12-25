@@ -1,8 +1,8 @@
-﻿using Languages;
-using System;
+﻿using System;
 using System.Linq;
+using Languages;
 
-namespace GuideToGalaxy
+namespace Guide
 {
     public class Information<T> where T:IProvideLanguage, new ()
     {

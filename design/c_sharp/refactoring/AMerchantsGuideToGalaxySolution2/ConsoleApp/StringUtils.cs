@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace GuideToGalaxy
+namespace ConsoleApp
 {
     public static class StringUtils
     {

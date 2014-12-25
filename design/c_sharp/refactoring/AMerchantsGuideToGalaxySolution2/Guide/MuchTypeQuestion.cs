@@ -1,6 +1,6 @@
 ﻿using Languages;
 
-namespace GuideToGalaxy
+namespace Guide
 {
     public class MuchTypeQuestion<T> : Question<T> where T : IProvideLanguage, new()
     {

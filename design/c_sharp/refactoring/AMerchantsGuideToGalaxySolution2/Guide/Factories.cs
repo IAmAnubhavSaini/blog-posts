@@ -1,8 +1,8 @@
-﻿using Exceptions;
+﻿using System;
+using Exceptions;
 using Languages;
-using System;
 
-namespace GuideToGalaxy
+namespace Guide
 {
     public class Factories
     {

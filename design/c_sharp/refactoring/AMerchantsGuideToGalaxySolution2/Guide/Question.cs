@@ -1,9 +1,9 @@
-﻿using Exceptions;
-using Languages;
-using System;
+﻿using System;
 using System.Linq;
+using Exceptions;
+using Languages;
 
-namespace GuideToGalaxy
+namespace Guide
 {
     public interface IProvideQuestion<T> where T : IProvideLanguage, new()
     {

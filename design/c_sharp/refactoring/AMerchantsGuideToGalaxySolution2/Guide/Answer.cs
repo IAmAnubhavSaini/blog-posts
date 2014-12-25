@@ -1,16 +1,16 @@
-﻿using Languages;
-using NumeralParser;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Languages;
+using NumeralParser;
 
-namespace GuideToGalaxy
+namespace Guide
 {
     public abstract class Answer<T> where T : IProvideLanguage, new ()
     {
         protected  abstract Question<T> Question { get; set; }
         protected string AnswerString;
 
-        internal abstract void MakeAnswer(IProvideQuestion<T> question, List<Information<T>> informations, Dictionary<string, string> dictionary);
+        public abstract void MakeAnswer(IProvideQuestion<T> question, List<Information<T>> informations, Dictionary<string, string> dictionary);
 
         protected int CalculateValue(IProvideQuestion<T> q)
         {
@@ -31,7 +31,7 @@ namespace GuideToGalaxy
             return value;
         }
 
-        internal void PrintAnswer()
+        public void PrintAnswer()
         {
             Console.WriteLine(AnswerString);
         }

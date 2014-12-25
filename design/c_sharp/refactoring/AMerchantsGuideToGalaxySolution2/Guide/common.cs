@@ -1,5 +1,5 @@
 ﻿
-namespace GuideToGalaxy
+namespace Guide
 {
     public enum QAType
     {

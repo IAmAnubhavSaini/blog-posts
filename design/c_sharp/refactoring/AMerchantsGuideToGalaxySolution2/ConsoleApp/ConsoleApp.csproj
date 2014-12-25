@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E4BBEB61-D3C3-4661-8A40-DE8E4869EA87}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{DCF8761A-14CE-49B2-AEF0-080B3C37BFA8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Guide</RootNamespace>
-    <AssemblyName>Guide</AssemblyName>
+    <RootNamespace>ConsoleApp</RootNamespace>
+    <AssemblyName>ConsoleApp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,29 +41,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Answer.cs" />
-    <Compile Include="common.cs" />
-    <Compile Include="Factories.cs" />
-    <Compile Include="information.cs" />
-    <Compile Include="Knowledge.cs" />
-    <Compile Include="ManyTypeAnswer.cs" />
-    <Compile Include="ManyTypeQuestion.cs" />
-    <Compile Include="MuchTypeAnswer.cs" />
-    <Compile Include="MuchTypeQuestion.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Question.cs" />
+    <Compile Include="StringUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exceptions\Exceptions.csproj">
       <Project>{E3A226A4-8815-4422-A557-0384871F46F1}</Project>
       <Name>Exceptions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Guide\Guide.csproj">
+      <Project>{E4BBEB61-D3C3-4661-8A40-DE8E4869EA87}</Project>
+      <Name>Guide</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Languages\Languages.csproj">
       <Project>{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}</Project>
       <Name>Languages</Name>
     </ProjectReference>
     <ProjectReference Include="..\NumeralParser\NumeralParser.csproj">
-      <Project>{8260CE64-90C1-46AE-8681-45E5A532C369}</Project>
+      <Project>{8260ce64-90c1-46ae-8681-45e5a532c369}</Project>
       <Name>NumeralParser</Name>
     </ProjectReference>
   </ItemGroup>

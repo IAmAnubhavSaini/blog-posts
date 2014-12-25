@@ -2,7 +2,7 @@
 using Languages;
 using NumeralParser;
 
-namespace GuideToGalaxy
+namespace Guide
 {
     public class Knowledge<T> where T: IProvideLanguage, new()
     {

@@ -1,9 +1,9 @@
 ﻿
 namespace MarsRover
 {
-    public class RoverDirection
+    public class RoverNavigation
     {
-        public RoverDirection(CompassDirection direction)
+        public RoverNavigation(CompassDirection direction)
         {
             Direction = direction;
         }

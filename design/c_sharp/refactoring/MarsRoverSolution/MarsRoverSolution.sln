@@ -9,14 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarsRoverTests", "MarsRover
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarsRover", "MarsRover\MarsRover.csproj", "{6CD6F42B-63B8-4286-9CA9-B3539B74F0E1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Input", "Input", "{DF3B7307-4394-4D59-B3D9-B2A9C015C0C1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{83AA25FE-8287-42DB-AE1C-0DAA5B72F6B6}"
 	ProjectSection(SolutionItems) = preProject
-		Input1.txt = Input1.txt
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Output", "Output", "{A24DEDBB-CF87-47C8-AAD8-FDE682D1654E}"
-	ProjectSection(SolutionItems) = preProject
-		Output1.txt = Output1.txt
+		Input\Input1.txt = Input\Input1.txt
+		Input\Input2.txt = Input\Input2.txt
+		Output\Output1.txt = Output\Output1.txt
+		Output\Output2.txt = Output\Output2.txt
 	EndProjectSection
 EndProject
 Global

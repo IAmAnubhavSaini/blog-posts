@@ -9,25 +9,26 @@ namespace MarsRover
 
     public class Rover
     {
-        private readonly RoverDirection roverDirection;
+        private readonly RoverNavigation roverNavigation;
         public Plane CurrentPlane { get; private set; }
         public string CommandToFollow { get; private set; }
 
-        public RoverLocation CurrentRoverLocation { get; private set; }
+        public RoverLocation StartLocation { get; private set; }
+        public RoverLocation EndLocation { get; private set; }
 
-        public Rover(Plane plane, string command, RoverLocation currentRoverLocation)
+        public Rover(Plane plane, string command, RoverLocation startLocation)
         {
-            CurrentRoverLocation = currentRoverLocation;
+            StartLocation = startLocation;
             CurrentPlane = plane;
             CommandToFollow = command;
-            roverDirection = new RoverDirection(currentRoverLocation.Direction);
+            roverNavigation = new RoverNavigation(startLocation.Direction);
         }
 
         public RoverLocation Operate()
         {
-            var x = CurrentRoverLocation.Coordinates.X;
-            var y = CurrentRoverLocation.Coordinates.Y;
-            var direction = CurrentRoverLocation.Direction;
+            var x = StartLocation.Coordinates.X;
+            var y = StartLocation.Coordinates.Y;
+            var direction = StartLocation.Direction;
 
             foreach (var command in CommandToFollow)
             {
@@ -51,23 +52,35 @@ namespace MarsRover
                                 x--;
                                 break;
                         }
-                        x = x < 0 ? 0 : x;
-                        x = x > CurrentPlane.TopRightX ? CurrentPlane.TopRightX : x;
-                        y = y < 0 ? 0 : y;
-                        y = y > CurrentPlane.TopRightY ? CurrentPlane.TopRightY : y;
+                        x = SanitizeXCoordinate(x);
+                        y = SanitizeYCoordinate(y);
                         break;
                     case RoverCommand.L:
-                        direction = roverDirection.TurnLeft();
+                        direction = roverNavigation.TurnLeft();
                         break;
                     case RoverCommand.R:
-                        direction = roverDirection.TurnRight();
+                        direction = roverNavigation.TurnRight();
                         break;
                     default:
                         throw new Exception("Unknown rover command");
                 }
             }
-            return new RoverLocation(new Point2D(x, y), direction);
+            EndLocation = new RoverLocation(new Point2D(x, y), direction);
+            return EndLocation;
         }
 
+        private int SanitizeYCoordinate(int y)
+        {
+            y = y < 0 ? 0 : y;
+            y = y > CurrentPlane.TopRightY ? CurrentPlane.TopRightY : y;
+            return y;
+        }
+
+        private int SanitizeXCoordinate(int x)
+        {
+            x = x < 0 ? 0 : x;
+            x = x > CurrentPlane.TopRightX ? CurrentPlane.TopRightX : x;
+            return x;
+        }
     }
 }

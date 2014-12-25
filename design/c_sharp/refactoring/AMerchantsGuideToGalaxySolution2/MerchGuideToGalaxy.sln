@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guide", "gallactic_money\Guide.csproj", "{DCF8761A-14CE-49B2-AEF0-080B3C37BFA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guide", "Guide\Guide.csproj", "{DCF8761A-14CE-49B2-AEF0-080B3C37BFA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumeralParser", "roman_numerals_parser\NumeralParser.csproj", "{8260CE64-90C1-46AE-8681-45E5A532C369}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumeralParser", "NumeralParser\NumeralParser.csproj", "{8260CE64-90C1-46AE-8681-45E5A532C369}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralParserTests", "RomanNumeralParserTests\RomanNumeralParserTests.csproj", "{A3DF2DC1-F881-497C-9FED-B07FC26EC0AE}"
 EndProject

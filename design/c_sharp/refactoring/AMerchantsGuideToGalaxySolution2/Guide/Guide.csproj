@@ -67,7 +67,7 @@
       <Project>{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}</Project>
       <Name>Languages</Name>
     </ProjectReference>
-    <ProjectReference Include="..\roman_numerals_parser\NumeralParser.csproj">
+    <ProjectReference Include="..\NumeralParser\NumeralParser.csproj">
       <Project>{8260ce64-90c1-46ae-8681-45e5a532c369}</Project>
       <Name>NumeralParser</Name>
     </ProjectReference>

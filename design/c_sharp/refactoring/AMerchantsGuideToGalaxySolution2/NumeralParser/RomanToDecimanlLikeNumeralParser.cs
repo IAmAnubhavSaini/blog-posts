@@ -17,7 +17,7 @@ namespace NumeralParser
             return (pos < input.Length - 1) ? Language.ConversionData[input[pos + 1]] : 0;
         }
 
-        public int ParseNumber(string input) // Here Number stands for Roman number which is string, what was Queen of England thinking?
+        public int ParseNumber(string input)
         {
             var value = 0;
             var tmpValue = 0;
@@ -35,7 +35,6 @@ namespace NumeralParser
                         {
                             tmpValue += currentValue;
                             value += tmpValue;
-                            //tmpValue = 0;
                             continue;
                         }
                         if (currentValue == nextValue)
@@ -43,14 +42,12 @@ namespace NumeralParser
                             tmpValue += (currentValue * 2);
                             ++i;
                             value += tmpValue;
-                            //tmpValue = 0;
                         }
                         if (currentValue < nextValue)
                         {
                             tmpValue -= currentValue;
                             tmpValue += nextValue;
                             value += tmpValue;
-                            //tmpValue = 0;
                             ++i;
                         }
 

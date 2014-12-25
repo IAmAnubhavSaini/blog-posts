@@ -16,6 +16,18 @@ namespace GuideToGalaxy
         {
             var parser = new RomanToDecimanlLikeNumeralParser<RomanLanguage>();
             var value = parser.ParseNumber(q.Information.Number);
+
+            foreach (var i in Question.Knowledge.Informations)
+            {
+                if (i.Item.Equals(Question.Information.Item))
+                {
+                    var iNumberDecimal = parser.ParseNumber(i.Number);
+                    var perItem = (double)i.Value / iNumberDecimal;
+                    value = int.Parse((perItem * value).ToString());
+                    break;
+                }
+            }
+
             return value;
         }
 

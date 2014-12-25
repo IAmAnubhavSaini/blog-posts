@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarsRoverApp", "MarsRoverApp\MarsRoverApp.csproj", "{11B28864-C00A-405F-8AC5-F966A4FD39CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarsRoverAppTests", "MarsRoverAppTests\MarsRoverAppTests.csproj", "{61F7E72B-E6E2-4988-80C5-AD681CB0CF40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarsRoverTests", "MarsRoverAppTests\MarsRoverTests.csproj", "{61F7E72B-E6E2-4988-80C5-AD681CB0CF40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarsRover", "MarsRover\MarsRover.csproj", "{6CD6F42B-63B8-4286-9CA9-B3539B74F0E1}"
 EndProject

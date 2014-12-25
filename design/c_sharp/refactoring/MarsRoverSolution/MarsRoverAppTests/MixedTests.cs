@@ -1,7 +1,7 @@
 ﻿using MarsRover;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MarsRoverAppTests
+namespace MarsRoverTests
 {
     [TestClass]
     public class MixedTests

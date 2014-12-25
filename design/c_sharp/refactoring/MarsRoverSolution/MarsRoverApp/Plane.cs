@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace MarsRoverApp
 {
@@ -86,7 +83,7 @@ namespace MarsRoverApp
     public class Rover
     {
         
-        private RoverDirection roverDirection;
+        private readonly RoverDirection roverDirection;
         public Plane CurrentPlane { get; private set; }
         public string CommandToFollow { get; private set; }
 
@@ -108,7 +105,7 @@ namespace MarsRoverApp
             foreach (var command in CommandToFollow)
             {
                 RoverCommand cmd;
-                Enum.TryParse(command.ToString(), out cmd);
+                Enum.TryParse(command.ToString(CultureInfo.InvariantCulture), out cmd);
                 switch (cmd)
                 {
                     case RoverCommand.M:

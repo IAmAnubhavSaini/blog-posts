@@ -60,6 +60,10 @@
       <Project>{11B28864-C00A-405F-8AC5-F966A4FD39CF}</Project>
       <Name>MarsRoverApp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MarsRover\MarsRover.csproj">
+      <Project>{6CD6F42B-63B8-4286-9CA9-B3539B74F0E1}</Project>
+      <Name>MarsRover</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

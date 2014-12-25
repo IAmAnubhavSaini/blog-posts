@@ -1,5 +1,4 @@
-﻿
-namespace MarsRoverApp
+﻿namespace MarsRover
 {
     public class Location
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace MarsRoverApp
+namespace MarsRover
 {
     public class Plane
     {

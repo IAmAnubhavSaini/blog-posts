@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Globalization;
+using MarsRover;
 
-namespace MarsRoverApp
+namespace MarsRover
 {
     enum RoverCommand
     {

@@ -1,4 +1,4 @@
-﻿using MarsRoverApp;
+﻿using MarsRover;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MarsRoverAppTests

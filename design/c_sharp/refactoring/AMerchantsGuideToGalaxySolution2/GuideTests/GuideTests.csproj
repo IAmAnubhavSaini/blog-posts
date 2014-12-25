@@ -53,6 +53,16 @@
     <Compile Include="QuestionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Guide\Guide.csproj">
+      <Project>{E4BBEB61-D3C3-4661-8A40-DE8E4869EA87}</Project>
+      <Name>Guide</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Languages\Languages.csproj">
+      <Project>{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}</Project>
+      <Name>Languages</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

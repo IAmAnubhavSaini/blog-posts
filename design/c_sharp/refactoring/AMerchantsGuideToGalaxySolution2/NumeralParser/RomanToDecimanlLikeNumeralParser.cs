@@ -19,6 +19,7 @@ namespace NumeralParser
 
         public int ParseNumber(string input)
         {
+            CheckSanity(input);
             var value = 0;
             var tmpValue = 0;
             try
@@ -68,6 +69,14 @@ namespace NumeralParser
             }
             return value;
 
+        }
+
+        private void CheckSanity(string input)
+        {
+            foreach(var action in Language.SanityRules())
+            {
+                action(input);
+            }
         }
     }
 }

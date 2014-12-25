@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using MarsRover;
 
 namespace MarsRover
 {
@@ -15,21 +14,21 @@ namespace MarsRover
         public Plane CurrentPlane { get; private set; }
         public string CommandToFollow { get; private set; }
 
-        public Location CurrentLocation { get; private set; }
+        public RoverLocation CurrentRoverLocation { get; private set; }
 
-        public Rover(Plane plane, string command, Location currentLocation)
+        public Rover(Plane plane, string command, RoverLocation currentRoverLocation)
         {
-            CurrentLocation = currentLocation;
+            CurrentRoverLocation = currentRoverLocation;
             CurrentPlane = plane;
             CommandToFollow = command;
-            roverDirection = new RoverDirection(currentLocation.CurrentDirection);
+            roverDirection = new RoverDirection(currentRoverLocation.Direction);
         }
 
-        public Location Operate()
+        public RoverLocation Operate()
         {
-            var x = CurrentLocation.CurrentX;
-            var y = CurrentLocation.CurrentY;
-            var direction = CurrentLocation.CurrentDirection;
+            var x = CurrentRoverLocation.Coordinates.X;
+            var y = CurrentRoverLocation.Coordinates.Y;
+            var direction = CurrentRoverLocation.Direction;
 
             foreach (var command in CommandToFollow)
             {
@@ -65,10 +64,10 @@ namespace MarsRover
                         direction = roverDirection.TurnRight();
                         break;
                     default:
-                        throw new Exception("Unknown command");
+                        throw new Exception("Unknown rover command");
                 }
             }
-            return new Location(x, y, direction);
+            return new RoverLocation(new Point2D(x, y), direction);
         }
 
     }

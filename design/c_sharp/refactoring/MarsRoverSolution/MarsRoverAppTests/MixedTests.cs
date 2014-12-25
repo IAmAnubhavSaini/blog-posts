@@ -9,25 +9,23 @@ namespace MarsRoverTests
         [TestMethod]
         public void RoverShouldReachOriginalStateAfter4ConsecutiveWalkAndLeftTurns()
         {
-            var currX = 5;
-            var currY = 5;
+            var curr = new Point2D(5, 5);
             var currLoc = CompassDirection.North;
-            var rover = new Rover(new Plane(10, 10), "MLMLMLML", new Location(currX, currY, currLoc));
-            Assert.AreEqual(currX, rover.Operate().CurrentX);
-            Assert.AreEqual(currY, rover.Operate().CurrentY);
-            Assert.AreEqual(currLoc, rover.Operate().CurrentDirection);
+            var rover = new Rover(new Plane(10, 10), "MLMLMLML", new RoverLocation(curr, currLoc));
+            Assert.AreEqual(curr.X, rover.Operate().Coordinates.X);
+            Assert.AreEqual(curr.Y, rover.Operate().Coordinates.Y);
+            Assert.AreEqual(currLoc, rover.Operate().Direction);
         }
 
         [TestMethod]
         public void RoverShouldReachOriginalStateAfter4ConsecutiveWalkAndRightTurns()
         {
-            var currX = 5;
-            var currY = 5;
+            var curr = new Point2D(5, 5);
             var currLoc = CompassDirection.North;
-            var rover = new Rover(new Plane(10, 10), "MRMRMRMR", new Location(currX, currY, currLoc));
-            Assert.AreEqual(currX, rover.Operate().CurrentX);
-            Assert.AreEqual(currY, rover.Operate().CurrentY);
-            Assert.AreEqual(currLoc, rover.Operate().CurrentDirection);
+            var rover = new Rover(new Plane(10, 10), "MRMRMRMR", new RoverLocation(curr, currLoc));
+            Assert.AreEqual(curr.X, rover.Operate().Coordinates.X);
+            Assert.AreEqual(curr.Y, rover.Operate().Coordinates.Y);
+            Assert.AreEqual(currLoc, rover.Operate().Direction);
         }
     }
 }

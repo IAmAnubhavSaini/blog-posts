@@ -66,8 +66,8 @@ namespace MarsRoverApp
         {
             foreach (var finalLocation in rovers.Select(rover => rover.Operate()))
             {
-                Console.WriteLine(finalLocation.CurrentX + " " + finalLocation.CurrentY + " " +
-                                  finalLocation.CurrentDirection.ToString()[0]);
+                Console.WriteLine(finalLocation.Coordinates.X + " " + finalLocation.Coordinates.Y + " " +
+                                  finalLocation.Direction.ToString()[0]);
             }
         }
 
@@ -106,12 +106,12 @@ namespace MarsRoverApp
             return locationStrings;
         }
 
-        private static Location GetLocation(string input)
+        private static RoverLocation GetLocation(string input)
         {
             var locationStrings = GetLocationStrings(input);
             var direction = GetDirectionFromInput(locationStrings);
-            return new Location(int.Parse(locationStrings[0]),
-                int.Parse(locationStrings[1]), direction);
+            return new RoverLocation(new Point2D(int.Parse(locationStrings[0]),
+                int.Parse(locationStrings[1])), direction);
         }
 
         private static CompassDirection GetDirectionFromInput(IList<string> locationStrings)

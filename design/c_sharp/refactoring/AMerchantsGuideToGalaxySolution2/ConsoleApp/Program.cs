@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Exceptions;
 using Guide;
 using Languages;
 
@@ -50,7 +51,6 @@ namespace ConsoleApp
         {
             string input;
             var questions = new List<IProvideQuestion<T>>();
-            var informations = new List<Information<T>>();
             var answers = new List<Answer<T>>();
             var knowledge = new Knowledge<T>();
             while (!string.IsNullOrEmpty(input = Console.ReadLine()))
@@ -66,9 +66,16 @@ namespace ConsoleApp
                 {
                     if (Question<T>.IsQuestion(input))
                     {
-                        var generateQuestion = Factories.QuestionFactory<T>.GenerateQuestion(input, knowledge );
-                        if (generateQuestion != null)
-                            questions.Add(generateQuestion);
+                        try
+                        {
+                            var generateQuestion = Factories.QuestionFactory<T>.GenerateQuestion(input, knowledge);
+                            if (generateQuestion != null)
+                                questions.Add(generateQuestion);
+                        }
+                        catch (NotAQuestionException)
+                        {
+                            Console.WriteLine("I have no idea what you are talking about.");
+                        }
                     }
                     else
                     {
@@ -102,12 +109,22 @@ namespace ConsoleApp
         private static void AnswerAllTheQuestion<T>(IEnumerable<IProvideQuestion<T>> questions, Knowledge<T> knowledge ,
             ICollection<Answer<T>> answers) where T : IProvideLanguage, new()
         {
+            
             foreach (var question in questions)
             {
-                var answer = Factories.AnswerFactory<T>.GenerateAnswer(question.QuestionType, question as Question<T>);
-                answer.MakeAnswer(question, knowledge.Informations, knowledge.ForeignLanguageToKnownLanguageDictionary);
-                answers.Add(answer);
-                answer.PrintAnswer();
+                try
+                {
+                    var answer = Factories.AnswerFactory<T>.GenerateAnswer(question.QuestionType,
+                        question as Question<T>);
+                    answer.MakeAnswer(question, knowledge.Informations,
+                        knowledge.ForeignLanguageToKnownLanguageDictionary);
+                    answers.Add(answer);
+                    answer.PrintAnswer();
+                }
+                catch (NotAnAnswerException)
+                {
+                    Console.WriteLine("I have no idea what you are talking about.");
+                }
             }
         }
     }

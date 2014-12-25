@@ -53,6 +53,16 @@
     <Compile Include="RomanNumeralParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Languages\Languages.csproj">
+      <Project>{419DC270-54AB-448C-ACCE-9EAD9FDD2F9B}</Project>
+      <Name>Languages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NumeralParser\NumeralParser.csproj">
+      <Project>{8260CE64-90C1-46AE-8681-45E5A532C369}</Project>
+      <Name>NumeralParser</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

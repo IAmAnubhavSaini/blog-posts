@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Languages
 {
@@ -9,40 +8,38 @@ namespace Languages
         public Dictionary<char, int> ConversionData { get; private set; }
         public List<SanityRule> SanityRules()
         {
-            var delegates = new List<SanityRule>
+            var rules = new List<SanityRule>
             {
                 NonRepeatRule, NotMoreThanThreeRepeatRule, NonSubtractRule
             };
-
-            return delegates;
+            return rules;
         }
 
         private static void NonRepeatRule(string input)
         {
-            var nonRepeatable = "DLV";
-            for (var i = 0; i < input.Length - 1; ++i)
+            var nonRepeatables = new[]
             {
-                var next = i + 1;
-                var curr = i;
-                foreach (var ch in nonRepeatable.Where(ch => input[curr] == ch && input[curr] == input[next]))
+                "DD", "LL", "VV"
+            };
+            foreach (var nonRepeatable in nonRepeatables)
+            {
+                if (input.Contains(nonRepeatable))
                 {
-                    throw new Exception(ch + " cannot be repeated in Roman numerals.");
+                    throw new Exception(nonRepeatable + " is not allowed in Roman numerals.");
                 }
             }
         }
 
         private void NotMoreThanThreeRepeatRule(string input)
         {
-            var repeatableUpto3Times = "IXCM";
-            for (var i = 0; i < input.Length - 3; i++)
+            var nonRepeatables = new []
             {
-                foreach (var ch in repeatableUpto3Times)
-                {
-                    if (ch == input[i] && ch == input[i + 1] && ch == input[i + 2] && ch == input[i + 3])
-                    {
-                        throw new Exception(ch + " cannot be repeated more than 3 times.");
-                    }
-                }
+                "IIII", "XXXX", "CCCC", "MMMM"
+            };
+            foreach (var nonRepeatable in nonRepeatables)
+            {
+                if(input.Contains(nonRepeatable))
+                    throw new Exception(nonRepeatable + " is not allowed in Roman numerals.");
             }
         }
 
@@ -59,8 +56,8 @@ namespace Languages
                 if(input.Contains(nonSubtractable))
                     throw new Exception(nonSubtractable + " is not a allowd in Roman numerals.");
             }
-            
         }
+
         public RomanLanguage()
         {
             ConversionData = new Dictionary<char, int>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-
 namespace MarsRover
 {
     enum RoverCommand

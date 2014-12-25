@@ -1,5 +1,4 @@
-﻿
-namespace MarsRover
+﻿namespace MarsRover
 {
     public class Plane
     {
@@ -8,13 +7,7 @@ namespace MarsRover
             TopRightX = topRightX;
             TopRightY = topRightY;
         }
-
         public int TopRightX { get; private set; }
-
         public int TopRightY { get; private set; }
-    }
-
-    
-
-    
+    }    
 }

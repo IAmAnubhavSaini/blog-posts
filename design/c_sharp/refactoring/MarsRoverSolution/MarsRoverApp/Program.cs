@@ -41,7 +41,10 @@ namespace MarsRoverApp
 
         private static void SelfTest()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("We require reflection to self test, which will be an overkill here. So just run it.");
+            var message = @"Or in other words, self test means testing yourself, use input files from Input folder " +
+                          "match the output with program output in the output folder. That's self test for ya. Cool!";
+            Console.WriteLine(message);
         }
 
         private static void RunMission()

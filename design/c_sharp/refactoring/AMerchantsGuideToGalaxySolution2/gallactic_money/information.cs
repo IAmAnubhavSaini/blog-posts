@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Languages;
 
 namespace GuideToGalaxy
 {
-    public class Information
+    public class Information<T> where T:IProvideLanguage, new ()
     {
         // This is for "glob glob Silver is 34 Credits"
         public string Number; //== II if glob == I
@@ -12,7 +13,7 @@ namespace GuideToGalaxy
         public int Value; // == 34
         public string Unit; // == Credits
         
-        public virtual void MakeInfo(string input, Dictionary<string, string> dict)
+        public virtual void MakeInfo(string input, Knowledge<T> knowledge)
         {
             var splitted = input.Split(' ');
             // Assumption : string input contains single spaces
@@ -21,10 +22,10 @@ namespace GuideToGalaxy
                 int i;
                 for (i = 0;
                     i < splitted.Count() &&
-                    dict.ContainsKey(splitted[i]);
+                    knowledge.ForeignLanguageToKnownLanguageDictionary.ContainsKey(splitted[i]);
                     ++i)
                 {
-                    Number += dict[splitted[i]];
+                    Number += knowledge.ForeignLanguageToKnownLanguageDictionary[splitted[i]];
                 }
 
                 // by now, Number contains only the roman numerals

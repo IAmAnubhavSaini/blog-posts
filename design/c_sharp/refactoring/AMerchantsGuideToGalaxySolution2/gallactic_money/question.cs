@@ -5,15 +5,15 @@ using System.Linq;
 
 namespace GuideToGalaxy
 {
-    public interface IProvideQuestion
+    public interface IProvideQuestion<T> where T : IProvideLanguage, new()
     {
-        Information Information { get; set; }
+        Information<T> Information { get; set; }
         string RawNumber { get; set; }
         QAType QuestionType { get; set; }
     }
-    public abstract class Question<T> : IProvideQuestion where T : IProvideLanguage, new ()
+    public abstract class Question<T> : IProvideQuestion<T> where T : IProvideLanguage, new ()
     {
-        public Information Information { get; set; }
+        public Information<T> Information { get; set; }
         public string RawNumber { get; set; }
         public QAType QuestionType { get; set; }
 
@@ -21,7 +21,7 @@ namespace GuideToGalaxy
         {
             Input = input;
             Knowledge = knowledge;
-            Information = new Information();
+            Information = new Information<T>();
             MakeInfo();
         }
 

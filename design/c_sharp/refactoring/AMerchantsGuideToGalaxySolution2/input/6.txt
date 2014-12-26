@@ -1,0 +1,7 @@
+A is I
+A A Item is 10 Unit
+B is V
+B A Temp is 20 Unit
+how much is B A
+how many Unit is A Temp
+how many Unit is A B Temp

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Languages
 {
@@ -10,7 +11,7 @@ namespace Languages
         {
             var rules = new List<SanityRule>
             {
-                NonRepeatRule, NotMoreThanThreeRepeatRule, NonSubtractRule
+                NonRepeatRule, NotMoreThanThreeRepeatRule, NonSubtractRule, CryOnInvalidNumeralInInput
             };
             return rules;
         }
@@ -58,6 +59,13 @@ namespace Languages
             }
         }
 
+        private void CryOnInvalidNumeralInInput(string input)
+        {
+            foreach (var ch in input.Where(c => !ConversionData.ContainsKey(c)))
+            {
+                throw new Exception(ch + " is not valid Roman numeral.");
+            }
+        }
         public RomanLanguage()
         {
             ConversionData = new Dictionary<char, int>

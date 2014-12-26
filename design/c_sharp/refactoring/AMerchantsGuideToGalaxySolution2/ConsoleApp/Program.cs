@@ -60,7 +60,7 @@ namespace ConsoleApp
                 var splitted = input.Split(' ');
                 if (SimpleFact(splitted))
                 {
-                    knowledge.ForeignLanguageToKnownLanguageDictionary.Add(splitted[0].ToUpper(), splitted[2].ToUpper());
+                    knowledge.ForeignLanguageToKnownLanguageDictionary.Add(splitted[0], splitted[2]);
                 }
                 else
                 {

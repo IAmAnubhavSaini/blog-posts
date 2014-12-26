@@ -8,8 +8,8 @@ namespace Guide
     public abstract class Answer<T> where T : IProvideLanguage, new ()
     {
         protected  abstract Question<T> Question { get; set; }
+        protected abstract string AnswerStringFormat { get; set; }
         protected string AnswerString;
-
         public abstract void MakeAnswer(IProvideQuestion<T> question, List<Information<T>> informations, Dictionary<string, string> dictionary);
 
         protected int CalculateValue(IProvideQuestion<T> q)
@@ -23,7 +23,7 @@ namespace Guide
                 {
                     var iNumberDecimal = parser.ParseNumber(i.Number);
                     var perItem = (double)i.Value / iNumberDecimal;
-                    value = int.Parse((perItem * value).ToString());
+                    value = (int)perItem * value;
                     break;
                 }
             }

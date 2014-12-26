@@ -15,7 +15,7 @@ namespace Guide
                     case QAType.Many: return new ManyTypeAnswer<T>(question);
                     case QAType.Much: return new MuchTypeAnswer<T>(question);
                 }
-                throw new NotAnAnswerException("Non-conforming type of question asked. Cannot generate an answer.", new ArgumentException().ToString());
+                throw new NotAnAnswerException(string.Empty, new ArgumentException().ToString());
             }
         }
 
@@ -32,7 +32,7 @@ namespace Guide
                 {
                     return new ManyTypeQuestion<T>(input, knowledge);
                 }
-                throw new NotAQuestionException("Non-conforming type of question.", new ArgumentException().ToString());
+                throw new NotAQuestionException(string.Empty, new ArgumentException().ToString());
             }
         }
     }

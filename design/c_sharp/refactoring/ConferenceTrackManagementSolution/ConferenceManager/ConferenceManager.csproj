@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptanceCriteria.cs" />
     <Compile Include="Conference.cs" />
     <Compile Include="Lunch.cs" />
     <Compile Include="Networking.cs" />

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using ConferenceManager;
@@ -9,13 +10,26 @@ namespace ConsoleApp
 {
     class Program
     {
+        private static readonly int EndTime = 17;
+        private static readonly int StartTime = 9;
+        private static readonly int LunchDuration = 1;
+        private static readonly int MaxTrackDuration = (EndTime - StartTime - LunchDuration)*60;
+        private static readonly int MorningSessionDuration = 3;
+        private static readonly int MaxEveningSessionDuration = 4;
         static void Main(string[] args)
         {
             var talks = GenerateTalks();
+            var totalTime = 0;
             foreach (var talk in talks.OrderByDescending(t=>t.Duration))
             {
-                Console.WriteLine(talk.Title + ", " + talk.Duration);
+                totalTime += talk.Duration.Minutes;
+            //    Console.WriteLine(talk.Title + ", " + talk.Duration);
             }
+            var trackCount = (totalTime/MaxTrackDuration)+1;
+            //Console.WriteLine("Total number of tracks: "+ trackCount);
+
+            var conf = new Conference(trackCount, talks);
+            conf.PrintTracks();
         }
 
         static IEnumerable<Talk> GenerateTalks()

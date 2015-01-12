@@ -9,36 +9,57 @@ namespace PuzzleSolverConsole
 {
     class Program
     {
+        private static string GetWordListPath(string[] args)
+        {
+            return args.Length != 0 ? args[0] : Console.ReadLine();
+        }
         static void Main(string[] args)
         {
             UsageDetails();
-            var pathToWordListFile = args.Length != 0 ? args[0] : Console.ReadLine();
-            if (!File.Exists(pathToWordListFile))
+            var wordListFilePath = GetWordListPath(args);
+            if (wordListFilePath == null || !File.Exists(wordListFilePath))
             {
-                Console.WriteLine("File not found at : {0}", pathToWordListFile);
+                Console.WriteLine("File not found at : {0}", wordListFilePath);
                 return;
             }
-            var input = ReadAllLinesFromFile(pathToWordListFile);
-            var wordsList = GetWords(input);
-            var wordType = new Words(wordsList);
-
+            var words = InstantiateWords(wordListFilePath);
 
             var s = args.Length > 0 && args[1].Length > 0 ? args[1] : Console.ReadLine();
             char[] letters;
             if (s != null)
+            {
                 letters = s.ToCharArray();
+            }
             else
             {
                 Console.WriteLine("Letters not provided.");
                 return;
             }
-            var minLenghtOfDesiredWords = int.Parse(args.Length > 0 && args[2] != null ? args[2] : (Console.ReadLine() ?? "4"));
-            var maxLenghtOfDesiredWords = int.Parse(args.Length > 0 && args[3] != null ? args[3] : (Console.ReadLine() ?? "4"));
+            var minLenghtOfDesiredWords = GetMinLenghtOfDesiredWords(args);
+            var maxLenghtOfDesiredWords = GetMaxLenghtOfDesiredWords(args);
 
-            foreach (var word in wordType.GetWordsThatContainAllLetters(letters, minLenghtOfDesiredWords, maxLenghtOfDesiredWords))
+            foreach (var word in words.ContainAllLetters(letters, minLenghtOfDesiredWords, maxLenghtOfDesiredWords))
             {
                 Console.WriteLine(word);
             }
+        }
+
+        private static Words InstantiateWords(string wordListFilePath)
+        {
+            var input = ReadAllLinesFromFile(wordListFilePath);
+            var wordsList = GetWords(input);
+            var wordType = new Words(wordsList);
+            return wordType;
+        }
+
+        private static int GetMaxLenghtOfDesiredWords(string[] args)
+        {
+            return int.Parse(args.Length > 0 && args[3] != null ? args[3] : (Console.ReadLine() ?? "4"));
+        }
+
+        private static int GetMinLenghtOfDesiredWords(string[] args)
+        {
+            return int.Parse(args.Length > 0 && args[2] != null ? args[2] : (Console.ReadLine() ?? "4"));
         }
 
         private static void UsageDetails()

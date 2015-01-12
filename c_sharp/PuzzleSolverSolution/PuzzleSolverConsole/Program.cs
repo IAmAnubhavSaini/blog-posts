@@ -9,10 +9,12 @@ namespace PuzzleSolverConsole
 {
     class Program
     {
-        private static string GetWordListPath(string[] args)
+        private static string GetWordListPath(IList<string> args)
         {
-            return args.Length != 0 ? args[0] : Console.ReadLine();
+            if (args == null) throw new ArgumentNullException("args");
+            return args.Count != 0 ? args[0] : Console.ReadLine();
         }
+
         static void Main(string[] args)
         {
             UsageDetails();

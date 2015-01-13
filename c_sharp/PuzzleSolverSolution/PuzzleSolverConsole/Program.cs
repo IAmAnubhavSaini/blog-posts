@@ -27,10 +27,10 @@ namespace PuzzleSolverConsole
             var words = InstantiateWords(wordListFilePath);
 
             var s = args.Length > 0 && args[1].Length > 0 ? args[1] : Console.ReadLine();
-            char[] letters;
-            if (s != null)
+            string letters;
+            if (!string.IsNullOrEmpty(s))
             {
-                letters = s.ToCharArray();
+                letters = s;
             }
             else
             {
@@ -40,7 +40,7 @@ namespace PuzzleSolverConsole
             var minLenghtOfDesiredWords = GetMinLenghtOfDesiredWords(args);
             var maxLenghtOfDesiredWords = GetMaxLenghtOfDesiredWords(args);
 
-            foreach (var word in words.ContainAllLetters(letters, minLenghtOfDesiredWords, maxLenghtOfDesiredWords))
+            foreach (var word in words.ContainAllLettersAndNoOther(letters, minLenghtOfDesiredWords, maxLenghtOfDesiredWords))
             {
                 Console.WriteLine(word);
             }

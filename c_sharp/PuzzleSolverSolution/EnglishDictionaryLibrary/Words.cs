@@ -21,18 +21,7 @@ namespace EnglishDictionaryLibrary
         public IEnumerable<string> ContainAllLettersAndNoOther(string letters, int minLenght, int maxLength)
         {
             var words = ContainAllLetters(letters, minLenght, maxLength).ToList();
-            var removedWords = new List<string>();
-            foreach (var word in words)
-            {
-                foreach (var letter in word)
-                {
-                    if (!letters.Contains(letter))
-                    {
-                        removedWords.Add(word);
-                        break;
-                    }
-                }
-            }
+            var removedWords = words.Where(word => word.Any(letter => !letters.Contains(letter))).ToList();
             words.RemoveAll(removedWords.Contains);
             return words;
         }

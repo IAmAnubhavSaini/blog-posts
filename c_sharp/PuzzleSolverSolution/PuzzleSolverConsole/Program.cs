@@ -44,6 +44,14 @@ namespace PuzzleSolverConsole
             {
                 Console.WriteLine(word);
             }
+            var allLenghtWords = words.AllCombinationedWords(words.AllWords, letters, minLenghtOfDesiredWords,
+                maxLenghtOfDesiredWords);
+            var constrainedWords = words.WordsThatMustContain(allLenghtWords, letters[0].ToString(CultureInfo.InvariantCulture),
+                minLenghtOfDesiredWords, maxLenghtOfDesiredWords);
+            foreach (var word in constrainedWords)
+            {
+                Console.WriteLine(word);
+            }
         }
 
         private static Words InstantiateWords(string wordListFilePath)

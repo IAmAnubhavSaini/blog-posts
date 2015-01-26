@@ -13,14 +13,9 @@ namespace blogposts
             this.Say = say;
         }
     }
-    public class Sayer
+    public static class Sayer
     {
-        public List<Rule> Rules { get; private set; }
-        public Sayer(List<Rule> rules)
-        {
-            Rules = rules;
-        }
-        public string Say(int number)
+        public static string Say(this int number, List<Rule> Rules)
         {
             var toSay = string.Empty;
             foreach (var rule in Rules)
@@ -41,11 +36,10 @@ namespace blogposts
                 new Rule(3,"fizz"),
                 new Rule(5, "buzz")
             };
-            var sayer = new Sayer(rules);
             
             for (var i = 0; i < 20; i++)
             {
-                Console.WriteLine(sayer.Say(i));
+                Console.WriteLine(i.Say(rules));
             }
         }
     }

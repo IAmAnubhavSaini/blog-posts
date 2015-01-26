@@ -15,7 +15,12 @@ namespace blogposts
     }
     public static class Sayer
     {
-        public static string Say(this int number, List<Rule> Rules)
+        private static List<Rule> Rules;
+        public static void MakeRules(List<Rule> rules)
+        {
+            Rules = rules;
+        }
+        public static string Say(this int number)
         {
             var toSay = string.Empty;
             foreach (var rule in Rules)
@@ -36,10 +41,10 @@ namespace blogposts
                 new Rule(3,"fizz"),
                 new Rule(5, "buzz")
             };
-            
+            Sayer.MakeRules(rules);
             for (var i = 0; i < 20; i++)
             {
-                Console.WriteLine(i.Say(rules));
+                Console.WriteLine(i.Say());
             }
         }
     }

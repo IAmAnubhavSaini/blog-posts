@@ -15,10 +15,15 @@ namespace blogposts
     }
     public class Sayer
     {
-        public string Say(int number, List<Rule> rules)
+        public List<Rule> Rules { get; private set; }
+        public Sayer(List<Rule> rules)
+        {
+            Rules = rules;
+        }
+        public string Say(int number)
         {
             var toSay = string.Empty;
-            foreach (var rule in rules)
+            foreach (var rule in Rules)
             {
                 if (number % rule.Number == 0)
                 {
@@ -32,14 +37,15 @@ namespace blogposts
     {
         static void Main()
         {
-            var sayer = new Sayer();
             var rules = new List<Rule>{
                 new Rule(3,"fizz"),
                 new Rule(5, "buzz")
             };
+            var sayer = new Sayer(rules);
+            
             for (var i = 0; i < 20; i++)
             {
-                Console.WriteLine(sayer.Say(i, rules));
+                Console.WriteLine(sayer.Say(i));
             }
         }
     }

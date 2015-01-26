@@ -1,20 +1,38 @@
-(function () {
-    function output(message) {
-        console.log(message);
-    }
+(function (startIndex, endIndex) {
 
-    function FizzBuzz() {
-        for (var i = 1; i < 20; i++) {
-            if (i % 15 === 0)
-                output("fizzbuzz")
-            else if (i % 5 === 0)
-                output("buzz")
-            else if (i % 3 === 0)
-                output("fizz")
-            else
-                output(i);
-        }
-    }
+    var Start = startIndex,
+        End = endIndex,
+
+        Rule = function (forNumber, sayThis) {
+            this.Number = forNumber
+            this.Say = sayThis
+        },
+
+        Rules = [
+            new Rule(3, "fizz"),
+            new Rule(5, "buzz")
+        ],
+
+        Say = function (number) {
+            var toSay = '';
+            for (var i = 0; i < Rules.length; i++) {
+                if (number % Rules[i].Number === 0) {
+                    toSay += Rules[i].Say;
+                }
+            }
+            return toSay.length > 0 ? toSay : number;
+        },
+
+        output = function (message) {
+            console.log(message);
+        },
+
+        FizzBuzz = function () {
+            for (var i = Start; i < End; i++) {
+                output(Say(i));
+            }
+        };
 
     FizzBuzz();
-})();
+
+})(1, 20);

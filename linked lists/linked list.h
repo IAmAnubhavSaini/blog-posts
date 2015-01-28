@@ -3,7 +3,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
+//#include <stdbool.h>
+#define bool int
+#define false 0
+#define true 1
 
 struct link_node
 {

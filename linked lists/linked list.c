@@ -2,10 +2,13 @@
 
 
 Node* create_node(void* val, enum link_node_data_type type){
+	int size;
+	Node *ptr;
 #ifdef DEBUG
 	printf("\ndebug: entering create_node with value : %d.", val);
 #endif
-	Node *ptr = (Node*)malloc(sizeof(Node));
+	size = sizeof(Node);
+	ptr = (Node*)malloc(size);
 	if (ptr == NULL ){
 		abort();
 	}
@@ -20,11 +23,12 @@ Node* create_node(void* val, enum link_node_data_type type){
 }
 
 void add_to_list(Node *head, void* val, enum link_node_data_type type){
+	Node *newTS, *tmp;
 #ifdef DEBUG
 	printf("\ndebug: entering add_to_list with value.");
 #endif
-	Node *newTS = create_node(val, type);
-	Node *tmp = head;
+	newTS = create_node(val, type);
+	tmp = head;
 	while (tmp->next != NULL){
 		tmp = tmp->next;
 	}
@@ -35,10 +39,11 @@ void add_to_list(Node *head, void* val, enum link_node_data_type type){
 }
 
 void make_list_circular(Node *head){
+	Node *tmp;
 #ifdef DEBUG
 	printf("\ndebug: entering make_list_circular.");
 #endif
-	Node * tmp = head;
+	tmp = head;
 	while (tmp && tmp->next){
 		tmp = tmp->next;
 	}
@@ -78,10 +83,11 @@ void make_list_acircular(Node *head)
 }
 
 void print_list(Node *head){
+	Node *ptr;
 #ifdef DEBUG
 	printf("\ndebug: entering print_list.");
 #endif
-	Node *ptr = head;
+	ptr = head;
 	if (is_list_circular(head)){
 		printf("\nCircular list; not printing.");
 	}

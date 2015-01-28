@@ -14,3 +14,31 @@ Copyright (C) Microsoft Corporation.  All rights reserved.
 "integer linked list runner.obj"
 "integer linked list test.obj"
 "integer linked list.obj"
+
+1:20 PM 1/28/2015
+d:\source\blog posts\linked lists>cl *c /Fa /Fd /Fm /Fo /Fe /DDEBUG
+Microsoft (R) C/C++ Optimizing Compiler Version 17.00.60610.1 for x86
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+crude.c
+linked list runner.c
+linked list test.c
+linked list.c
+Generating Code...
+Microsoft (R) Incremental Linker Version 11.00.60610.1
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/map:crude.map
+/out:crude.exe
+crude.obj
+"linked list runner.obj"
+"linked list test.obj"
+"linked list.obj"
+linked list runner.obj : error LNK2005: _main already defined in crude.obj
+linked list.obj : error LNK2005: _create_node already defined in crude.obj
+linked list.obj : error LNK2005: _print_list already defined in crude.obj
+LINK : fatal error LNK1104: cannot open file 'LIBCMT.lib'
+
+Because of that we need to explicitly name files.
+
+C:\SRC\blog posts\linked lists>cl "linked list runner.c" "linked list test.c" "linked list.c" /Fa /Fd /Fm /Fo /Fe /DDEBUG

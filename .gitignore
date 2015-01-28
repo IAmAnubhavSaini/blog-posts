@@ -9,3 +9,5 @@ packages/
 App_Data/
 *.pdb
 *.patch
+
+design/c_sharp/refactoring/GildedRose

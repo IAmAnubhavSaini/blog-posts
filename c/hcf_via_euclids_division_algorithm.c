@@ -33,7 +33,7 @@ int hcf_iterative(int a, int b){
 	int q, r;
 	if(a > 0 && b > 0){
 		if(a < b)
-			return hcf_recursive(b, a);
+			return hcf_iterative(b, a);
 
 		q = a / b;
 		r = a % b;

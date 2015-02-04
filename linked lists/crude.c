@@ -7,6 +7,13 @@ struct linked_node{
 };
 typedef struct linked_node node;
 
+struct node_cache{
+	int count;
+	node *cache;
+};
+
+typedef struct node_cache cache;
+
 struct linked_list{
 	node * head;
 	node * tail;
@@ -33,6 +40,8 @@ node * replace(node * head, int val, position pos);
 node * last_node(node *anyNode);
 void append(node * tail, int val);
 void print_list(node*head);
+
+cache create_cache();
 
 int main(){
 	node * head = create_node(1);
@@ -209,4 +218,40 @@ void append(node * tail, int val)
 {
 	node * last = last_node(tail);
 	last->next = create_node(val);
+}
+
+
+cache create_cache()
+{
+	cache cache;
+	node * tail = NULL;
+	int i = 0;
+	cache.count = 1024;
+	tail = cache.cache = create_node(i);
+	for(i = 1; i < cache.count; i++){
+		append(tail, i);
+	}
+	return cache;
+}
+
+node * get_node_from_cache(cache cache)
+{
+	node * tmp;
+	if(cache.count > 0){
+		tmp = cache.cache;
+		cache.cache = cache.cache->next;
+		tmp->next = NULL;
+		cache.count--;
+	}
+	else {
+		int i = 0;
+		node * tail = NULL;
+		cache.count = 1024;
+		tail = cache.cache = create_node(i);
+		for(i = 1; i < cache.count; i++){
+			append(tail, i);
+		}
+		tmp = get_node_from_cache(cache);
+	}
+	return tmp;
 }

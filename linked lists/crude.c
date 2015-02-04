@@ -7,6 +7,13 @@ struct linked_node{
 };
 typedef struct linked_node node;
 
+struct linked_list{
+	node * head;
+	node * tail;
+	int count;
+};
+typedef struct linked_list linked_list;
+
 enum position{
 	END, START, MID
 };

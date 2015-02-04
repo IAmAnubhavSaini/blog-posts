@@ -19,7 +19,7 @@ enum position{
 };
 typedef enum position position;
 
-
+linked_list create_linked_list(int values[]);
 node * create_empty_node(void);
 node * create_node(int val);
 node * insert_at_end(node* head, int val);
@@ -30,7 +30,8 @@ node * replace_head(node*head, int val);
 node * replace_tail(node*head, int val);
 node * replace_mid(node * head, int val);
 node * replace(node * head, int val, position pos);
-
+node * last_node(node *anyNode);
+void append(node * tail, int val);
 void print_list(node*head);
 
 int main(){
@@ -178,4 +179,34 @@ node * replace(node * head, int val, position pos)
 	else if (pos == MID)
 		head = replace_mid(head, val);
 	return head;
+}
+
+linked_list create_linked_list(int values[])
+{
+	linked_list list;
+	int count = sizeof(values)/sizeof(int);
+	int i;
+
+	list.tail = list.head = create_node(values[0]);
+	list.count = 1;
+
+	for(i = 1; i < count; i++){
+		append(list.tail, values[i]);
+		list.count++;
+	}
+	return list;
+}
+
+node * last_node(node *anyNode)
+{
+	node * curr = anyNode;
+	if(curr == NULL) return NULL;
+	while(curr->next != NULL) curr = curr->next;
+	return curr;
+}
+
+void append(node * tail, int val)
+{
+	node * last = last_node(tail);
+	last->next = create_node(val);
 }

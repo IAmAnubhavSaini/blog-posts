@@ -1,5 +1,4 @@
-﻿@model List<string>
-@{
+﻿@{
     ViewBag.Title = "Me";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -7,10 +6,37 @@
 <h2>Me</h2>
 
 @{
-    
-foreach (var item in Model)
-{
-    @item <br />
-}
+    List<string> Info = new List<string>();
+    Info.Add("Request:");
+    Info.Add("-------------------------------Browser Info-------------------------------");
+    foreach (var key in Request.Browser.Capabilities.Keys)
+    {
+        Info.Add(key + " = " + Request.Browser.Capabilities[key]);
+    }
+    Info.Add("-------------------------------Requst Header Info-------------------------------");
+    for (int i = 0; i < Request.Headers.Count; i++)
+    {
+        Info.Add(Request.Headers[i]);
+    }
+    Info.Add("-------------------------------Accepted types-------------------------------");
+    foreach (var type in Request.AcceptTypes)
+    {
+        Info.Add(type);
+    }
+    Info.Add("--------------------------------------------------------------");
+    Info.Add("Anonymous User Id: " + Request.AnonymousID);
+    Info.Add("Application path on server: " + Request.ApplicationPath);
+
+    Info.Add("--------------------------------------------------------------");
+    Info.Add("Response:");
+    Info.Add("-------------------------------Response Header Info-------------------------------");
+    for (int i = 0; i < Response.Headers.Count; i++)
+    {
+        Info.Add(Response.Headers[i]);
+    }
+    foreach (var item in Info)
+    {
+        @item <br />
+    }
 
 }

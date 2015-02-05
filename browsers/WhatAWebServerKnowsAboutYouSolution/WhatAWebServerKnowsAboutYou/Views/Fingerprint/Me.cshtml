@@ -7,7 +7,15 @@
 
 @{
     List<string> Info = new List<string>();
+    Info.Add("These informations are what IIS web server know after processing the request and response.");
     Info.Add("Request:");
+    Info.Add("-------------------------------Screen-------------------------------");
+    Info.Add("Screen Bit depth: " + Request.Browser.ScreenBitDepth);
+    Info.Add("Screen Characters height: " + Request.Browser.ScreenCharactersHeight);
+    Info.Add("Screen Characters width: " + Request.Browser.ScreenCharactersWidth);
+    Info.Add("Screen Pixels height: " + Request.Browser.ScreenPixelsHeight);
+    Info.Add("Screen Pixels width: " + Request.Browser.ScreenPixelsWidth);
+    
     Info.Add("-------------------------------Browser Info-------------------------------");
     foreach (var key in Request.Browser.Capabilities.Keys)
     {
@@ -26,14 +34,31 @@
     Info.Add("--------------------------------------------------------------");
     Info.Add("Anonymous User Id: " + Request.AnonymousID);
     Info.Add("Application path on server: " + Request.ApplicationPath);
+    Info.Add("User host name: " + Request.UserHostName);
+    Info.Add("User host address: "+Request.UserHostAddress);
+    Info.Add("User Agent: "+Request.UserAgent);
     Info.Add("--------------------------------------------------------------");
 
     Info.Add("-------------------------------Encoding-------------------------------");
     Info.Add("Name: " + Request.ContentEncoding.BodyName + " a.k.a. " + Request.ContentEncoding.EncodingName + " a.k.a. " + Request.ContentEncoding.WebName);
     Info.Add("Code Page identifier: " + Request.ContentEncoding.CodePage.ToString());
-    
-    
 
+    Info.Add("-------------------------------Cookies-------------------------------");
+    for (int i = 0; i < Request.Cookies.Count; i++)
+    {
+        foreach (var value in Request.Cookies.Get(i).Values)
+        {
+            Info.Add(value.ToString());
+        }
+    }
+    Info.Add("-------------------------------User Languages-------------------------------");
+    foreach (var lang in Request.UserLanguages)
+    {
+        Info.Add(lang);
+    }
+
+    
+    
     Info.Add("--------------------------------------------------------------");
     Info.Add("Response:");
     Info.Add("-------------------------------Response Header Info-------------------------------");
@@ -44,7 +69,12 @@
     Info.Add("-------------------------------Encoding-------------------------------");
     Info.Add("Name: " + Response.ContentEncoding.BodyName + " a.k.a. " + Response.ContentEncoding.EncodingName + " a.k.a. " + Response.ContentEncoding.WebName);
     Info.Add("Code Page identifier: " + Response.ContentEncoding.CodePage.ToString());
-    
+    Info.Add("-------------------------------Status-------------------------------");
+    Info.Add("Status: "+ Response.Status);
+    Info.Add("Status code: "+ Response.StatusCode);
+    Info.Add("Status description: "+ Response.StatusDescription);
+    Info.Add("Sub status code: "+ Response.SubStatusCode);
+
     
     
     foreach (var item in Info)

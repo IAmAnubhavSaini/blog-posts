@@ -26,6 +26,13 @@
     Info.Add("--------------------------------------------------------------");
     Info.Add("Anonymous User Id: " + Request.AnonymousID);
     Info.Add("Application path on server: " + Request.ApplicationPath);
+    Info.Add("--------------------------------------------------------------");
+
+    Info.Add("-------------------------------Encoding-------------------------------");
+    Info.Add("Name: " + Request.ContentEncoding.BodyName + " a.k.a. " + Request.ContentEncoding.EncodingName + " a.k.a. " + Request.ContentEncoding.WebName);
+    Info.Add("Code Page identifier: " + Request.ContentEncoding.CodePage.ToString());
+    
+    
 
     Info.Add("--------------------------------------------------------------");
     Info.Add("Response:");
@@ -34,6 +41,12 @@
     {
         Info.Add(Response.Headers[i]);
     }
+    Info.Add("-------------------------------Encoding-------------------------------");
+    Info.Add("Name: " + Response.ContentEncoding.BodyName + " a.k.a. " + Response.ContentEncoding.EncodingName + " a.k.a. " + Response.ContentEncoding.WebName);
+    Info.Add("Code Page identifier: " + Response.ContentEncoding.CodePage.ToString());
+    
+    
+    
     foreach (var item in Info)
     {
         @item <br />

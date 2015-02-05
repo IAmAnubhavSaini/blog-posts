@@ -24,6 +24,7 @@ typedef struct linked_list linked_list;
 enum position{
 	END, START, MID
 };
+
 typedef enum position position;
 
 linked_list create_linked_list(int values[]);
@@ -42,24 +43,34 @@ void append(node * tail, int val);
 void print_list(node*head);
 
 cache create_cache();
+node * GetLocalizedNodes();
 
 int main(){
-	node * head = create_node(1);
-	print_list(head);
-	head = insert(head, 2, END);
-	print_list(head);
-	head = insert(head, 3, START);
-	print_list(head);
-	head = insert(head, 4, MID);
-	print_list(head);
-	head = replace_head(head, 40);
-	print_list(head);
-	head = replace_tail(head, 80);
-	print_list(head);
-	head = replace_mid(head, 120);
-	print_list(head);
-	head = replace(head, 800, START);
-	print_list(head);
+	//node * head = create_node(1);
+	//print_list(head);
+	//head = insert(head, 2, END);
+	//print_list(head);
+	//head = insert(head, 3, START);
+	//print_list(head);
+	//head = insert(head, 4, MID);
+	//print_list(head);
+	//head = replace_head(head, 40);
+	//print_list(head);
+	//head = replace_tail(head, 80);
+	//print_list(head);
+	//head = replace_mid(head, 120);
+	//print_list(head);
+	//head = replace(head, 800, START);
+	//print_list(head);
+	int i = 0, end = 10;
+	node * head = GetLocalizedNodes();
+	cache cache = create_cache();
+	printf("\nlocalized:");
+	for(i = 0; i < end; i++, head=head->next)
+		printf("\t%p (%i)->", head, head->value);
+	printf("\ncache:");
+	for(i = 0; i < end; i++, cache.cache = cache.cache->next)
+		printf("\t%p (%i)->", cache.cache, cache.cache->value);
 	return 0;
 }
 
@@ -254,4 +265,22 @@ node * get_node_from_cache(cache cache)
 		tmp = get_node_from_cache(cache);
 	}
 	return tmp;
+}
+
+node * GetLocalizedNodes()
+{
+	node * localizedNodes = NULL;
+	int i = 0;
+	int count = 1024;
+	int end = count - 1;
+	node * tmp = NULL;
+	localizedNodes = (node*)malloc(sizeof(node)*count);
+	tmp = (node*)localizedNodes;
+	for(i = 0; i < end; i++){
+		tmp->next = tmp+1;
+		tmp->value = i;
+		tmp++;
+	}
+	tmp->next = NULL;
+	return localizedNodes;
 }

@@ -14,7 +14,7 @@ void TEST_should_resize_integer_stack_on_push_to_full_integer_stack()
 	push(integer_stack, 1);
 	push(integer_stack, 2);
 	push(integer_stack, 3);
-	push(integer_stack, 4); // should be aborted here.
+	push(integer_stack, 4);
 	printf("\nStack size after 4th push: %d,", integer_stack->size);
 }
 
@@ -25,7 +25,7 @@ void TEST_should_push_and_pop_three_integers_to_integer_stack()
 	push(integer_stack, 1);
 	push(integer_stack, 2);
 	push(integer_stack, 3);
-	printf("\nStack top: %d,", pop(integer_stack));
-	printf("\nStack top: %d,", pop(integer_stack));
-	printf("\nStack top: %d,", pop(integer_stack));
+	printf("\nStack pop: %d,", pop(integer_stack));
+	printf("\nStack pop: %d,", pop(integer_stack));
+	printf("\nStack pop: %d,", pop(integer_stack));
 }

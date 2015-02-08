@@ -23,7 +23,10 @@ namespace BlogPosts.Stringology
                         break;
                 }
                 if (j == pattern.Length)
+                {
                     positions.Add(i);
+                    i += j;
+                }
             }
             return positions;
         }

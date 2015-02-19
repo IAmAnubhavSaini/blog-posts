@@ -1,9 +1,10 @@
 #include "CharFrequency.h"
 
+struct CharFrequency * SetupCharFrequency(char * input);
 bool Contains(char ch, struct CharFrequency * cf);
 int GetFrequency(char ch, struct CharFrequency * cf);
+void PrintFrequencyList(struct CharFrequency * cf);
 void Initialize(char *input, struct CharFrequency * cf);
-struct CharFrequency * SetupCharFrequency(char * input);
 struct CharFrequency * CreateEmptyCharFrequency();
 
 struct CharIntNode * CreateEmptyCharIntNode();
@@ -38,6 +39,16 @@ int GetFrequency(char ch, struct CharFrequency * cf)
 	return 0;
 }
 
+void PrintFrequencyList(struct CharFrequency * cf)
+{
+	struct CharIntNode * curr = cf->first;
+	printf("\nPrinting frequency list:");
+	while(curr != NULL){
+		printf("\n %c - %i.", curr->ch, curr->f);
+		curr = curr->next;
+	}
+	printf("\n");
+}
 void Initialize(char *input, struct CharFrequency * cf)
 {
 	if(cf == NULL) return;
@@ -58,6 +69,7 @@ struct CharFrequency * SetupCharFrequency(char * input)
 	struct CharFrequency * cf = CreateEmptyCharFrequency();
 	cf->Contains = Contains;
 	cf->GetFrequency = GetFrequency;
+	cf->PrintFrequencyList = PrintFrequencyList;
 	cf->first = NULL;
 	Initialize(input, cf);
 	return cf;

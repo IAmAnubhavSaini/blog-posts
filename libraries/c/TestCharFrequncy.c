@@ -9,6 +9,7 @@ int main()
 	printf("\nFrequency of 'c': %i\n", cf->GetFrequency('c', cf));
 	printf("\nFrequency of 'd': %i\n", cf->GetFrequency('d', cf));
 	cf->PrintFrequencyList(cf);
+	cf->PrintFrequencyMap(cf);
 	free(cf);
 	cf = SetupCharFrequency("AbcAAbd");
 	printf("\nTesting in 'AbcAAbd'.\n");
@@ -17,5 +18,6 @@ int main()
 	printf("\nFrequency of 'c': %i\n", cf->GetFrequency('c', cf));
 	printf("\nFrequency of 'd': %i\n", cf->GetFrequency('d', cf));
 	cf->PrintFrequencyList(cf);
+	cf->PrintFrequencyMap(cf);
 	return 0;
 }

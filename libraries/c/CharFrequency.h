@@ -26,6 +26,7 @@ struct CharFrequency {
 	bool (*Contains)(char ch, struct CharFrequency * cf);
 	int (*GetFrequency)(char ch, struct CharFrequency * cf);
 	void (*PrintFrequencyList)(struct CharFrequency * cf);
+	void (*PrintFrequencyMap)(struct CharFrequency * cf);
 	struct CharIntNode * first;
 };
 

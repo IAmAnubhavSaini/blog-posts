@@ -4,9 +4,10 @@ struct CharFrequency * SetupCharFrequency(char * input);
 bool Contains(char ch, struct CharFrequency * cf);
 int GetFrequency(char ch, struct CharFrequency * cf);
 void PrintFrequencyList(struct CharFrequency * cf);
+void PrintFrequencyMap(struct CharFrequency * cf);
+
 void Initialize(char *input, struct CharFrequency * cf);
 struct CharFrequency * CreateEmptyCharFrequency();
-
 struct CharIntNode * CreateEmptyCharIntNode();
 struct CharIntNode * Insert(char ch, struct CharIntNode * head);
 void BumpFrequency(char ch, struct CharIntNode * head);
@@ -49,6 +50,21 @@ void PrintFrequencyList(struct CharFrequency * cf)
 	}
 	printf("\n");
 }
+
+void PrintFrequencyMap(struct CharFrequency * cf)
+{
+	struct CharIntNode * curr = cf->first;
+	int i = 0, j = 0;
+	printf("\nPrinting frequency map:");
+	while(curr != NULL){
+		printf("\n");
+		for(i = 0; i < curr->f; i++)
+			printf("%c", curr->ch);
+		curr = curr->next;
+	}
+	printf("\n");
+}
+
 void Initialize(char *input, struct CharFrequency * cf)
 {
 	if(cf == NULL) return;
@@ -70,6 +86,7 @@ struct CharFrequency * SetupCharFrequency(char * input)
 	cf->Contains = Contains;
 	cf->GetFrequency = GetFrequency;
 	cf->PrintFrequencyList = PrintFrequencyList;
+	cf->PrintFrequencyMap = PrintFrequencyMap;
 	cf->first = NULL;
 	Initialize(input, cf);
 	return cf;

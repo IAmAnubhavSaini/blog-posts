@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Third interface from Hope book 3 chapter layouts.pdf</title>
+    <link rel="stylesheet" type="text/css" href="./reset.css" />
+    <style type="text/css">
+        body{
+            background-color: rgb(91, 155,213);
+        }
+        .head{
+            background-color: black;
+            height: 180px;
+        }
+        aside.notice{
+            width: 15%;
+            height: 300px;
+        }
+        section.main-body{
+            width: 70%;
+            height: 600px;
+        }
+        aside.notice, section.main-body{
+            margin:auto 0 auto 5%;
+            background-color: white;
+            float: left;
+            position:relative;
+            top: 80px;
+        }
+        section.main-body::after{
+            clear:both;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="head"></header>
+    <aside class="notice"></aside>
+    <section class="main-body"></section>
+</body>
+</html>

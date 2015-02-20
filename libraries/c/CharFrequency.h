@@ -17,8 +17,8 @@
 #endif
 
 struct CharIntNode {
-	char ch;
-	int f;
+	char key;
+	int value;
 	struct CharIntNode * next;
 };
 

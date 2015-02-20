@@ -581,9 +581,9 @@ _CreateEmptyCharIntNode PROC
   002a1	8b ec		 mov	 ebp, esp
   002a3	51		 push	 ecx
 
-; 106  : 	struct CharIntNode * cin = (struct CharIntNode *)malloc(sizeof(struct CharIntNode *));
+; 106  : 	struct CharIntNode * cin = (struct CharIntNode *)malloc(sizeof(struct CharIntNode));
 
-  002a4	6a 04		 push	 4
+  002a4	6a 0c		 push	 12			; 0000000cH
   002a6	e8 00 00 00 00	 call	 _malloc
   002ab	83 c4 04	 add	 esp, 4
   002ae	89 45 fc	 mov	 DWORD PTR _cin$[ebp], eax

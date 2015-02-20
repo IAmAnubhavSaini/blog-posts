@@ -103,7 +103,7 @@ struct CharFrequency * CreateEmptyCharFrequency()
 
 struct CharIntNode * CreateEmptyCharIntNode()
 {
-	struct CharIntNode * cin = (struct CharIntNode *)malloc(sizeof(struct CharIntNode *));
+	struct CharIntNode * cin = (struct CharIntNode *)malloc(sizeof(struct CharIntNode));
 	if(cin == NULL){
 		cin = (struct CharIntNode *)malloc(sizeof(struct CharIntNode *));
 	}

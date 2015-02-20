@@ -1,0 +1,8 @@
+cl /FAcs /Fd /Fm /Fo /Fe /Z7 /DDEBUG TestIntFrequncy.c
+/Zi
+Produces a program database (PDB) that contains type information and symbolic debugging information for use with the debugger. The symbolic debugging information includes the names and types of variables, as well as functions and line numbers.
+/Zi does not affect optimizations. However, /Zi does imply /debug;
+Type information is placed in the .pdb file, and not in the .obj file.
+/Z7
+Produces an .obj file containing full symbolic debugging information for use with the debugger. The symbolic debugging information includes the names and types of variables, as well as functions and line numbers. No .pdb file is produced.
+For distributors of third-party libraries, there is an advantage to not having a .pdb file. However, the .obj files for the precompiled headers are necessary during the link phase, and debugging.

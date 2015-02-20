@@ -23,10 +23,12 @@ struct CharIntNode {
 };
 
 struct CharFrequency {
-	bool (*Contains)(char ch, struct CharFrequency * cf);
-	int (*GetFrequency)(char ch, struct CharFrequency * cf);
+	bool (*Contains)(char key, struct CharFrequency * cf);
+	int (*GetValue)(char key, struct CharFrequency * cf);
 	void (*PrintFrequencyList)(struct CharFrequency * cf);
 	void (*PrintFrequencyMap)(struct CharFrequency * cf);
+	char * (*Keys)(struct CharFrequency * cf);
+	int Count;
 	struct CharIntNode * first;
 };
 

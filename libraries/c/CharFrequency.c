@@ -1,39 +1,40 @@
 #include "CharFrequency.h"
 
 struct CharFrequency * SetupCharFrequency(char * input);
-bool Contains(char ch, struct CharFrequency * cf);
-int GetFrequency(char ch, struct CharFrequency * cf);
+bool Contains(char key, struct CharFrequency * cf);
+int GetValue(char key, struct CharFrequency * cf);
 void PrintFrequencyList(struct CharFrequency * cf);
 void PrintFrequencyMap(struct CharFrequency * cf);
+char * Keys(struct CharFrequency * cf);
 
 void Initialize(char *input, struct CharFrequency * cf);
 struct CharFrequency * CreateEmptyCharFrequency();
 struct CharIntNode * CreateEmptyCharIntNode();
-struct CharIntNode * Insert(char ch, struct CharIntNode * head);
-void BumpFrequency(char ch, struct CharIntNode * head);
+struct CharIntNode * Insert(char key, struct CharIntNode * head);
+void BumpFrequency(char key, struct CharIntNode * head);
 
-bool Contains(char ch, struct CharFrequency * cf)
+bool Contains(char key, struct CharFrequency * cf)
 {
 	struct CharIntNode * curr = cf->first;
 	if(curr == NULL){
 		return false;
 	}
 	while(curr != NULL){
-		if(curr->key == ch)
+		if(curr->key == key)
 			return true;
 		curr = curr -> next;
 	}
 	return false;
 }
 
-int GetFrequency(char ch, struct CharFrequency * cf)
+int GetValue(char key, struct CharFrequency * cf)
 {
 	struct CharIntNode * curr = cf->first;
 	if(curr == NULL){
 		return 0;
 	} 
 	while(curr != NULL){
-		if(curr->key == ch)
+		if(curr->key == key)
 			return curr->value;
 		curr = curr -> next;
 	}
@@ -65,6 +66,19 @@ void PrintFrequencyMap(struct CharFrequency * cf)
 	printf("\n");
 }
 
+char * Keys(struct CharFrequency * cf)
+{
+	struct CharIntNode * curr = cf->first;
+	char * keys = (char*)malloc(sizeof(char)*(cf->Count + 1));
+	int i = 0;
+	keys[cf->Count] = '\0';
+	while(curr != NULL){
+		keys[i++] = curr->key;
+		curr = curr->next;
+	}
+	return keys;
+}
+
 void Initialize(char *input, struct CharFrequency * cf)
 {
 	if(cf == NULL) return;
@@ -72,6 +86,7 @@ void Initialize(char *input, struct CharFrequency * cf)
 	while(*input){
 		if(!(cf->Contains(*input, cf))){
 			cf->first = Insert(*input, cf->first);
+			cf->Count++;
 		}
 		else {
 			BumpFrequency(*input, cf->first);
@@ -84,10 +99,12 @@ struct CharFrequency * SetupCharFrequency(char * input)
 {
 	struct CharFrequency * cf = CreateEmptyCharFrequency();
 	cf->Contains = Contains;
-	cf->GetFrequency = GetFrequency;
+	cf->GetValue = GetValue;
 	cf->PrintFrequencyList = PrintFrequencyList;
 	cf->PrintFrequencyMap = PrintFrequencyMap;
 	cf->first = NULL;
+	cf->Count = 0;
+	cf->Keys = Keys;
 	Initialize(input, cf);
 	return cf;
 }
@@ -110,24 +127,24 @@ struct CharIntNode * CreateEmptyCharIntNode()
 	return cin;
 }
 
-struct CharIntNode * Insert(char ch, struct CharIntNode * head)
+struct CharIntNode * Insert(char key, struct CharIntNode * head)
 {
 	struct CharIntNode * tmp = CreateEmptyCharIntNode();
-	tmp->key = ch;
+	tmp->key = key;
 	tmp->value = 1;
 	tmp -> next = head;
 	head = tmp;
 	return head;
 }
 
-void BumpFrequency(char ch, struct CharIntNode * head)
+void BumpFrequency(char key, struct CharIntNode * head)
 {
 	struct CharIntNode * curr = head;
 	if(curr == NULL){
 		return;
 	}
 	while(curr != NULL){
-		if(curr->key == ch) {
+		if(curr->key == key) {
 			curr->value = curr->value + 1;
 			return;
 		}

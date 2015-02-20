@@ -28,6 +28,7 @@ struct CharFrequency {
 	void (*PrintFrequencyList)(struct CharFrequency * cf);
 	void (*PrintFrequencyMap)(struct CharFrequency * cf);
 	char * (*Keys)(struct CharFrequency * cf);
+	void (*Remove)(char key, struct CharFrequency * cf);
 	int Count;
 	struct CharIntNode * first;
 };

@@ -12,6 +12,8 @@ int main()
 	cf->PrintFrequencyMap(cf);
 	printf("\nCount: %i\n", cf->Count);
 	printf("\nKeys: %s\n", cf->Keys(cf));
+	cf->Remove('b', cf);
+	printf("\nKeys: %s\n", cf->Keys(cf));
 	free(cf);
 	cf = SetupCharFrequency("AbcAAbdAAAbAcAd");
 	printf("\nTesting in 'AbcAAbd'.\n");
@@ -22,6 +24,8 @@ int main()
 	cf->PrintFrequencyList(cf);
 	cf->PrintFrequencyMap(cf);
 	printf("\nCount: %i\n", cf->Count);
+	printf("\nKeys: %s\n", cf->Keys(cf));
+	cf->Remove('A', cf);
 	printf("\nKeys: %s\n", cf->Keys(cf));
 	return 0;
 }

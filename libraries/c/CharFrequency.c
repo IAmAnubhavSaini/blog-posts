@@ -6,6 +6,7 @@ int GetValue(char key, struct CharFrequency * cf);
 void PrintFrequencyList(struct CharFrequency * cf);
 void PrintFrequencyMap(struct CharFrequency * cf);
 char * Keys(struct CharFrequency * cf);
+void Remove(char key, struct CharFrequency * cf);
 
 void Initialize(char *input, struct CharFrequency * cf);
 struct CharFrequency * CreateEmptyCharFrequency();
@@ -79,6 +80,30 @@ char * Keys(struct CharFrequency * cf)
 	return keys;
 }
 
+void Remove(char key, struct CharFrequency * cf)
+{
+	struct CharIntNode * prev, * curr;
+	prev = curr = cf->first;
+	if(curr == NULL)
+		return;
+	if(curr->key == key){
+		curr = curr -> next;
+		free(prev);
+		cf->first = curr;
+		cf->Count--;
+	}
+	while(curr != NULL){
+		if(curr->key == key){
+			prev->next = curr->next;
+			free(curr);
+			cf->Count--;
+			return;
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+}
+
 void Initialize(char *input, struct CharFrequency * cf)
 {
 	if(cf == NULL) return;
@@ -105,6 +130,7 @@ struct CharFrequency * SetupCharFrequency(char * input)
 	cf->first = NULL;
 	cf->Count = 0;
 	cf->Keys = Keys;
+	cf->Remove = Remove;
 	Initialize(input, cf);
 	return cf;
 }

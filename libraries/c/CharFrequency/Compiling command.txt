@@ -1,4 +1,4 @@
-cl /FAcs /Fd /Fm /Fo /Fe /Zi /Z7 /DDEBUG TestCharFrequncy.c
+cl /FAcs /Fd /Fm /Fo /Fe /Z7 /DDEBUG TestCharFrequncy.c
 /Zi
 Produces a program database (PDB) that contains type information and symbolic debugging information for use with the debugger. The symbolic debugging information includes the names and types of variables, as well as functions and line numbers.
 /Zi does not affect optimizations. However, /Zi does imply /debug;

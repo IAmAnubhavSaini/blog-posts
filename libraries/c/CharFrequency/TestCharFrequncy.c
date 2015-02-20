@@ -12,9 +12,11 @@ int main()
 	cf->PrintFrequencyMap(cf);
 	printf("\nCount: %i\n", cf->Count);
 	printf("\nKeys: %s\n", cf->Keys(cf));
+	printf("\nRemoving b from keys.");
 	cf->Remove('b', cf);
 	printf("\nKeys: %s\n", cf->Keys(cf));
 	free(cf);
+
 	cf = SetupCharFrequency("AbcAAbdAAAbAcAd");
 	printf("\nTesting in 'AbcAAbd'.\n");
 	printf("\nFrequency of 'A': %i\n", cf->GetValue('A', cf));
@@ -25,7 +27,9 @@ int main()
 	cf->PrintFrequencyMap(cf);
 	printf("\nCount: %i\n", cf->Count);
 	printf("\nKeys: %s\n", cf->Keys(cf));
+	printf("\nRemoving A from keys.");
 	cf->Remove('A', cf);
 	printf("\nKeys: %s\n", cf->Keys(cf));
+
 	return 0;
 }

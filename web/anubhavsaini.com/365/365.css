@@ -1,0 +1,41 @@
+.classy-list {
+    margin: 1em;
+    padding: 1em;
+    counter-reset: ayom;
+}
+
+.classy-list-item {
+    background-color: #ddddff;
+    color: #333;
+    border-top: .4em solid #62befa;
+    padding-bottom: .3em;
+    margin: 1em 0;
+}
+
+    .classy-list-item::before {
+        font-size: 2em;
+        font-weight: bold;
+        padding: .2em .3em;
+        position: relative;
+        background-color: #62befa;
+        color: #333;
+        content: counter(ayom) " / 365";
+        counter-increment: ayom;
+    }
+
+    .classy-list-item a {
+        font-size: 2em;
+        text-decoration: none;
+        padding: 0 1em .2em;
+        margin: .1em 0 0;
+    }
+
+        .classy-list-item a:hover {
+            background-color: orange;
+            color: white;
+            font-weight: bold;
+        }
+
+.AYOM.AYOM2#Log {
+    height: 2em;
+}

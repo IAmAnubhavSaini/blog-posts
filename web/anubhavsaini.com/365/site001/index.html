@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> An Year Of Madness - 01 - ayom site 1 at anuhbavsaini.com</title>
+    <link href="http://anubhavsaini.com/site.css" type="text/css" rel="stylesheet" />
+    <link href="http://anubhavsaini.com/365/365.css" type="text/css" rel="stylesheet" />
+</head>
+<body class="AYOM">
+    <div class="toolbar navigation-toolbar">
+        <a href="http://anubhavsaini.com/index.html">home</a>
+        <a href="http://anubhavsaini.com/365/index.html">A Year Of Madness</a>
+    </div>
+    <div class="Central">
+        <h1>Hello, World!</h1>
+        <form action="#">
+            <input id="Greeting" placeholder="Greeting" value="Hello, World!" />
+            <input id="FontFamily" placeholder="FontFamily" value="Trebuchet-MS" />
+            <input id="FontSize" type="number" placeholder="font size in numerals" min="1" value="3"/>
+            <select id="FontSizeUnit">
+                <option value="em">EM</option>
+                <option value="px">Pixels</option>
+            </select>
+            Background Color: <input type="color" title="background color" id="BackgroundColor" value="#FFffFF" />
+            Color: <input type="color" title="color" id="Color" />
+            <input type="button" value="Generate" onclick="AYOM.GenerateGreetingSite001();" />
+        </form>
+        <div id="GreetingOutput"></div>
+    </div>
+    <script type="text/javascript" src="http://anubhavsaini.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="http://anubhavsaini.com/365/365.js"></script>
+</body>
+</html>

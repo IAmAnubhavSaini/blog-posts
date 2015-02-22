@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Mouse tracking - An Year Of Madness App - 02 - ayom site 2 at anuhbavsaini.com</title>
+    <link href="../../site.css" type="text/css" rel="stylesheet" />
+    <link href="../365.css" type="text/css" rel="stylesheet" />
+</head>
+<body class="AYOM AYOM2" onload="AYOM.MouseTrack();">
+    <div class="toolbar navigation-toolbar">
+        <a href="../../index.html">home</a>
+        <a href="../index.html">A Year Of Madness</a>
+    </div>
+    <div class="Central">
+        <h1>Mouse track</h1>
+        <div class="Central">
+            Size of pixel: <input type="number" min="1" max="100" id="Size" value="2" />
+            Color: <input type="color" id="Color" />
+            <input type="button" id="Apply" value="Hit Apply after making changes." /><br />
+            <input type="button" value="Clear" id="Clear" /><br />
+            <span id="Log" class="AYOM AYOM2"></span>
+            <canvas id="TrackArea" class="AYOM AYOM2" height="400" width="800">OOPS your browser doesn't support canvas api.</canvas>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../365.js"></script>
+</body>
+</html>

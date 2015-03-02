@@ -61,8 +61,8 @@ void print_binary_tree_post_order_recursive(struct binaryTree *root)
 {
 	struct binaryTree * curr = root;
 	if (curr){
-		print_binary_tree_pre_order_recursive(curr->left);
-		print_binary_tree_pre_order_recursive(curr->right);
+		print_binary_tree_post_order_recursive(curr->left);
+		print_binary_tree_post_order_recursive(curr->right);
 		printf(" %d ", curr->value);
 	}
 }
@@ -70,9 +70,9 @@ void print_binary_tree_in_order_recursive(struct binaryTree *root)
 {
 	struct binaryTree * curr = root;
 	if (curr){
-		print_binary_tree_pre_order_recursive(curr->left);
+		print_binary_tree_in_order_recursive(curr->left);
 		printf(" %d ", curr->value);
-		print_binary_tree_pre_order_recursive(curr->right);
+		print_binary_tree_in_order_recursive(curr->right);
 	}
 }
 

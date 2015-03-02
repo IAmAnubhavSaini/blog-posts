@@ -51,7 +51,7 @@ void print_binary_tree_pre_order_recursive(struct binaryTree *root)
 	// root, left, right traversal
 	struct binaryTree * curr = root;
 	if (curr){
-		printf(" %d ", curr->value);
+		printf("%i", curr->value);
 		print_binary_tree_pre_order_recursive(curr->left);
 		print_binary_tree_pre_order_recursive(curr->right);
 	}
@@ -63,7 +63,7 @@ void print_binary_tree_post_order_recursive(struct binaryTree *root)
 	if (curr){
 		print_binary_tree_post_order_recursive(curr->left);
 		print_binary_tree_post_order_recursive(curr->right);
-		printf(" %d ", curr->value);
+		printf("%i", curr->value);
 	}
 }
 void print_binary_tree_in_order_recursive(struct binaryTree *root)
@@ -71,27 +71,7 @@ void print_binary_tree_in_order_recursive(struct binaryTree *root)
 	struct binaryTree * curr = root;
 	if (curr){
 		print_binary_tree_in_order_recursive(curr->left);
-		printf(" %d ", curr->value);
+		printf("%i", curr->value);
 		print_binary_tree_in_order_recursive(curr->right);
 	}
-}
-
-
-struct binaryTree * create_sample_tree()
-{
-	struct binaryTree * tree = create_node(1);
-	insert(tree, 2, LEFT);
-	insert(tree, 3, RIGHT);
-	insert(tree, 4, LEFT);
-	insert(tree, 5, RIGHT);
-	return tree;
-}
-
-int main()
-{
-	struct binaryTree * tree = create_sample_tree();
-	printf("\npre order: "); print_binary_tree_pre_order_recursive(tree);
-	printf("\nin order: "); print_binary_tree_in_order_recursive(tree);
-	printf("\npost order: "); print_binary_tree_post_order_recursive(tree);
-	return 0;
 }

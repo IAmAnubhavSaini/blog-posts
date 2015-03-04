@@ -41,6 +41,9 @@ bool insert(struct binaryTree * root, int value, enum position pos)
 
 void print_binary_tree_pre_order(struct binaryTree *root)
 {
+	struct binaryTree * curr = root;
+	if(!curr) return;
+	// Oh I need a stack implementation.
 
 }
 void print_binary_tree_post_order(struct binaryTree *root);

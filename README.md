@@ -1,5 +1,4 @@
-blog-posts
-==========
+# blog-posts
 
 code examples for my blog posts on the-diary-of-a-wimpy-coder.blogspot.com
 
